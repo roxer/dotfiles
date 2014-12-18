@@ -5,7 +5,7 @@ set nocompatible
 
 " Vundle initialization
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 
 " let Vundle manage Vundle
@@ -19,11 +19,13 @@ Bundle 'tpope/vim-rails.git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-speeddating'
 
 " Bundle 'git://git.wincent.com/command-t.git'
 
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
+Bundle 'kchmck/vim-coffee-script'
 
 Bundle 'vim-scripts/Align'
 Bundle 'corntrace/bufexplorer'
@@ -37,10 +39,13 @@ Bundle 'amirh/HTML-AutoCloseTag'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'rking/ag.vim'
 Bundle 'Shougo/neocomplcache.vim'
+Bundle 'techlivezheng/vim-plugin-minibufexpl'
+Bundle 'taglist.vim'
 
 " Syntax plugins
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-haml'
+Bundle 'slim-template/vim-slim.git'
 
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'othree/html5-syntax.vim'
@@ -51,6 +56,8 @@ Bundle 'puppetlabs/puppet-syntax-vim'
 Bundle 'jQuery'
 Bundle 'groenewege/vim-less'
 Bundle 'jnwhiteh/vim-golang'
+
+call vundle#end()
 
 " Enable syntax
 syntax enable
@@ -189,11 +196,15 @@ nnoremap <c-S-Tab> :bprevious<CR>
 " Switching between tabs using Shift+Tab
 nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
+nnoremap Y y$
 
 " Searching using Ctrl+P
-map <Leader>o :CtrlPMixed<CR>
+map <leader>o :CtrlPMixed<CR>
 nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nnoremap <silent> <leader>b :TagbarToggle<CR>
+map <leader>e :MBEOpen<cr>
+map <leader>c :MBEClose<cr>
+map <leader>t :MBEToggle<cr>
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader>, :noh<cr>
