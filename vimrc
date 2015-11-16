@@ -15,22 +15,29 @@ Bundle 'gmarik/vundle'
 " Bundles
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-rails.git'
+Bundle 'tpope/vim-bundler'
+Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-speeddating'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'ervandew/supertab'
 
+Bundle 'wincent/terminus'
 " Bundle 'git://git.wincent.com/command-t.git'
+" Bundle 'elixir-lang/vim-elixir'
 
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'kchmck/vim-coffee-script'
 
-Bundle 'vim-scripts/Align'
+Bundle 'junegunn/vim-easy-align'
 Bundle 'corntrace/bufexplorer'
 Bundle 'Raimondi/delimitMate'
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'powerline/powerline'
+Bundle 'bling/vim-airline'
+" Bundle 'itchyny/lightline.vim'
 Bundle 'airblade/vim-rooter'
 Bundle 'scrooloose/syntastic'
 Bundle 'yaifa.vim'
@@ -43,6 +50,7 @@ Bundle 'techlivezheng/vim-plugin-minibufexpl'
 Bundle 'taglist.vim'
 
 " Syntax plugins
+Bundle 'elzr/vim-json'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-haml'
 Bundle 'slim-template/vim-slim.git'
@@ -69,9 +77,9 @@ filetype plugin indent on
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
-" set nobackup
-" set nowb
-" set noswapfile
+set nobackup
+set nowb
+set noswapfile
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -83,6 +91,20 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+" map . in visual mode
+vnoremap . :norm.<cr>
+
+" unmap F1 help
+nmap <F1> <nop>
+imap <F1> <nop>
+
+" unmap ex mode: 'Type visual to go into Normal mode.'
+nnoremap Q <nop>
+
+map - ddp
+map _ ddkP
+" vmap - dp
+" vmap - dkP
 
 " Ensure vim uses bash
 set shell=/bin/bash
@@ -91,10 +113,13 @@ set shell=/bin/bash
 set modelines=0
 
 " Set the default font
-set guifont=Monaco:h12
+set guifont=Meslo\ LG\ S\ for\ Powerline:h12
+let g:airline_powerline_fonts = 1
+" set guifont=Monaco:h12
 
 " Automatically reload on file changes
 set autoread
+set autowrite
 
 " Automatically attempt to handle indentation
 set autoindent
@@ -123,7 +148,7 @@ set wildmenu
 set wildmode=list:longest
 
 set visualbell
-set cursorline
+set cursorline " highlight current line
 set ttyfast
 
 " For regular expressions turn magic on
@@ -148,7 +173,7 @@ set smartcase
 set incsearch
 
 " Visually display matching braces
-set showmatch
+set showmatch " show bracket matches
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -159,21 +184,21 @@ set backspace=indent,eol,start
 
 " Always show the status line
 set laststatus=2
+set scrolloff=3
 
 set cindent
 
 " Line number rules
 set number
-set rnu
+set relativenumber " show relative line numbers
 
 " Tab rules
 set expandtab
-" Be smart when using tabs ;)
-set smarttab
+set smarttab " Be smart when using tabs ;)
 
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 
 set cm=blowfish
 set textwidth=90
@@ -184,7 +209,6 @@ highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 set foldmethod=marker
 set foldlevelstart=0
-set scrolloff=3
 colo railscasts
 
 " Set the default encoding to the always trusty UTF-8
@@ -205,8 +229,13 @@ nnoremap <silent> <leader>b :TagbarToggle<CR>
 map <leader>e :MBEOpen<cr>
 map <leader>c :MBEClose<cr>
 map <leader>t :MBEToggle<cr>
+map <leader>f :MBEFocus<cr>
+noremap <C-TAB>   :MBEbf<CR>
+noremap <C-S-TAB> :MBEbb<CR>
+" nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+" nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" Disable highlight when <leader><cr> is pressed
+" Disable highlight when <leader>, is pressed
 map <silent> <leader>, :noh<cr>
 " Close all the buffers
 map <leader>ba :1,1000 bd!<cr>
@@ -241,6 +270,15 @@ let g:netrw_list_hide='.DS_Store,^\.git/$'
 " Start neocompletecache automatically
 let g:neocomplcache_enable_at_startup = 1
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" rabl files
+au BufRead,BufNewFile *.rabl setf ruby
+
 " Every time the user issues a :w command, Vim will automatically remove all trailing whitespace before saving.
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -260,8 +298,13 @@ autocmd BufWritePre * :%s/\s\+$//e
 " map <leader>n :cn<cr>
 " map <leader>p :cp<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " The Silver Searcher
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 if executable('ag')
+  " Searching using Ag
+  map <leader>a :Ag!<space>
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
   set wildignore=*/tmp/*,*.so,*.swp,*.zip
@@ -271,7 +314,21 @@ if executable('ag')
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
+  let g:ctrlp_max_height = 30
+  let g:ctrlp_working_path_mode = 0
+  let g:ctrlp_match_window_reversed = 0
+  let g:ag_working_path_mode = "r"
+  " search for word under the cursor
+  nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Coffeescript
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+"autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+let coffee = '/usr/local/bin/coffee'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -310,3 +367,17 @@ function! HasPaste()
     en
     return ''
 endfunction
+
+
+" rename current file, via Gary Bernhardt
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'))
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+

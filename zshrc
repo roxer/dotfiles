@@ -5,7 +5,13 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="fino"
+# ZSH_THEME="steeef"
+# ZSH_THEME="sporty_256"
+# ZSH_THEME="bira"
+# ZSH_THEME="powerline"
+
 RAILS_ENV=development
 
 # Example aliases
@@ -14,11 +20,14 @@ RAILS_ENV=development
 
 alias b="bundle exec"
 alias -g se='| grep -i'
-alias runso="bundle exec rails s -p 3030"
-alias runmso="bundle exec rails s"
-alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
+# alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
 alias -s log="less -MN"
 alias -s rb=vim
+alias gdw="git diff --color-words"
+alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
+docker-ip() {
+  docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
+}
 
 # http://zshwiki.org/home/builtin/functions/zmv
 autoload -U zmv
@@ -59,13 +68,18 @@ SAVEHIST=1000
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx ruby brew bundler forklift gem github history postgres pow rails rake tmux vi-mode zsh-syntax-highlighting history-substring-search)
+plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails rake tmux vi-mode zsh-syntax-highlighting history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
+# source ~/.autojump/etc/profile.d/autojump.zsh
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
+
+# if [ -f `brew --prefix`/etc/autojump ]; then
+#   . `brew --prefix`/etc/autojump
+# fi
 
 # User configuration
 
@@ -82,14 +96,17 @@ bindkey '\e[B' history-beginning-search-forward
 export ARCHFLAGS="-arch x86_64"
 export CC=/usr/local/bin/gcc-4.2
 export CXX=/usr/local/bin/g++-4.2
-export PATH="/usr/local/heroku/bin:/Library/PostgreSQL/9.3/data:$PATH"
-export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export CPP=/usr/local/bin/cpp-4.2
+export PATH="/usr/local/heroku/bin:/Library/PostgreSQL/9.3/data:/Library/PostgreSQL/9.3/bin:$PATH"
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
 export PGDATA=/Library/PostgreSQL/9.3/data/
 export EDITOR=vim
 export GIT_EDITOR=vim
+export TERM="xterm-256color"
 
 #eval "$(rbenv init -)"
 eval "$(rbenv init --no-rehash - zsh)"
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
 
 # ssh
