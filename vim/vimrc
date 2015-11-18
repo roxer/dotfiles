@@ -23,6 +23,9 @@ Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-speeddating'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'ervandew/supertab'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'benmills/vimux.git'
+Bundle 'editorconfig/editorconfig-vim'
 
 Bundle 'wincent/terminus'
 " Bundle 'git://git.wincent.com/command-t.git'
@@ -63,7 +66,7 @@ Bundle 'jiangmiao/simple-javascript-indenter'
 Bundle 'puppetlabs/puppet-syntax-vim'
 Bundle 'jQuery'
 Bundle 'groenewege/vim-less'
-Bundle 'jnwhiteh/vim-golang'
+Bundle 'fatih/vim-go'
 
 call vundle#end()
 
