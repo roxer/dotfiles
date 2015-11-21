@@ -6,11 +6,26 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="fino"
+# ZSH_THEME="fino"
 # ZSH_THEME="steeef"
 # ZSH_THEME="sporty_256"
 # ZSH_THEME="bira"
 # ZSH_THEME="powerline"
+ZSH_THEME="bullet-train"
+# for list of colors run spectrum_ls
+BULLETTRAIN_TIME_SHOW=false
+BULLETTRAIN_CONTEXT_SHOW=false
+ULLETTRAIN_IS_SSH_CLIENT=true
+BULLETTRAIN_NVM_SHOW=true
+BULLETTRAIN_NVM_BG=075
+BULLETTRAIN_NVM_FG=232
+BULLETTRAIN_RUBY_BG=235
+BULLETTRAIN_RUBY_FG=red
+BULLETTRAIN_GO_SHOW=true
+BULLETTRAIN_DIR_BG=232
+BULLETTRAIN_DIR_FG=226
+BULLETTRAIN_GIT_BG=233
+BULLETTRAIN_GIT_FG=214
 
 RAILS_ENV=development
 
@@ -68,7 +83,8 @@ SAVEHIST=1000
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails rake tmux vi-mode zsh-syntax-highlighting history-substring-search)
+plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails \
+         rake tmux vi-mode zsh-syntax-highlighting dircycle history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 # source ~/.autojump/etc/profile.d/autojump.zsh
@@ -107,7 +123,6 @@ export TERM="xterm-256color"
 #eval "$(rbenv init -)"
 eval "$(rbenv init --no-rehash - zsh)"
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"

@@ -26,6 +26,13 @@ Bundle 'ervandew/supertab'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'benmills/vimux.git'
 Bundle 'editorconfig/editorconfig-vim'
+" git: git://github.com/garbas/vim-snipmate.git
+" vim-addon-mw-utils: #needed for snipmate
+" git: git://github.com/MarcWeber/vim-addon-mw-utils.git
+" tlib: #needed for snipmate
+" git: git://github.com/tomtom/tlib_vim.git
+" git: git://github.com/nelstrom/gundo.vim.git
+" git: https://github.com/lukaszkorecki/CoffeeTags.git
 
 Bundle 'wincent/terminus'
 " Bundle 'git://git.wincent.com/command-t.git'
