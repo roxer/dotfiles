@@ -149,6 +149,9 @@ set showmode
 
 " Extra information about the command you're running in the status bar
 set showcmd
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
 set hidden
 set ttimeoutlen=50        " Make Esc work faster"
 
@@ -269,7 +272,17 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 
 
 " Do syntax check when the buffer is first loaded
-let g:syntastic_check_on_open=1
+let g:syntastic_check_on_open=0
+let g:syntastic_disabled_filetypes=['m.html']
+let g:syntastic_html_checkers=['']
+" let g:syntastic_html_tidy_ignore_errors = [
+"     \  'plain text isn''t allowed in <head> elements',
+"     \  '<base> escaping malformed URI reference',
+"     \  'discarding unexpected <body>',
+"     \  '<script> escaping malformed URI reference',
+"     \  'content occurs after end of body',
+"     \  '</head> isn''t allowed in <body> elements'
+"     \ ]
 
 " Don't overindent javascript
 let g:SimpleJsIndenter_BriefMode=1
@@ -317,7 +330,17 @@ if executable('ag')
   map <leader>a :Ag!<space>
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-  set wildignore=*/tmp/*,*.so,*.swp,*.zip
+  set wildignore=*.so,*.swp,*.zip
+  set wildignore+=*.o,*.obj,*~ "stuff to ignore when tab completing
+  set wildignore+=*vim/backups*
+  set wildignore+=*sass-cache*
+  set wildignore+=*DS_Store*
+  set wildignore+=vendor/rails/**
+  set wildignore+=vendor/cache/**
+  set wildignore+=*.gem
+  set wildignore+=log/**
+  set wildignore+=tmp/**
+  set wildignore+=*.png,*.jpg,*.gif
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'

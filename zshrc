@@ -17,8 +17,8 @@ BULLETTRAIN_TIME_SHOW=false
 BULLETTRAIN_CONTEXT_SHOW=false
 ULLETTRAIN_IS_SSH_CLIENT=true
 BULLETTRAIN_NVM_SHOW=true
-BULLETTRAIN_NVM_BG=075
-BULLETTRAIN_NVM_FG=232
+BULLETTRAIN_NVM_BG=022
+BULLETTRAIN_NVM_FG=253
 BULLETTRAIN_RUBY_BG=235
 BULLETTRAIN_RUBY_FG=red
 BULLETTRAIN_GO_SHOW=true
@@ -119,6 +119,7 @@ export PGDATA=/Library/PostgreSQL/9.3/data/
 export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
+export b2c=~/rails/mfind-b2c
 
 #eval "$(rbenv init -)"
 eval "$(rbenv init --no-rehash - zsh)"
@@ -126,4 +127,9 @@ eval "$(rbenv init --no-rehash - zsh)"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-
+# To have launchd start mongodb at login:
+# ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
+# Then to load mongodb now:
+# launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
+# Or, if you don't want/need launchctl, you can just run:
+# mongod --config /usr/local/etc/mongod.conf
