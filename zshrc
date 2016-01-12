@@ -13,6 +13,7 @@ ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="powerline"
 ZSH_THEME="bullet-train"
 # for list of colors run spectrum_ls
+BULLETTRAIN_DIR_EXTENDED=2
 BULLETTRAIN_TIME_SHOW=false
 BULLETTRAIN_CONTEXT_SHOW=false
 ULLETTRAIN_IS_SSH_CLIENT=true
@@ -34,18 +35,23 @@ RAILS_ENV=development
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias b="bundle exec"
+alias bs="brew services"
 alias -g se='| grep -i'
 # alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
 alias -s log="less -MN"
 alias -s rb=vim
 alias gdw="git diff --color-words"
+alias dcom="docker-compose"
 alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
 docker-ip() {
   docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
 }
 
+fpath=(~/.zsh/completion $fpath)
+
 # http://zshwiki.org/home/builtin/functions/zmv
 autoload -U zmv
+autoload -Uz compinit && compinit -i
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -77,8 +83,8 @@ export UPDATE_ZSH_DAYS=31
 # in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
 # yyyy-mm-dd
 HIST_STAMPS="yyyy/mm/dd"
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -110,16 +116,15 @@ bindkey '\e[B' history-beginning-search-forward
 
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
-export CC=/usr/local/bin/gcc-4.2
-export CXX=/usr/local/bin/g++-4.2
-export CPP=/usr/local/bin/cpp-4.2
-export PATH="/usr/local/heroku/bin:/Library/PostgreSQL/9.3/data:/Library/PostgreSQL/9.3/bin:$PATH"
+# export CC=/usr/local/bin/gcc-5
+# export CXX=/usr/local/bin/g++-5
+# export CPP=/usr/local/bin/cpp-5
+export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
-export PGDATA=/Library/PostgreSQL/9.3/data/
+export PGDATA=~/Library/PostgreSQL/9.5/data/
 export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
-export b2c=~/rails/mfind-b2c
 
 #eval "$(rbenv init -)"
 eval "$(rbenv init --no-rehash - zsh)"
