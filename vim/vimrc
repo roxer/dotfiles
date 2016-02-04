@@ -21,7 +21,10 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-speeddating'
+Bundle 'tpope/vim-fireplace'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
 Bundle 'mudge/runspec.vim'
 Bundle 'ervandew/supertab'
 Bundle 'vim-scripts/YankRing.vim'
@@ -40,7 +43,7 @@ Bundle 'mbbill/undotree'
 
 Bundle 'wincent/terminus'
 " Bundle 'git://git.wincent.com/command-t.git'
-" Bundle 'elixir-lang/vim-elixir'
+Bundle 'elixir-lang/vim-elixir'
 
 Bundle 'kylef/apiblueprint.vim'
 Bundle 'kien/ctrlp.vim'
@@ -148,6 +151,11 @@ let mapleader = ','
 let g:mapleader = ","
 noremap \ ,
 
+" stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
 " Automatically attempt to set the working directory to the current
 " file. This value will be superceeded by rooter if it is installed
 set autochdir
@@ -161,7 +169,8 @@ set showcmd
 " exist in the background without being in a window.
 " http://items.sjbach.com/319/configuring-vim-right
 set hidden
-set ttimeoutlen=50        " Make Esc work faster"
+" set ttimeoutlen=50        " Make Esc work faster"
+set timeout timeoutlen=500 ttimeoutlen=100
 
 " Auto complete filenames when in :Ex mode, etc
 set wildmenu
@@ -190,8 +199,10 @@ set ic
 set scs
 " Smart case searching. Case insensitive if all lowercase, but if you
 " provide uppercase it will force matching case
-set smartcase
+set ignorecase smartcase
 set incsearch
+
+autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 tabstop=4 wrap linebreak nolist wrap lbr colorcolumn=0 synmaxcol=999999
 
 " Visually display matching braces
 set showmatch " show bracket matches
@@ -261,6 +272,45 @@ map <silent> <leader>, :noh<cr>
 " Close all the buffers
 map <leader>ba :1,1000 bd!<cr>
 
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" wrap quickfix window
+autocmd FileType qf setlocal wrap linebreak
+
+set splitbelow
+set splitright
+
+" Stop Vim dying if there's massively long lines.
+" set synmaxcol=250
+
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+" autocmd FileType * setlocal formatoptions-=r formatoptions-=o
+
+" new file in current directory
+" map <Leader>nf :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Prevent Vim from clobbering the scrollback buffer. See
+" http://www.shallowsky.com/linux/noaltscreen.html
+" set t_ti= t_te=
+
+" FZF.vim
+" nnoremap <leader>t :Files<cr>
+" nnoremap <leader>b :Buffers<cr>
+
+" nmap <leader><tab> <plug>(fzf-maps-n)
+" xmap <leader><tab> <plug>(fzf-maps-x)
+" omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+" imap <c-x><c-f> <plug>(fzf-complete-path)
+" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+" imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" makes fzf never use tmux
+" https://github.com/junegunn/fzf.vim/issues/66#issuecomment-169362556
+" let g:fzf_layout = {}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -309,6 +359,10 @@ nmap ga <Plug>(EasyAlign)
 
 " rabl files
 au BufRead,BufNewFile *.rabl setf ruby
+" let ruby_fold = 1
+set foldlevelstart=1
+autocmd Syntax c,cpp,vim,ruby setlocal foldmethod=syntax
+" autocmd Syntax c,cpp,vim,rb normal zR
 
 " Every time the user issues a :w command, Vim will automatically remove all trailing whitespace before saving.
 autocmd BufWritePre * :%s/\s\+$//e
@@ -338,14 +392,16 @@ if executable('ag')
   map <leader>a :Ag!<space>
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-  set wildignore=*.so,*.swp,*.zip
+  set wildignore=*.so,*.swp,*.aux,*.zip
   set wildignore+=*.o,*.obj,*~ "stuff to ignore when tab completing
   set wildignore+=*vim/backups*
   set wildignore+=*sass-cache*
   set wildignore+=*DS_Store*
   set wildignore+=vendor/rails/**
   set wildignore+=vendor/cache/**
+  set wildignore+=*.git
   set wildignore+=*.gem
+  set wildignore+=node_modules,_site
   set wildignore+=log/**
   set wildignore+=tmp/**
   set wildignore+=*.png,*.jpg,*.gif
@@ -368,8 +424,11 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 autocmd BufRead,BufNewFile *.es6 setfiletype javascript
+autocmd BufRead,BufNewFile *.ts setfiletype javascript
 "autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 let coffee = '/usr/local/bin/coffee'
+" special highlighting for React and Lodash
+let g:used_javascript_libs = 'react,lodash'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
