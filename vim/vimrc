@@ -4,35 +4,36 @@ filetype off
 set nocompatible
 
 " Vundle initialization
-set rtp+=~/.vim/bundle/vundle.vim
-call vundle#begin()
+" set rtp+=~/.vim/bundle/vundle.vim
+" call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-speeddating'
-Plugin 'tpope/vim-fireplace'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'mudge/runspec.vim'
-Plugin 'ervandew/supertab'
-Plugin 'vim-scripts/YankRing.vim'
-Plugin 'benmills/vimux.git'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
-Plugin 'mbbill/undotree'
-Plugin 'flazz/vim-colorschemes'
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-fireplace'
+Plug 'vim-ruby/vim-ruby'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'mudge/runspec.vim'
+Plug 'ervandew/supertab'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'benmills/vimux.git'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+Plug 'mbbill/undotree'
+Plug 'flazz/vim-colorschemes'
 " git: git://github.com/garbas/vim-snipmate.git
 " vim-addon-mw-utils: #needed for snipmate
 " git: git://github.com/MarcWeber/vim-addon-mw-utils.git
@@ -41,52 +42,61 @@ Plugin 'flazz/vim-colorschemes'
 " git: git://github.com/nelstrom/gundo.vim.git
 " git: https://github.com/lukaszkorecki/CoffeeTags.git
 
-Plugin 'wincent/terminus'
+Plug 'sjl/gundo.vim'
+" Plugin 'mhinz/vim-signify'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'maksimr/vim-jsbeautify'
+" Plugin 'Lokaltog/vim-easymotion'               " Move around with ease
+" Plugin 'AndrewRadev/splitjoin.vim'             " Split join: gS to split, gJ to join/
+Plug 'wincent/terminus'
 " Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'elixir-lang/vim-elixir'
+Plug 'elixir-lang/vim-elixir'
 
-Plugin 'kylef/apiblueprint.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kylef/apiblueprint.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'kchmck/vim-coffee-script'
 
-Plugin 'junegunn/vim-easy-align'
-Plugin 'corntrace/bufexplorer'
-Plugin 'Raimondi/delimitMate'
+Plug 'junegunn/vim-easy-align'
+Plug 'corntrace/bufexplorer'
+Plug 'Raimondi/delimitMate'
 " Plugin 'powerline/powerline'
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'                        " status line
 " Plugin 'itchyny/lightline.vim'
-Plugin 'airblade/vim-rooter'
-Plugin 'scrooloose/syntastic'
-Plugin 'yaifa.vim'
+Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-gitgutter'                   " git status line
+Plug 'scrooloose/syntastic'
+Plug 'yaifa.vim'
 " Plugin 'matchit.zip'
-Plugin 'exvim/ex-matchit'
-Plugin 'amirh/HTML-AutoCloseTag'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'rking/ag.vim'
-Plugin 'Shougo/neocomplcache.vim'
-Plugin 'techlivezheng/vim-plugin-minibufexpl'
-Plugin 'taglist.vim'
+Plug 'exvim/ex-matchit'
+Plug 'amirh/HTML-AutoCloseTag'
+Plug 'altercation/vim-colors-solarized'
+Plug 'rking/ag.vim'
+Plug 'Shougo/neocomplete.vim'
+Plug 'techlivezheng/vim-plugin-minibufexpl'
+Plug 'taglist.vim'
 
 " Syntax plugins
-Plugin 'elzr/vim-json'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'tpope/vim-haml'
-Plugin 'slim-template/vim-slim.git'
-Plugin 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
-Plugin 'yaml/yaml.vim'
+Plug 'elzr/vim-json'
+Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-haml'
+Plug 'slim-template/vim-slim.git'
+Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+Plug 'yaml/yaml.vim'
 
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'othree/html5-syntax.vim'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'jiangmiao/simple-javascript-indenter'
-Plugin 'puppetlabs/puppet-syntax-vim'
-Plugin 'jQuery'
-Plugin 'groenewege/vim-less'
-Plugin 'fatih/vim-go'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'othree/html5-syntax.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'jiangmiao/simple-javascript-indenter'
+Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'jQuery'
+Plug 'groenewege/vim-less'
+Plug 'fatih/vim-go'
+Plug 'wellle/targets.vim'
 
-call vundle#end()
+" call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 " Enable syntax
@@ -136,6 +146,7 @@ set modelines=0
 " Set the default font
 set guifont=Meslo\ LG\ S\ for\ Powerline:h12
 let g:airline_powerline_fonts = 1
+let g:airline_theme = "base16_solarized"
 " set guifont=Monaco:h12
 
 " Automatically reload on file changes
@@ -189,6 +200,9 @@ set cmdheight=2
 
 let g:html_use_css = "1"
 let xml_use_xhtml = 1
+let g:go_fmt_command = "goimports"
+" disable fmt on save if it slows down vim
+" let g:go_fmt_autosave = 0
 
 set background=dark
 set history=7000
@@ -235,6 +249,11 @@ set softtabstop=2
 set cm=blowfish
 set textwidth=90
 set formatoptions=qrn1
+" Delete comment character when joining commented lines
+set formatoptions+=j
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+" autocmd FileType * setlocal formatoptions-=r formatoptions-=o
+
 
 set colorcolumn=90
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
@@ -284,9 +303,6 @@ set splitright
 " Stop Vim dying if there's massively long lines.
 " set synmaxcol=250
 
-" Don't add the comment prefix when I hit enter or o/O on a comment line.
-" autocmd FileType * setlocal formatoptions-=r formatoptions-=o
-
 " new file in current directory
 " map <Leader>nf :e <C-R>=expand("%:p:h") . "/" <CR>
 
@@ -295,6 +311,7 @@ set splitright
 " set t_ti= t_te=
 
 " FZF.vim
+set rtp+=/usr/local/opt/fzf
 " nnoremap <leader>t :Files<cr>
 " nnoremap <leader>b :Buffers<cr>
 
@@ -348,8 +365,27 @@ let g:SimpleJsIndenter_BriefMode=1
 " Hide .DS_Store and .git directories from Vim
 let g:netrw_list_hide='.DS_Store,^\.git/$'
 
-" Start neocompletecache automatically
-let g:neocomplcache_enable_at_startup = 1
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
