@@ -34,15 +34,6 @@ RAILS_ENV=development
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias b="bundle exec"
-alias bs="brew services"
-alias -g se='| grep -i'
-# alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
-alias -s log="less -MN"
-alias -s rb=vim
-alias gdw="git diff --color-words"
-alias dcom="docker-compose"
-alias dockerip='docker ps | tail -n +2 | while read cid b; do echo -n "$cid\t"; docker inspect $cid | grep IPAddress | cut -d \" -f 4; done'
 docker-ip() {
   docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
 }
@@ -80,17 +71,18 @@ export UPDATE_ZSH_DAYS=31
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment following line if you want to  shown in the command execution time stamp
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
+# in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy/mm/dd"
 HISTSIZE=10000
 SAVEHIST=10000
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
+# install syntax-higlighting first
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails \
-         rake tmux vi-mode zsh-syntax-highlighting dircycle history-substring-search)
+         rake tmux vi-mode dircycle history-substring-search zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 # source ~/.autojump/etc/profile.d/autojump.zsh
@@ -98,6 +90,9 @@ export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
+source ~/.zsh/aliases.zsh
+source ~/.zsh/abbreviations.zsh
+source ~/.zsh/functions.zsh
 
 # if [ -f `brew --prefix`/etc/autojump ]; then
 #   . `brew --prefix`/etc/autojump
@@ -120,11 +115,13 @@ export ARCHFLAGS="-arch x86_64"
 # export CXX=/usr/local/bin/g++-5
 # export CPP=/usr/local/bin/cpp-5
 export PATH="/usr/local/heroku/bin:$PATH"
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/gocode/bin:$PATH
+export PATH="$(brew --prefix sqlite)/bin:$PATH"
 export PGDATA=~/Library/PostgreSQL/9.5/data/
 export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
+export GOPATH=$HOME/gocode
 
 #eval "$(rbenv init -)"
 eval "$(rbenv init --no-rehash - zsh)"

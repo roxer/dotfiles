@@ -37,6 +37,11 @@ brew 'elixir'
 brew 'gnupg2'
 brew 'gpg-agent'
 brew 'graphviz'
+brew 'proctools'
+brew 'pstree'
+brew 'vnstat'
+brew 'ipcalc'
+# brew 'lsof'
 brew 'homebrew/dupes/openssh'
 
 # Install GNU core utilities (those that come with OS X are outdated).
