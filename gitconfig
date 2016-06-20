@@ -3,6 +3,9 @@
 	email = pawel@przylucki.pl
 [core]
 	excludesfile = /Users/roxer/.gitignore_global
+	autocrlf = input
+	eol = lf
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
 	au = auto
 	diff = auto
@@ -10,6 +13,8 @@
 	branch = auto
 	interactive = auto
 	grep = auto
+[push]
+  default = tracking
 [alias]
 	s = status
 	co = checkout
