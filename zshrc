@@ -127,6 +127,10 @@ export GOPATH=$HOME/gocode
 eval "$(rbenv init --no-rehash - zsh)"
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
+if (( $+commands[tag] )); then
+  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
+  alias ag=tag
+fi
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 # To have launchd start mongodb at login:
@@ -135,3 +139,5 @@ eval "$(rbenv init --no-rehash - zsh)"
 # launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist
 # Or, if you don't want/need launchctl, you can just run:
 # mongod --config /usr/local/etc/mongod.conf
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
