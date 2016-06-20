@@ -28,12 +28,13 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'mudge/runspec.vim'
 Plug 'ervandew/supertab'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'benmills/vimux.git'
+Plug 'benmills/vimux'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'mbbill/undotree'
 Plug 'flazz/vim-colorschemes'
+Plug 'Konfekt/FastFold'
 " git: git://github.com/garbas/vim-snipmate.git
 " vim-addon-mw-utils: #needed for snipmate
 " git: git://github.com/MarcWeber/vim-addon-mw-utils.git
@@ -62,6 +63,7 @@ Plug 'corntrace/bufexplorer'
 Plug 'Raimondi/delimitMate'
 " Plugin 'powerline/powerline'
 Plug 'bling/vim-airline'                        " status line
+" Plug 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'                   " git status line
@@ -71,7 +73,8 @@ Plug 'yaifa.vim'
 Plug 'exvim/ex-matchit'
 Plug 'amirh/HTML-AutoCloseTag'
 Plug 'altercation/vim-colors-solarized'
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'techlivezheng/vim-plugin-minibufexpl'
 Plug 'taglist.vim'
@@ -80,7 +83,7 @@ Plug 'taglist.vim'
 Plug 'elzr/vim-json'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-haml'
-Plug 'slim-template/vim-slim.git'
+Plug 'slim-template/vim-slim'
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
 Plug 'yaml/yaml.vim'
 
@@ -111,6 +114,9 @@ syntax enable
 set nobackup
 set nowb
 set noswapfile
+set ff=unix " display DOS file endings
+set copyindent
+set preserveindent
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -146,7 +152,7 @@ set modelines=0
 " Set the default font
 set guifont=Meslo\ LG\ S\ for\ Powerline:h12
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "base16_solarized"
+" let g:airline_theme = "base16_solarized"
 " set guifont=Monaco:h12
 
 " Automatically reload on file changes
@@ -341,10 +347,14 @@ autocmd BufReadPost *
      \ endif
 " Remember info about open buffers on close
 set viminfo^=%
+" TODO set viminfo='50,<1000,s100,h " Set max buffer size to 1000 lines (default 50)
+" TODO set lazyredraw
 
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
+" Alias "write as sudo" as :w!!
+cmap w!! w !sudo tee > /dev/null %
 
 " Do syntax check when the buffer is first loaded
 let g:syntastic_check_on_open=0
@@ -451,6 +461,11 @@ if executable('ag')
   let g:ctrlp_working_path_mode = 0
   let g:ctrlp_match_window_reversed = 0
   let g:ag_working_path_mode = "r"
+  let g:ackprg = 'ag --vimgrep --smart-case'
+  cnoreabbrev ag Ack
+  cnoreabbrev aG Ack
+  cnoreabbrev Ag Ack
+  cnoreabbrev AG Ack
   " search for word under the cursor
   nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>
 endif
