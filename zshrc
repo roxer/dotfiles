@@ -82,6 +82,7 @@ SAVEHIST=10000
 # install syntax-higlighting first
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails \
+         zsh-autosuggestions \
          rake tmux vi-mode dircycle history-substring-search zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
@@ -141,3 +142,5 @@ fi
 # mongod --config /usr/local/etc/mongod.conf
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

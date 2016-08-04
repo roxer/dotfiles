@@ -54,6 +54,18 @@ Pry.config.hooks.add_hook(:before_session, :set_environment) do
   end
 end
 
+if defined?(PryByebug)
+  Pry.commands.alias_command '_c', 'continue'
+  Pry.commands.alias_command '_s', 'step'
+  Pry.commands.alias_command '_n', 'next'
+  Pry.commands.alias_command '_f', 'finish'
+end
+
+# Hit Enter to repeat last command
+Pry::Commands.command /^$/, "repeat last command" do
+  _pry_.run_command Pry.history.to_a.last
+end
+
 =begin
 load 'user.rb'
 require './user' # .rb is optional

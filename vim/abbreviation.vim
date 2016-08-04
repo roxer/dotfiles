@@ -1,5 +1,5 @@
 " mappings
-nmap <leader>bp obinding.pry # FIXME <esc>
+nmap <leader>bp orequire 'pry'; binding.pry # FIXME <esc>
 
 " abbreviations
 abbreviate <expr> d§ strftime("%F")

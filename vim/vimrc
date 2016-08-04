@@ -7,7 +7,7 @@ set nocompatible
 " set rtp+=~/.vim/bundle/vundle.vim
 " call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 " Plugin 'VundleVim/Vundle.vim'
@@ -26,7 +26,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'mudge/runspec.vim'
-Plug 'ervandew/supertab'
 Plug 'vim-scripts/YankRing.vim'
 Plug 'benmills/vimux'
 Plug 'editorconfig/editorconfig-vim'
@@ -45,7 +44,10 @@ Plug 'Konfekt/FastFold'
 
 Plug 'sjl/gundo.vim'
 " Plugin 'mhinz/vim-signify'
-" Plugin 'Valloric/YouCompleteMe'
+
+" Plug 'ervandew/supertab' " YouCompleteMe obsoletes it
+Plug 'Valloric/YouCompleteMe'
+
 " Plugin 'maksimr/vim-jsbeautify'
 " Plugin 'Lokaltog/vim-easymotion'               " Move around with ease
 " Plugin 'AndrewRadev/splitjoin.vim'             " Split join: gS to split, gJ to join/
@@ -57,9 +59,11 @@ Plug 'kylef/apiblueprint.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'kchmck/vim-coffee-script'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'junegunn/vim-easy-align'
-Plug 'corntrace/bufexplorer'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'Raimondi/delimitMate'
 " Plugin 'powerline/powerline'
 Plug 'bling/vim-airline'                        " status line
@@ -73,7 +77,8 @@ Plug 'yaifa.vim'
 Plug 'exvim/ex-matchit'
 Plug 'amirh/HTML-AutoCloseTag'
 Plug 'altercation/vim-colors-solarized'
-" Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim' " depreciated
+Plug 'junegunn/fzf', { 'dir': '~/.fzf.bash', 'do': './install --all' }
 Plug 'mileszs/ack.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'techlivezheng/vim-plugin-minibufexpl'
@@ -317,7 +322,7 @@ set splitright
 " set t_ti= t_te=
 
 " FZF.vim
-set rtp+=/usr/local/opt/fzf
+" set rtp+=/usr/local/opt/fzf
 " nnoremap <leader>t :Files<cr>
 " nnoremap <leader>b :Buffers<cr>
 
@@ -531,4 +536,5 @@ function! RenameFile()
   endif
 endfunction
 map <leader>n :call RenameFile()<cr>
+map <leader>t :NERDTreeToggle<CR>
 

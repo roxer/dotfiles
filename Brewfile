@@ -12,10 +12,10 @@ brew 'tmux'
 brew 'htop'
 brew 'ncdu'
 brew 'reattach-to-user-namespace'
-brew 'vim', args: ['--override-system-vi']
 brew 'zsh'
 brew 'fzf'
 brew 'lua'
+brew 'luajit'
 brew 'neovim/neovim/neovim'
 brew 'ag'
 brew 'universal-ctags', args: %w[HEAD]
@@ -27,8 +27,8 @@ brew 'redis'
 brew 'sqlite'
 brew 'python'
 brew 'python3'
-brew 'wget', args: ['--with-iri']
-brew 'curl'
+brew 'wget', args: %w(--with-iri)
+brew 'curl', args: %w(--with-openssl --with-nghttp2)
 brew 'gawk'
 brew 'pcre'
 brew 'go'
@@ -57,7 +57,7 @@ brew 'moreutils'
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew 'findutils'
-brew 'gnu-sed', args: ['--with-default-names']
+brew 'gnu-sed', args: %w(--with-default-names)
 brew 'rbenv'
 brew 'rbenv-default-gems'
 brew 'mongodb'
@@ -65,11 +65,11 @@ brew 'mariadb'
 brew 'rabbitmq'
 brew 'postgresql'
 brew 'elasticsearch'
-brew 'imagemagick', args: ['--with-webp']
+brew 'imagemagick', args: %w(--with-webp)
 # Install clojure tools
 brew 'leiningen'
 # brew 'youtube-dl'
-brew 'ffmpeg', args: %w[--with-libvpx --with-libvorbis]
+brew 'ffmpeg', args: %w(--with-libvpx --with-libvorbis)
 brew 'heroku-toolbelt'
 brew 'the_silver_searcher'
 brew 'heroku-toolbelt'
@@ -91,7 +91,8 @@ cask 'iterm2'
 cask 'alfred'
 # brew cask alfred link
 cask 'java'
-cask 'macvim'
+cask 'macvim', args: %w(--with-cscope --with-lua --with-override-system-vim --with-luajit --with-python3)
+# brew 'vim', args: ['--override-system-vi'] - macvim does this job
 cask 'heroku-toolbelt'
 # cask 'charles'
 cask 'skype'
