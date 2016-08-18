@@ -29,6 +29,12 @@ if defined? Hirb
 Pry.config.editor = 'gvim --nofork'
 Pry.config.commands.alias_command "lM", "ls -M"
 
+Pry.config.history.file = if defined?(Bundler)
+                            Bundler.tmp.parent.join('history.rb')
+                          else
+                            File.expand_path('~/.history.rb')
+                          end
+
 begin
   require 'awesome_print'
   Pry.config.print = proc do |output, value|

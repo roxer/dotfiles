@@ -3,15 +3,6 @@ filetype on
 filetype off
 set nocompatible
 
-" Vundle initialization
-" set rtp+=~/.vim/bundle/vundle.vim
-" call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-" Plugin 'VundleVim/Vundle.vim'
-
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -78,7 +69,7 @@ Plug 'exvim/ex-matchit'
 Plug 'amirh/HTML-AutoCloseTag'
 Plug 'altercation/vim-colors-solarized'
 " Plug 'rking/ag.vim' " depreciated
-Plug 'junegunn/fzf', { 'dir': '~/.fzf.bash', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'mileszs/ack.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'techlivezheng/vim-plugin-minibufexpl'
@@ -102,6 +93,7 @@ Plug 'jQuery'
 Plug 'groenewege/vim-less'
 Plug 'fatih/vim-go'
 Plug 'wellle/targets.vim'
+Plug 'sunaku/vim-ruby-minitest'
 
 " call vundle#end()
 call plug#end()
