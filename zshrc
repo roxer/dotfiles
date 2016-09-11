@@ -37,6 +37,7 @@ RAILS_ENV=development
 docker-ip() {
   docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
 }
+alias docker-clean="docker ps -a | grep Exited | awk '{ print \$1; }' | xargs -n1 docker rm"
 
 fpath=(~/.zsh/completion $fpath)
 
@@ -73,7 +74,8 @@ export UPDATE_ZSH_DAYS=31
 # Uncomment following line if you want to  shown in the command execution time stamp
 # in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="yyyy/mm/dd"
+# HIST_STAMPS="yyyy/mm/dd"
+HISTTIMEFORMAT="%d/%m/%y %T "
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -83,7 +85,8 @@ SAVEHIST=10000
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails \
          zsh-autosuggestions \
-         rake tmux vi-mode dircycle history-substring-search zsh-syntax-highlighting)
+         rake tmux vi-mode dircycle history-substring-search \
+         zsh-syntax-highlighting) # always last item
 
 source $ZSH/oh-my-zsh.sh
 # source ~/.autojump/etc/profile.d/autojump.zsh

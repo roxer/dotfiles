@@ -7,28 +7,26 @@ tap 'aykamko/tag-ag'
 
 brew 'tag-ag'
 brew 'diff-so-fancy'
-brew 'ruby-build'
+brew 'ruby-build' # manage rubies
 brew 'tmux'
 brew 'htop'
-brew 'ncdu'
-brew 'reattach-to-user-namespace'
+brew 'ncdu'       # to free space on disk
+brew 'pgcli'      # better psql
 brew 'zsh'
 brew 'fzf'
+brew 'tig'        # git manager
 brew 'lua'
 brew 'luajit'
-brew 'neovim/neovim/neovim'
 brew 'ag'
-brew 'universal-ctags', args: %w[HEAD]
 brew 'openssl'
-brew 'autojump'
+brew 'ranger'
+brew 'autojump'   # navigate darectories
 # brew 'memcached'
 brew 'node'
 brew 'redis'
 brew 'sqlite'
 brew 'python'
 brew 'python3'
-brew 'wget', args: %w(--with-iri)
-brew 'curl', args: %w(--with-openssl --with-nghttp2)
 brew 'gawk'
 brew 'pcre'
 brew 'go'
@@ -44,8 +42,13 @@ brew 'proctools'
 brew 'pstree'
 brew 'vnstat'
 brew 'ipcalc'
+brew 'universal-ctags', args: %w[HEAD]
+brew 'wget', args: %w(--with-iri)
+brew 'curl', args: %w(--with-openssl --with-nghttp2)
 # brew 'lsof'
 brew 'homebrew/dupes/openssh'
+brew 'reattach-to-user-namespace'
+brew 'neovim/neovim/neovim'
 
 # Install GNU core utilities (those that come with OS X are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
@@ -68,7 +71,7 @@ brew 'elasticsearch'
 brew 'imagemagick', args: %w(--with-webp)
 # Install clojure tools
 brew 'leiningen'
-# brew 'youtube-dl'
+# brew 'youtube-dl' # download from youtube
 brew 'ffmpeg', args: %w(--with-libvpx --with-libvorbis)
 brew 'heroku-toolbelt'
 brew 'the_silver_searcher'

@@ -6,16 +6,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 # install oh-my-zsh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-ln -s ./zshrc ~/.zshrc
-ln -s ./vim/vimrc ~/.vimrc
-ln -s ./Brewfile ~/Brewfile
-ln -s ./irbrc ~/.irbrc
-ln -s ./pryrc ~/.pryrc
-ln -s ./psqlrc ~/.psqlrc
-ln -s ./tmux.conf ~/.tmux.conf
-ln -s ./gemrc ~/.gemrc
 mkdir -p ~/.vim/plugin
 ln -s ./vim/abbreviation.vim ~/.vim/plugin/abbreviation.vim
+ln -s ./Brewfile             ~/Brewfile
+ln -s ./gemrc                ~/.gemrc
+ln -s ./irbrc                ~/.irbrc
+ln -s ./pryrc                ~/.pryrc
+ln -s ./psqlrc               ~/.psqlrc
+ln -s ./tmux.conf            ~/.tmux.conf
+ln -s ./vim/vimrc            ~/.vimrc
+ln -s ./zshrc                ~/.zshrc
 
 brew tap homebrew/bundle
 brew bundle
@@ -28,6 +28,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
+
+pip install wharfee
 
 git clone git://github.com/zsh-users/zsh-autosuggestions \
   $ZSH_CUSTOM/plugins/zsh-autosuggestions

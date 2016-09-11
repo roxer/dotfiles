@@ -13,6 +13,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-characterize'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -23,6 +24,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'mbbill/undotree'
+    nnoremap <F5> :UndotreeToggle<cr>
+" Plug 'sjl/gundo.vim' # requires python 2.4+ but vim compiled with 3+
+"     nnoremap <F5> :GundoToggle<CR>
+
 Plug 'flazz/vim-colorschemes'
 Plug 'Konfekt/FastFold'
 " git: git://github.com/garbas/vim-snipmate.git
@@ -30,14 +35,16 @@ Plug 'Konfekt/FastFold'
 " git: git://github.com/MarcWeber/vim-addon-mw-utils.git
 " tlib: #needed for snipmate
 " git: git://github.com/tomtom/tlib_vim.git
-" git: git://github.com/nelstrom/gundo.vim.git
 " git: https://github.com/lukaszkorecki/CoffeeTags.git
 
-Plug 'sjl/gundo.vim'
 " Plugin 'mhinz/vim-signify'
 
 " Plug 'ervandew/supertab' " YouCompleteMe obsoletes it
+" Plug 'Shougo/neocomplete.vim' " YouCompleteMe obsoletes it
 Plug 'Valloric/YouCompleteMe'
+    let g:ycm_use_ultisnips_completer      = 1
+    let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " Plugin 'maksimr/vim-jsbeautify'
 " Plugin 'Lokaltog/vim-easymotion'               " Move around with ease
@@ -47,8 +54,12 @@ Plug 'wincent/terminus'
 Plug 'elixir-lang/vim-elixir'
 
 Plug 'kylef/apiblueprint.vim'
-Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
+" Plug 'vim-misc'
+" Plug 'xolox/vim-easytags'
+    " let g:easytags_suppress_ctags_warning = 1
+" Plug 'taglist.vim'
+"
 Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -69,11 +80,19 @@ Plug 'exvim/ex-matchit'
 Plug 'amirh/HTML-AutoCloseTag'
 Plug 'altercation/vim-colors-solarized'
 " Plug 'rking/ag.vim' " depreciated
+" Plug 'ctrlpvim/ctrlp.vim' " depreciated by fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+    let g:UltiSnipsExpandTrigger       = "<F8>"
+    let g:UltiSnipsJumpForwardTrigger  = "<F9>"
+    let g:UltiSnipsJumpBackwardTrigger = "<F7>"
+    let g:UltiSnipsListSnippets        = "<F6>"
+
 Plug 'mileszs/ack.vim'
-Plug 'Shougo/neocomplete.vim'
 Plug 'techlivezheng/vim-plugin-minibufexpl'
-Plug 'taglist.vim'
 
 " Syntax plugins
 Plug 'elzr/vim-json'
@@ -135,10 +154,14 @@ imap <F1> <nop>
 " unmap ex mode: 'Type visual to go into Normal mode.'
 nnoremap Q <nop>
 
+" move line down and up
 map - ddp
 map _ ddkP
 " vmap - dp
 " vmap - dkP
+
+" format json file
+com! FormatJSON %!python -m json.tool
 
 " Ensure vim uses bash
 set shell=/bin/bash
@@ -149,6 +172,7 @@ set modelines=0
 " Set the default font
 set guifont=Meslo\ LG\ S\ for\ Powerline:h12
 let g:airline_powerline_fonts = 1
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 " let g:airline_theme = "base16_solarized"
 " set guifont=Monaco:h12
 
@@ -249,7 +273,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
-set cm=blowfish
+" set cm=blowfish2 " this brakes neovim
 set textwidth=90
 set formatoptions=qrn1
 " Delete comment character when joining commented lines
@@ -276,9 +300,9 @@ nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
 map Y y$
 
-" Searching using Ctrl+P
-map <leader>o :CtrlPMixed<CR>
-nnoremap <leader>. :CtrlPTag<cr>
+" TODEL Searching using Ctrl+P
+" map <leader>o :CtrlPMixed<CR>
+" nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <silent> <leader>b :TagbarToggle<CR>
 map <leader>e :MBEOpen<cr>
 map <leader>c :MBEClose<cr>
@@ -314,7 +338,7 @@ set splitright
 " set t_ti= t_te=
 
 " FZF.vim
-" set rtp+=/usr/local/opt/fzf
+set rtp+=/usr/local/opt/fzf
 " nnoremap <leader>t :Files<cr>
 " nnoremap <leader>b :Buffers<cr>
 
@@ -375,11 +399,11 @@ let g:netrw_list_hide='.DS_Store,^\.git/$'
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -391,8 +415,8 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -402,13 +426,24 @@ nmap ga <Plug>(EasyAlign)
 
 " rabl files
 au BufRead,BufNewFile *.rabl setf ruby
-" let ruby_fold = 1
+let ruby_fold = 1
 set foldlevelstart=1
+
+" vim-ruby setting
+let g:ruby_indent_block_style = 'do'
+
 autocmd Syntax c,cpp,vim,ruby setlocal foldmethod=syntax
 " autocmd Syntax c,cpp,vim,rb normal zR
 
 " Every time the user issues a :w command, Vim will automatically remove all trailing whitespace before saving.
-autocmd BufWritePre * :%s/\s\+$//e
+fun! StripTrailingWhitespace()
+    " Don't strip on these filetypes
+    if &ft =~ 'markdown\|perl'
+        return
+    endif
+    %s/\s\+$//e
+endfun
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 " Do :help cope if you are unsure what cope is. It's super useful!
 "
