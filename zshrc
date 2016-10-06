@@ -34,11 +34,6 @@ RAILS_ENV=development
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-docker-ip() {
-  docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
-}
-alias docker-clean="docker ps -a | grep Exited | awk '{ print \$1; }' | xargs -n1 docker rm"
-
 fpath=(~/.zsh/completion $fpath)
 
 # http://zshwiki.org/home/builtin/functions/zmv

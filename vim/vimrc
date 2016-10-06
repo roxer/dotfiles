@@ -81,7 +81,8 @@ Plug 'amirh/HTML-AutoCloseTag'
 Plug 'altercation/vim-colors-solarized'
 " Plug 'rking/ag.vim' " depreciated
 " Plug 'ctrlpvim/ctrlp.vim' " depreciated by fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" If you installed fzf using Homebrew, the following should suffice:
 Plug 'junegunn/fzf.vim'
 
 Plug 'SirVer/ultisnips'
@@ -100,11 +101,13 @@ Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-haml'
 Plug 'slim-template/vim-slim'
 Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+Plug 'ekalinin/Dockerfile.vim'
 Plug 'yaml/yaml.vim'
 
 Plug 'hail2u/vim-css3-syntax'
 Plug 'othree/html5-syntax.vim'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'posva/vim-vue' " vue syntax hightlight
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'jiangmiao/simple-javascript-indenter'
 Plug 'puppetlabs/puppet-syntax-vim'
@@ -378,9 +381,10 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 cmap w!! w !sudo tee > /dev/null %
 
 " Do syntax check when the buffer is first loaded
-let g:syntastic_check_on_open=0
-let g:syntastic_disabled_filetypes=['m.html']
-let g:syntastic_html_checkers=['']
+let g:syntastic_check_on_open      = 0
+let g:syntastic_disabled_filetypes = ['m.html']
+let g:syntastic_html_checkers      = ['']
+let g:syntastic_ruby_mri_exec      = '~/.rbenv/shims/ruby'
 " let g:syntastic_html_tidy_ignore_errors = [
 "     \  'plain text isn''t allowed in <head> elements',
 "     \  '<base> escaping malformed URI reference',
