@@ -3,6 +3,7 @@ alias b="bundle exec"
 alias b-s="brew services"
 alias b-u="brew update"
 alias b-g="brew upgrade"
+alias truncate=gtruncate
 alias -g se='| grep -i'
 # alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
 alias -s log="less -MN"
