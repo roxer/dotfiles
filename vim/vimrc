@@ -13,7 +13,8 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-characterize'
+Plug 'tpope/vim-characterize' " ga shows info about char; <C-K> shortcut; set list/nolist
+
 Plug 'vim-ruby/vim-ruby'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -136,6 +137,7 @@ set noswapfile
 set ff=unix " display DOS file endings
 set copyindent
 set preserveindent
+set clipboard=unnamed
 
 """"""""""""""""""""""""""""""
 " => Visual mode related

@@ -1,4 +1,5 @@
 
+alias tac=gtac
 alias b="bundle exec"
 alias b-s="brew services"
 alias b-u="brew update"

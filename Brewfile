@@ -111,6 +111,7 @@ cask 'cathode'
 cask 'cyberduck'
 cask 'atom'
 cask 'tower'
+cask 'macdown'
 # brew install git-lfs
 # brew install git-flow
 # brew install ack
