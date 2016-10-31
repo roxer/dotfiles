@@ -1,4 +1,10 @@
 
+# Go to the root of a project (git root)
+alias root='cd $(git rev-parse --show-cdup)'
+# Pretty print the path
+alias path="echo $PATH | tr -s ':' '\n'"
+
+alias tlf="tail -f"
 alias tac=gtac
 alias b="bundle exec"
 alias b-s="brew services"

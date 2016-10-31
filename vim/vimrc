@@ -132,7 +132,7 @@ syntax enable
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
-set nowb
+set nowb " nowritebackup
 set noswapfile
 set ff=unix " display DOS file endings
 set copyindent
@@ -177,7 +177,7 @@ set modelines=0
 " Set the default font
 set guifont=Meslo\ LG\ S\ for\ Powerline:h12
 let g:airline_powerline_fonts = 1
-set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set listchars=eol:¬,tab:»·,trail:~,extends:>,precedes:<,space:␣
 " let g:airline_theme = "base16_solarized"
 " set guifont=Monaco:h12
 
@@ -222,7 +222,10 @@ set wildmode=list:longest
 
 set visualbell
 set cursorline " highlight current line
+
+" Allow usage of mouse in iTerm
 set ttyfast
+set mouse=a
 
 " For regular expressions turn magic on
 set magic
@@ -247,6 +250,8 @@ set scs
 " provide uppercase it will force matching case
 set ignorecase smartcase
 set incsearch
+" Never have to type /g at the end of search / replace again
+set gdefault
 
 autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 tabstop=4 wrap linebreak nolist wrap lbr colorcolumn=0 synmaxcol=999999
 
@@ -322,6 +327,13 @@ noremap <C-S-TAB> :MBEbb<CR>
 map <silent> <leader>, :noh<cr>
 " Close all the buffers
 map <leader>ba :1,1000 bd!<cr>
+" Quickly close windows
+nnoremap <leader>x :x<cr>
+nnoremap <leader>X :q!<cr>
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <leader>= :wincmd =<cr>
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -494,11 +506,11 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_max_height = 30
-  let g:ctrlp_working_path_mode = 0
+  let g:ctrlp_use_caching           = 0
+  let g:ctrlp_max_height            = 30
+  let g:ctrlp_working_path_mode     = 0
   let g:ctrlp_match_window_reversed = 0
-  let g:ag_working_path_mode = "r"
+  let g:ag_working_path_mode        = "r"
   let g:ackprg = 'ag --vimgrep --smart-case'
   cnoreabbrev ag Ack
   cnoreabbrev aG Ack
