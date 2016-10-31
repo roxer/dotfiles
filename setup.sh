@@ -16,6 +16,7 @@ ln -s ./psqlrc               ~/.psqlrc
 ln -s ./tmux.conf            ~/.tmux.conf
 ln -s ./vim/vimrc            ~/.vimrc
 ln -s ./zshrc                ~/.zshrc
+ln -s ./bin/git-churn        /usr/local/bin/
 
 brew tap homebrew/bundle
 brew bundle
@@ -33,3 +34,4 @@ pip install wharfee
 
 git clone git://github.com/zsh-users/zsh-autosuggestions \
   $ZSH_CUSTOM/plugins/zsh-autosuggestions
+# setup config for iTerm2 http://stackoverflow.com/a/25122646/4298624
