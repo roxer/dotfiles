@@ -3,7 +3,12 @@ filetype on
 filetype off
 set nocompatible
 
-call plug#begin('~/.vim/plugged')
+" Set our mapleader key
+let mapleader = ','
+let g:mapleader = ","
+noremap \ ,
+
+call plug#begin('~/.vim/plugged') " Plugins initialization start
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-bundler'
@@ -13,6 +18,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-characterize' " ga shows info about char; <C-K> shortcut; set list/nolist
 
 Plug 'vim-ruby/vim-ruby'
@@ -43,17 +49,69 @@ Plug 'Konfekt/FastFold'
 " Plug 'ervandew/supertab' " YouCompleteMe obsoletes it
 " Plug 'Shougo/neocomplete.vim' " YouCompleteMe obsoletes it
 Plug 'Valloric/YouCompleteMe'
+" {{{
     let g:ycm_use_ultisnips_completer      = 1
     let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
     let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    let g:ycm_seed_identifiers_with_syntax = 1
+    let g:ycm_key_invoke_completion        = '<c-j>'
+    let g:ycm_complete_in_strings          = 1
+    let g:ycm_min_num_of_chars_for_completion = 2
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1
+" }}}
 
 " Plugin 'maksimr/vim-jsbeautify'
-" Plugin 'Lokaltog/vim-easymotion'               " Move around with ease
+Plug 'haya14busa/incsearch.vim'
+" {{{
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+" }}}
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'Lokaltog/vim-easymotion'                   " Move around with ease
+" {{{
+    " :h g:incsearch#auto_nohlsearch
+    set hlsearch
+    map <Leader><Leader> <Plug>(easymotion-prefix)
+    let g:incsearch#auto_nohlsearch    = 1
+    let g:EasyMotion_do_mapping        = 0
+    " Smartsign (type `3` and match `3`&`#`)
+    let g:EasyMotion_smartcase         = 1
+    let g:EasyMotion_off_screen_search = 0
+    " Jump to anywhere with only `s{char}{target}`
+    " `s<CR>` repeat last find motion.
+    " nmap s <Plug>(easymotion-s)
+    nmap ; <Plug>(easymotion-s2)
+    " Bidirectional & within line 't' motion
+    omap t <Plug>(easymotion-bd-tl)
+    " Use uppercase target labels and type as a lower case
+    let g:EasyMotion_use_upper         = 1
+     " type `l` and match `l`&`L`
+    let g:EasyMotion_use_smartsign_us  = 1
+    map n  <Plug>(incsearch-nohl-n)
+    map N  <Plug>(incsearch-nohl-N)
+    map *  <Plug>(incsearch-nohl-*)
+    map #  <Plug>(incsearch-nohl-#)
+    map g* <Plug>(incsearch-nohl-g*)
+    map g# <Plug>(incsearch-nohl-g#)
+    " function! s:config_easyfuzzymotion(...) abort
+    "     return extend(copy({
+    "     \   'converters': [incsearch#config#fuzzyword#converter()],
+    "     \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+    "     \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+    "     \   'is_expr': 0,
+    "     \   'is_stay': 1
+    "     \ }), get(a:, 1, {}))
+    " endfunction
+
+    " noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" }}}
+
 " Plugin 'AndrewRadev/splitjoin.vim'             " Split join: gS to split, gJ to join/
 Plug 'wincent/terminus'
 " Plugin 'git://git.wincent.com/command-t.git'
 Plug 'elixir-lang/vim-elixir'
-
 Plug 'kylef/apiblueprint.vim'
 Plug 'majutsushi/tagbar'
 " Plug 'vim-misc'
@@ -66,7 +124,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'junegunn/vim-easy-align'
-Plug 'jlanzarotta/bufexplorer'
+" Plug 'jlanzarotta/bufexplorer' " fzf obsoletes this
+Plug 'techlivezheng/vim-plugin-minibufexpl'
 Plug 'Raimondi/delimitMate'
 " Plugin 'powerline/powerline'
 Plug 'bling/vim-airline'                        " status line
@@ -85,8 +144,44 @@ Plug 'altercation/vim-colors-solarized'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 " If you installed fzf using Homebrew, the following should suffice:
 Plug 'junegunn/fzf.vim'
+"{{{
+    set rtp+=/usr/local/opt/fzf
+    nnoremap <silent> <leader><space> :Files<CR>
+    nnoremap <silent> <leader>B :Buffers<CR>
+    nnoremap <silent> <leader>A :Windows<CR>
+    nnoremap <silent> <leader>; :BLines<CR>
+    nnoremap <silent> <leader>o :BTags<CR>
+    nnoremap <silent> <leader>O :Tags<CR>
+    nnoremap <silent> <leader>? :History<CR>
+    " nnoremap <leader>t :Files<cr>
+    " nnoremap <leader>b :Buffers<cr>
+
+    " nmap <leader><tab> <plug>(fzf-maps-n)
+    " xmap <leader><tab> <plug>(fzf-maps-x)
+    " omap <leader><tab> <plug>(fzf-maps-o)
+
+    " Insert mode completion
+    imap <C-x><C-f> <plug>(fzf-complete-path)
+    imap <C-x><C-j> <plug>(fzf-complete-file-ag)
+    " imap <C-x><C-l> <plug>(fzf-complete-line)
+    " imap <S-Tabl>   <plug>(fzf-complete-line)
+    inoremap <S-Tab> <C-x><C-l>
+
+    " makes fzf never use tmux
+    " https://github.com/junegunn/fzf.vim/issues/66#issuecomment-169362556
+    " let g:fzf_layout = {}
+"}}}
 
 Plug 'SirVer/ultisnips'
+    nnoremap <leader>se :UltiSnipsEdit<CR>
+    let g:UltiSnipsSnippetsDir         = '~/.vim/UltiSnips'
+    let g:UltiSnipsEditSplit           = 'horizontal'
+    let g:UltiSnipsListSnippets        = '<nop>'
+    let g:UltiSnipsExpandTrigger       = '<c-l>'
+    let g:UltiSnipsJumpForwardTrigger  = '<c-l>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
+    let g:ulti_expand_or_jump_res      = 0
+
 Plug 'honza/vim-snippets'
     let g:UltiSnipsExpandTrigger       = "<F8>"
     let g:UltiSnipsJumpForwardTrigger  = "<F9>"
@@ -94,7 +189,6 @@ Plug 'honza/vim-snippets'
     let g:UltiSnipsListSnippets        = "<F6>"
 
 Plug 'mileszs/ack.vim'
-Plug 'techlivezheng/vim-plugin-minibufexpl'
 
 " Syntax plugins
 Plug 'elzr/vim-json'
@@ -137,7 +231,7 @@ set noswapfile
 set ff=unix " display DOS file endings
 set copyindent
 set preserveindent
-set clipboard=unnamed
+set clipboard=unnamed,unnamedplus
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -164,6 +258,8 @@ map - ddp
 map _ ddkP
 " vmap - dp
 " vmap - dkP
+map <Space> <C-w>
+map <Space><Space> <C-w><C-p>
 
 " format json file
 com! FormatJSON %!python -m json.tool
@@ -172,7 +268,7 @@ com! FormatJSON %!python -m json.tool
 set shell=/bin/bash
 
 " Some kind of security thing
-set modelines=0
+set modelines=1
 
 " Set the default font
 set guifont=Meslo\ LG\ S\ for\ Powerline:h12
@@ -188,11 +284,6 @@ set autowrite
 " Automatically attempt to handle indentation
 set autoindent
 set si
-
-" Set our mapleader key
-let mapleader = ','
-let g:mapleader = ","
-noremap \ ,
 
 " stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
 " Keep search matches in the middle of the window.
@@ -241,7 +332,6 @@ let g:go_fmt_command = "goimports"
 
 set background=dark
 set history=7000
-set hlsearch
 " ignore case - ignorowanie wielkosci znakow przy
 " przeszukiwaniu tekstu
 set ic
@@ -293,7 +383,10 @@ set formatoptions+=j
 
 
 set colorcolumn=90
-highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+highlight! ColorColumn ctermbg=233 guibg=#131313
+highlight! SignColumn ctermbg=233 guibg=#0D0D0D
+highlight! FoldColumn ctermbg=233 guibg=#0D0D0D
 
 set foldmethod=expr
 set foldlevelstart=2
@@ -303,12 +396,12 @@ colo railscasts
 set encoding=utf-8
 
 " Switching between buffers using Ctrl+Tab
-nnoremap <c-Tab> :bnext<CR>
-nnoremap <c-S-Tab> :bprevious<CR>
+nnoremap <leader><Tab> :bnext<CR>
+nnoremap <leader><S-Tab> :bprevious<CR>
 " Switching between tabs using Shift+Tab
 nnoremap <Tab> :tabn<CR>
 nnoremap <S-Tab> :tabp<CR>
-map Y y$
+nnoremap Y y$
 
 " TODEL Searching using Ctrl+P
 " map <leader>o :CtrlPMixed<CR>
@@ -354,23 +447,6 @@ set splitright
 " http://www.shallowsky.com/linux/noaltscreen.html
 " set t_ti= t_te=
 
-" FZF.vim
-set rtp+=/usr/local/opt/fzf
-" nnoremap <leader>t :Files<cr>
-" nnoremap <leader>b :Buffers<cr>
-
-" nmap <leader><tab> <plug>(fzf-maps-n)
-" xmap <leader><tab> <plug>(fzf-maps-x)
-" omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-" imap <c-x><c-f> <plug>(fzf-complete-path)
-" imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-" imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" makes fzf never use tmux
-" https://github.com/junegunn/fzf.vim/issues/66#issuecomment-169362556
-" let g:fzf_layout = {}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -384,7 +460,12 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 " Remember info about open buffers on close
-set viminfo^=%
+" set viminfo^=%
+" ! save global variables that doesn't contains lowercase letters
+" h disable the effect of 'hlsearch' when loading the viminfo
+" f1 store marks
+" '100 remember 100 previously edited files
+set viminfo=!,h,f1,'100
 " TODO set viminfo='50,<1000,s100,h " Set max buffer size to 1000 lines (default 50)
 " TODO set lazyredraw
 
@@ -524,8 +605,8 @@ endif
 " => Coffeescript
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-autocmd BufRead,BufNewFile *.es6 setfiletype javascript
-autocmd BufRead,BufNewFile *.ts setfiletype javascript
+autocmd BufRead,BufNewFile     *.es6    setfiletype javascript
+autocmd BufRead,BufNewFile     *.ts     setfiletype javascript
 "autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 let coffee = '/usr/local/bin/coffee'
 " special highlighting for React and Lodash
@@ -583,3 +664,4 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 map <leader>t :NERDTreeToggle<CR>
 
+" vim: set sw=4 ts=4 et foldlevel=0 foldmethod=marker:

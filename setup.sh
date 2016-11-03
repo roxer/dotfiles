@@ -32,6 +32,8 @@ bundle config --global jobs $((number_of_cores - 1))
 
 pip install wharfee
 
+mkdir -p ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 git clone git://github.com/zsh-users/zsh-autosuggestions \
   $ZSH_CUSTOM/plugins/zsh-autosuggestions
 # setup config for iTerm2 http://stackoverflow.com/a/25122646/4298624
