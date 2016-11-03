@@ -145,6 +145,7 @@ Plug 'altercation/vim-colors-solarized'
 " If you installed fzf using Homebrew, the following should suffice:
 Plug 'junegunn/fzf.vim'
 "{{{
+    let g:fzf_launcher = "fzf_function %s"
     set rtp+=/usr/local/opt/fzf
     nnoremap <silent> <leader><space> :Files<CR>
     nnoremap <silent> <leader>B :Buffers<CR>
