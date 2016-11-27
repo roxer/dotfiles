@@ -116,18 +116,21 @@ export ARCHFLAGS="-arch x86_64"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/gocode/bin:$PATH
 export PATH="$(brew --prefix sqlite)/bin:$PATH"
-export PGDATA=~/Library/PostgreSQL/9.5/data/
+# export PGDATA=~/Library/PostgreSQL/9.5/data/
+export PGDATA=/usr/local/var/postgres-9.6/
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications --caskroom=/opt/homebrew-cask/Caskroom"
 export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
 export GOPATH=$HOME/gocode
 
-#eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 eval "$(rbenv init --no-rehash - zsh)"
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
 if (( $+commands[tag] )); then
+  # https://github.com/aykamko/tag OR https://github.com/sampson-chen/sack
+
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
   alias ag=tag
 fi

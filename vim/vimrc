@@ -4,9 +4,9 @@ filetype off
 set nocompatible
 
 " Set our mapleader key
-let mapleader = ','
-let g:mapleader = ","
-noremap \ ,
+let mapleader   = ','
+let g:mapleader = ','
+" noremap \ ,
 
 call plug#begin('~/.vim/plugged') " Plugins initialization start
 Plug 'tpope/vim-surround'
@@ -26,6 +26,10 @@ Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'mudge/runspec.vim'
 Plug 'vim-scripts/YankRing.vim'
+"{{{
+    set modifiable
+    map <leader>p :YRShow<cr>
+"}}}
 Plug 'benmills/vimux'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/webapi-vim'
@@ -69,24 +73,33 @@ Plug 'haya14busa/incsearch.vim'
     map g/ <Plug>(incsearch-stay)
 " }}}
 Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'Lokaltog/vim-easymotion'                   " Move around with ease
+Plug 'easymotion/vim-easymotion'                   " Move around with ease
 " {{{
     " :h g:incsearch#auto_nohlsearch
     set hlsearch
     map <Leader><Leader> <Plug>(easymotion-prefix)
+    map  <Leader><Leader>w <Plug>(easymotion-bd-w)
+    omap t <Plug>(easymotion-bd-tl)
+    nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
+    nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
+    " JK motions: Line motions
+    map <Leader><Leader>j <Plug>(easymotion-j)
+    map <Leader><Leader>k <Plug>(easymotion-k)
+
+    " map <Leader><Leader> <Plug>(easymotion-prefix)
     let g:incsearch#auto_nohlsearch    = 1
-    let g:EasyMotion_do_mapping        = 0
+    let g:EasyMotion_do_mapping        = 1
     " Smartsign (type `3` and match `3`&`#`)
     let g:EasyMotion_smartcase         = 1
     let g:EasyMotion_off_screen_search = 0
     " Jump to anywhere with only `s{char}{target}`
     " `s<CR>` repeat last find motion.
     " nmap s <Plug>(easymotion-s)
-    nmap ; <Plug>(easymotion-s2)
+    " nmap ; <Plug>(easymotion-s2)
     " Bidirectional & within line 't' motion
     omap t <Plug>(easymotion-bd-tl)
     " Use uppercase target labels and type as a lower case
-    let g:EasyMotion_use_upper         = 1
+    let g:EasyMotion_use_upper         = 0
      " type `l` and match `l`&`L`
     let g:EasyMotion_use_smartsign_us  = 1
     map n  <Plug>(incsearch-nohl-n)
@@ -123,12 +136,69 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+Plug 'junegunn/vim-slash'
+"{{{
+    function! s:blink(times, delay)
+      let s:blink = { 'ticks': 2 * a:times, 'delay': a:delay }
+
+      function! s:blink.tick(_)
+        let self.ticks -= 1
+        let active = self == s:blink && self.ticks > 0
+
+        if !self.clear() && active && &hlsearch
+          let [line, col] = [line('.'), col('.')]
+          let w:blink_id = matchadd('IncSearch',
+                \ printf('\%%%dl\%%>%dc\%%<%dc', line, max([0, col-2]), col+2))
+        endif
+        if active
+          call timer_start(self.delay, self.tick)
+        endif
+      endfunction
+
+      function! s:blink.clear()
+        if exists('w:blink_id')
+          call matchdelete(w:blink_id)
+          unlet w:blink_id
+          return 1
+        endif
+      endfunction
+
+      call s:blink.clear()
+      call s:blink.tick(0)
+      return ''
+    endfunction
+
+    noremap <expr> <plug>(slash-after) <sid>blink(2, 50)
+"}}}
 Plug 'junegunn/vim-easy-align'
-" Plug 'jlanzarotta/bufexplorer' " fzf obsoletes this
-Plug 'techlivezheng/vim-plugin-minibufexpl'
-Plug 'Raimondi/delimitMate'
+" Plug 'jlanzarotta/bufexplorer' " fzf obsoletes this use <Leader>A
+Plug 'vim-ctrlspace/vim-ctrlspace'
+"{{{
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+    " let g:CtrlSpaceSearchTiming = 500
+"}}}
+Plug 'edkolev/tmuxline.vim'
+Plug 'weynhamz/vim-plugin-minibufexpl'
+"{{{
+    " map <leader>e :MBEOpen<cr>
+    " map <leader>c :MBEClose<cr>
+    map     <leader>f :MBEFocus<CR>
+
+    " Switching between tabs using Shift+Tab
+    nnoremap <Tab>   :bnext<CR>
+    nnoremap <S-Tab> :bprevious<CR>
+    " Switching between buffers using Ctrl+Tab
+    nnoremap <leader><Tab>   :tabnext<CR>
+    nnoremap <leader><S-Tab> :tabprevious<CR>
+"}}}
 " Plugin 'powerline/powerline'
-Plug 'bling/vim-airline'                        " status line
+" TODEL Plug 'bling/vim-bufferline'
+Plug 'Raimondi/delimitMate'
+Plug 'vim-airline/vim-airline'                        " status line
+"{{{
+    let g:airline#extensions#tabline#enabled = 0
+    let g:airline#extensions#tabline#buffer_nr_show = 0
+"}}}
 " Plug 'vim-airline/vim-airline-themes'
 " Plugin 'itchyny/lightline.vim'
 Plug 'airblade/vim-rooter'
@@ -150,7 +220,7 @@ Plug 'junegunn/fzf.vim'
     nnoremap <silent> <leader><space> :Files<CR>
     nnoremap <silent> <leader>B :Buffers<CR>
     nnoremap <silent> <leader>A :Windows<CR>
-    nnoremap <silent> <leader>; :BLines<CR>
+    nnoremap <silent> <leader>L :BLines<CR>
     nnoremap <silent> <leader>o :BTags<CR>
     nnoremap <silent> <leader>O :Tags<CR>
     nnoremap <silent> <leader>? :History<CR>
@@ -164,9 +234,9 @@ Plug 'junegunn/fzf.vim'
     " Insert mode completion
     imap <C-x><C-f> <plug>(fzf-complete-path)
     imap <C-x><C-j> <plug>(fzf-complete-file-ag)
+    imap <S-Tab>    <plug>(fzf-complete-line)
     " imap <C-x><C-l> <plug>(fzf-complete-line)
-    " imap <S-Tabl>   <plug>(fzf-complete-line)
-    inoremap <S-Tab> <C-x><C-l>
+    " inoremap <S-Tab> <C-x><C-l>
 
     " makes fzf never use tmux
     " https://github.com/junegunn/fzf.vim/issues/66#issuecomment-169362556
@@ -239,8 +309,9 @@ set clipboard=unnamed,unnamedplus
 """"""""""""""""""""""""""""""
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
+" vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap // y/<C-R>"<CR>
+" vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
@@ -313,7 +384,7 @@ set wildmenu
 set wildmode=list:longest
 
 set visualbell
-set cursorline " highlight current line
+set cursorcolumn cursorline " cuc cul - highlight current line and column
 
 " Allow usage of mouse in iTerm
 set ttyfast
@@ -390,44 +461,34 @@ highlight! SignColumn ctermbg=233 guibg=#0D0D0D
 highlight! FoldColumn ctermbg=233 guibg=#0D0D0D
 
 set foldmethod=expr
-set foldlevelstart=2
+set foldlevelstart=4
 colo railscasts
 
 " Set the default encoding to the always trusty UTF-8
 set encoding=utf-8
 
-" Switching between buffers using Ctrl+Tab
-nnoremap <leader><Tab> :bnext<CR>
-nnoremap <leader><S-Tab> :bprevious<CR>
-" Switching between tabs using Shift+Tab
-nnoremap <Tab> :tabn<CR>
-nnoremap <S-Tab> :tabp<CR>
 nnoremap Y y$
 
 " TODEL Searching using Ctrl+P
 " map <leader>o :CtrlPMixed<CR>
 " nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <silent> <leader>b :TagbarToggle<CR>
-map <leader>e :MBEOpen<cr>
-map <leader>c :MBEClose<cr>
-map <leader>t :MBEToggle<cr>
-map <leader>f :MBEFocus<cr>
-noremap <C-TAB>   :MBEbf<CR>
-noremap <C-S-TAB> :MBEbb<CR>
 " nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 " nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Disable highlight when <leader>, is pressed
-map <silent> <leader>, :noh<cr>
+map <silent> <Leader><Leader><Leader> :nohlsearch<cr>
+" map <silent> <leader>, :noh<cr>
+
 " Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
+map <Leader>ba :1,1000 bd!<cr>
 " Quickly close windows
-nnoremap <leader>x :x<cr>
-nnoremap <leader>X :q!<cr>
+nnoremap <Leader>x :x<cr>
+nnoremap <Leader>X :q!<cr>
 
 " zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
+nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <Leader>= :wincmd =<cr>
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
@@ -527,7 +588,6 @@ nmap ga <Plug>(EasyAlign)
 " rabl files
 au BufRead,BufNewFile *.rabl setf ruby
 let ruby_fold = 1
-set foldlevelstart=1
 
 " vim-ruby setting
 let g:ruby_indent_block_style = 'do'
@@ -577,12 +637,13 @@ if executable('ag')
   set wildignore+=*DS_Store*
   set wildignore+=vendor/rails/**
   set wildignore+=vendor/cache/**
-  set wildignore+=*.git
-  set wildignore+=*.gem
+  set wildignore+=*.git,*.svn
+  set wildignore+=tags,*.tags
+  set wildignore+=*.gem,*.class,*.mo
   set wildignore+=node_modules,_site
   set wildignore+=log/**
   set wildignore+=tmp/**
-  set wildignore+=*.png,*.jpg,*.gif
+  set wildignore+=*.png,*.jpg,*jpeg,*.gif,*.xpm
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -630,13 +691,13 @@ function! VisualSelection(direction) range
     let l:pattern = substitute(l:pattern, "\n$", "", "")
 
     if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
+        execute "normal ?" . l:pattern
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern
     elseif a:direction == 'gv'
         call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
     elseif a:direction == 'replace'
         call CmdLine("%s" . '/'. l:pattern . '/')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
     endif
 
     let @/ = l:pattern
@@ -651,7 +712,6 @@ function! HasPaste()
     return ''
 endfunction
 
-
 " rename current file, via Gary Bernhardt
 function! RenameFile()
   let old_name = expand('%')
@@ -665,4 +725,39 @@ endfunction
 map <leader>n :call RenameFile()<cr>
 map <leader>t :NERDTreeToggle<CR>
 
+" space nnoremap <silent> <leader><space> :Files<CR>
+" a map <leader>a :Ag!<space>
+" A nnoremap <silent> <leader>A :Windows<CR>
+" b nnoremap <silent> <leader>b :TagbarToggle<CR>
+" ba map <Leader>ba :1,1000 bd!<cr>
+" B nnoremap <silent> <leader>B :Buffers<CR>
+" f map <leader>f :MBEFocus<CR>
+" >k map <Leader><Leader>k <Plug>(easymotion-k)
+" >l map <Leader><Leader>j <Plug>(easymotion-j)
+" L nnoremap <silent> <leader>L :BLines<CR>
+" n map <leader>n :call RenameFile()<cr>
+" o nnoremap <silent> <leader>o :BTags<CR>
+" O nnoremap <silent> <leader>O :Tags<CR>
+" p map <leader>p :YRShow<cr>
+" r vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+" se nnoremap <leader>se :UltiSnipsEdit<CR>
+" t map <leader>t :NERDTreeToggle<CR>
+" x nnoremap <Leader>x :x<cr>
+" X nnoremap <Leader>X :q!<cr>
+
+" ? nnoremap <silent> <leader>? :History<CR>
+" nnoremap <leader><Tab>   :tabnext<CR>
+" nnoremap <leader><S-Tab> :tabprevious<CR>
+" map <Leader><Leader> <Plug>(easymotion-prefix)
+"
+" map  <Leader><Leader>w <Plug>(easymotion-bd-w)
+" omap t <Plug>(easymotion-bd-tl)
+" nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
+" nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
+" " map <leader>e :MBEOpen<cr>
+" " map <leader>c :MBEClose<cr>
+
+" " zoom a vim pane, <C-w>= to re-balance
+" nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
+" nnoremap <Leader>= :wincmd =<cr>
 " vim: set sw=4 ts=4 et foldlevel=0 foldmethod=marker:
