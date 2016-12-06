@@ -7,3 +7,8 @@ ab p§ pawel@przylucki.pl
 ab g§ roxermc@gmail.com
 ab n§ 521-161-58-30
 ab t§ tel. 601 32 75 05
+ab #f # FIXME
+ab #t # TODO
+ab #r # REVIEW
+ab #o # OPTIMIZE
+ab #h # HACK

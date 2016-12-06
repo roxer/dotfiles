@@ -5,7 +5,7 @@ tap 'universal-ctags/universal-ctags'
 tap 'caskroom/cask'
 tap 'aykamko/tag-ag'
 
-brew 'tag-ag'
+brew 'tag-ag'     # https://github.com/aykamko/tag
 brew 'diff-so-fancy'
 brew 'ruby-build' # manage rubies
 brew 'tmux'
@@ -13,16 +13,19 @@ brew 'htop'
 brew 'ncdu'       # to free space on disk
 brew 'pgcli'      # better psql
 brew 'zsh'
+brew 'rpl'        # replace strings recursively http://www.laffeycomputer.com/rpl.html
 brew 'fzf'
 brew 'tig'        # git manager
 brew 'lua'
 brew 'luajit'
-brew 'ag'
+brew 'ag'         # https://github.com/ggreer/the_silver_searcher
+brew 'pv'         # http://www.ivarch.com/programs/pv.shtml
 brew 'openssl'
 brew 'ranger'
 brew 'autojump'   # navigate darectories
 # brew 'memcached'
 brew 'node'
+brew 'tree'
 brew 'redis'
 brew 'sqlite'
 brew 'python'
@@ -43,8 +46,8 @@ brew 'pstree'
 brew 'vnstat'
 brew 'ipcalc'
 brew 'universal-ctags', args: %w[HEAD]
-brew 'wget', args: %w(--with-iri)
-brew 'curl', args: %w(--with-openssl --with-nghttp2)
+brew 'wget',            args: %w(--with-iri)
+brew 'curl',            args: %w(--with-openssl --with-nghttp2)
 # brew 'lsof'
 brew 'homebrew/dupes/openssh'
 brew 'reattach-to-user-namespace'
@@ -60,7 +63,6 @@ brew 'moreutils'
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew 'findutils'
-brew 'gnu-sed', args: %w(--with-default-names)
 brew 'rbenv'
 brew 'rbenv-default-gems'
 brew 'mongodb'
@@ -68,11 +70,12 @@ brew 'mariadb'
 brew 'rabbitmq'
 brew 'postgresql'
 brew 'elasticsearch'
+brew 'gnu-sed',     args: %w(--with-default-names)
 brew 'imagemagick', args: %w(--with-webp)
+brew 'ffmpeg',      args: %w(--with-libvpx --with-libvorbis)
 # Install clojure tools
 brew 'leiningen'
 # brew 'youtube-dl' # download from youtube
-brew 'ffmpeg', args: %w(--with-libvpx --with-libvorbis)
 brew 'heroku-toolbelt'
 brew 'the_silver_searcher'
 brew 'heroku-toolbelt'
@@ -94,7 +97,11 @@ cask 'iterm2'
 cask 'alfred'
 # brew cask alfred link
 cask 'java'
-cask 'macvim', args: %w(--with-cscope --with-lua --with-override-system-vim --with-luajit --with-python3)
+cask 'macvim', args: %w(--with-cscope
+                        --with-lua
+                        --with-override-system-vim
+                        --with-luajit
+                        --with-python3)
 # brew 'vim', args: ['--override-system-vi'] - macvim does this job
 cask 'heroku-toolbelt'
 # cask 'charles'
@@ -114,12 +121,10 @@ cask 'tower'
 cask 'macdown'
 # brew install git-lfs
 # brew install git-flow
-# brew install ack
 # brew install dark-mode
 # brew install rename
 # brew install speedtest_cli
 # brew install ssh-copy-id
-# brew install tree
 # xcode
 # thunderbird
 # navicat

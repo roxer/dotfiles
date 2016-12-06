@@ -22,6 +22,13 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-characterize' " ga shows info about char; <C-K> shortcut; set list/nolist
 
 Plug 'vim-ruby/vim-ruby'
+"{{{
+    let g:rubycomplete_buffer_loading    = 1
+    let g:rubycomplete_classes_in_global = 1
+    let g:rubycomplete_rails             = 1
+    let g:rubycomplete_load_gemfile      = 0
+    let g:rubycomplete_use_bundler       = 0
+"}}}
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'mudge/runspec.vim'
@@ -77,14 +84,18 @@ Plug 'easymotion/vim-easymotion'                   " Move around with ease
 " {{{
     " :h g:incsearch#auto_nohlsearch
     set hlsearch
-    map <Leader><Leader> <Plug>(easymotion-prefix)
-    map  <Leader><Leader>w <Plug>(easymotion-bd-w)
-    omap t <Plug>(easymotion-bd-tl)
-    nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
-    nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
+    map <Leader> <Plug>(easymotion-prefix)
+    " map <Leader><Leader> <Plug>(easymotion-prefix)
+    " use ALT + key w, t, w, s, j, k respectively
+    " map ∑ <Plug>(easymotion-bd-w)
+    map <Leader>w <Plug>(easymotion-bd-w)
+    omap <Leader>t <Plug>(easymotion-bd-tl)
+    omap <Leader>f <Plug>(easymotion-bd-fl)
+    nmap <Leader>w <Plug>(easymotion-overwin-w)
+    nmap <Leader>s <Plug>(easymotion-overwin-f2)
     " JK motions: Line motions
-    map <Leader><Leader>j <Plug>(easymotion-j)
-    map <Leader><Leader>k <Plug>(easymotion-k)
+    map <Leader>j <Plug>(easymotion-j)
+    map <Leader>k <Plug>(easymotion-k)
 
     " map <Leader><Leader> <Plug>(easymotion-prefix)
     let g:incsearch#auto_nohlsearch    = 1
@@ -182,7 +193,7 @@ Plug 'weynhamz/vim-plugin-minibufexpl'
 "{{{
     " map <leader>e :MBEOpen<cr>
     " map <leader>c :MBEClose<cr>
-    map     <leader>f :MBEFocus<CR>
+    map <leader>b :MBEFocus<CR>
 
     " Switching between tabs using Shift+Tab
     nnoremap <Tab>   :bnext<CR>
@@ -204,6 +215,24 @@ Plug 'vim-airline/vim-airline'                        " status line
 Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'                   " git status line
 Plug 'scrooloose/syntastic'
+"{{{
+    " Do syntax check when the buffer is first loaded
+    let g:syntastic_check_on_open      = 0
+    let g:syntastic_disabled_filetypes = ['m.html']
+    let g:syntastic_html_checkers      = ['']
+    let g:syntastic_ruby_checkers      = ['rubocop', 'mri']
+    let g:syntastic_ruby_mri_exec      = '~/.rbenv/shims/ruby'
+    let g:syntastic_ruby_rubocop_exec  = '~/.rbenv/shims/rubocop'
+    " let g:syntastic_quiet_messages     = 0
+    " let g:syntastic_html_tidy_ignore_errors = [
+    "     \  'plain text isn''t allowed in <head> elements',
+    "     \  '<base> escaping malformed URI reference',
+    "     \  'discarding unexpected <body>',
+    "     \  '<script> escaping malformed URI reference',
+    "     \  'content occurs after end of body',
+    "     \  '</head> isn''t allowed in <body> elements'
+    "     \ ]
+"}}}
 Plug 'yaifa.vim'
 " Plugin 'matchit.zip'
 Plug 'exvim/ex-matchit'
@@ -244,7 +273,7 @@ Plug 'junegunn/fzf.vim'
 "}}}
 
 Plug 'SirVer/ultisnips'
-    nnoremap <leader>se :UltiSnipsEdit<CR>
+    nnoremap <leader>ie :UltiSnipsEdit<CR>
     let g:UltiSnipsSnippetsDir         = '~/.vim/UltiSnips'
     let g:UltiSnipsEditSplit           = 'horizontal'
     let g:UltiSnipsListSnippets        = '<nop>'
@@ -472,7 +501,7 @@ nnoremap Y y$
 " TODEL Searching using Ctrl+P
 " map <leader>o :CtrlPMixed<CR>
 " nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <silent> <leader>b :TagbarToggle<CR>
+nnoremap <silent> <leader>v :TagbarToggle<CR>
 " nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 " nnoremap <leader>sv :source $MYVIMRC<cr>
 
@@ -536,20 +565,6 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 
 " Alias "write as sudo" as :w!!
 cmap w!! w !sudo tee > /dev/null %
-
-" Do syntax check when the buffer is first loaded
-let g:syntastic_check_on_open      = 0
-let g:syntastic_disabled_filetypes = ['m.html']
-let g:syntastic_html_checkers      = ['']
-let g:syntastic_ruby_mri_exec      = '~/.rbenv/shims/ruby'
-" let g:syntastic_html_tidy_ignore_errors = [
-"     \  'plain text isn''t allowed in <head> elements',
-"     \  '<base> escaping malformed URI reference',
-"     \  'discarding unexpected <body>',
-"     \  '<script> escaping malformed URI reference',
-"     \  'content occurs after end of body',
-"     \  '</head> isn''t allowed in <body> elements'
-"     \ ]
 
 " Don't overindent javascript
 let g:SimpleJsIndenter_BriefMode=1
@@ -627,7 +642,7 @@ autocmd BufWritePre * call StripTrailingWhitespace()
 
 if executable('ag')
   " Searching using Ag
-  map <leader>a :Ag!<space>
+  map <Leader>a :Ag!<space>
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
   set wildignore=*.so,*.swp,*.aux,*.zip
@@ -657,10 +672,11 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep --smart-case'
   cnoreabbrev ag Ack
   cnoreabbrev aG Ack
-  cnoreabbrev Ag Ack
-  cnoreabbrev AG Ack
+  " cnoreabbrev Ag Ack
+  " cnoreabbrev AG Ack
   " search for word under the cursor
-  nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>
+  " nnoremap K :Ack! "\b<C-R><C-W>\b"<CR>
+  nnoremap K :Ag <C-R><C-W><CR>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -722,42 +738,55 @@ function! RenameFile()
     redraw!
   endif
 endfunction
-map <leader>n :call RenameFile()<cr>
-map <leader>t :NERDTreeToggle<CR>
 
+map <leader>m :call RenameFile()<CR>
+map <leader>n :NERDTreeToggle<CR>
+map <Leader>c :EasyAlign<CR> <CR>
+
+    " JK motions: Line motions
 " space nnoremap <silent> <leader><space> :Files<CR>
 " a map <leader>a :Ag!<space>
 " A nnoremap <silent> <leader>A :Windows<CR>
-" b nnoremap <silent> <leader>b :TagbarToggle<CR>
 " ba map <Leader>ba :1,1000 bd!<cr>
+" b map <leader>f :MBEFocus<CR>
 " B nnoremap <silent> <leader>B :Buffers<CR>
-" f map <leader>f :MBEFocus<CR>
-" >k map <Leader><Leader>k <Plug>(easymotion-k)
-" >l map <Leader><Leader>j <Plug>(easymotion-j)
+" c map <Leader>c :EasyAlign<CR> <CR>
+" d
+" e
+" f omap <Leader>f <Plug>(easymotion-bd-fl)
+" g
+" h
+" i
+" ie nnoremap <leader>ie :UltiSnipsEdit<CR>
+" j map <Leader>j <Plug>(easymotion-j)
+" k map <Leader>k <Plug>(easymotion-k)
+" l
 " L nnoremap <silent> <leader>L :BLines<CR>
-" n map <leader>n :call RenameFile()<cr>
+" m map <leader>n :call RenameFile()<cr>
+" n map <leader>t :NERDTreeToggle<CR>
 " o nnoremap <silent> <leader>o :BTags<CR>
 " O nnoremap <silent> <leader>O :Tags<CR>
 " p map <leader>p :YRShow<cr>
+" q
 " r vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
-" se nnoremap <leader>se :UltiSnipsEdit<CR>
-" t map <leader>t :NERDTreeToggle<CR>
-" x nnoremap <Leader>x :x<cr>
+" s nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" t omap <Leader>t <Plug>(easymotion-bd-tl)
+" w map <Leader>w <Plug>(easymotion-bd-w)
+" w nmap <Leader>w <Plug>(easymotion-overwin-w)
+" v nnoremap <silent> <leader>b :TagbarToggle<CR>
+" x nnoremap <Leader>x :x<cre>
 " X nnoremap <Leader>X :q!<cr>
-
+" y
+" z
 " ? nnoremap <silent> <leader>? :History<CR>
+" zoom a vim pane, <C-w>= to re-balance
+" - nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
+" = nnoremap <Leader>= :wincmd =<cr>
+
 " nnoremap <leader><Tab>   :tabnext<CR>
 " nnoremap <leader><S-Tab> :tabprevious<CR>
-" map <Leader><Leader> <Plug>(easymotion-prefix)
 "
-" map  <Leader><Leader>w <Plug>(easymotion-bd-w)
-" omap t <Plug>(easymotion-bd-tl)
-" nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
-" nmap <Leader><Leader>s <Plug>(easymotion-overwin-f2)
 " " map <leader>e :MBEOpen<cr>
 " " map <leader>c :MBEClose<cr>
 
-" " zoom a vim pane, <C-w>= to re-balance
-" nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
-" nnoremap <Leader>= :wincmd =<cr>
 " vim: set sw=4 ts=4 et foldlevel=0 foldmethod=marker:
