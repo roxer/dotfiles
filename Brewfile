@@ -22,12 +22,14 @@ brew 'ag'         # https://github.com/ggreer/the_silver_searcher
 brew 'pv'         # http://www.ivarch.com/programs/pv.shtml
 brew 'openssl'
 brew 'ranger'
-brew 'autojump'   # navigate darectories
+brew 'autojump'   # navigate directories
 # brew 'memcached'
 brew 'node'
 brew 'tree'
 brew 'redis'
+brew 'httpie'
 brew 'sqlite'
+brew 'keybase'    # http://keybase.io
 brew 'python'
 brew 'python3'
 brew 'gawk'
@@ -45,7 +47,7 @@ brew 'proctools'
 brew 'pstree'
 brew 'vnstat'
 brew 'ipcalc'
-brew 'universal-ctags', args: %w[HEAD]
+brew 'universal-ctags', args: %w(HEAD)
 brew 'wget',            args: %w(--with-iri)
 brew 'curl',            args: %w(--with-openssl --with-nghttp2)
 # brew 'lsof'
@@ -54,7 +56,7 @@ brew 'reattach-to-user-namespace'
 brew 'neovim/neovim/neovim'
 
 # Install GNU core utilities (those that come with OS X are outdated).
-# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+# Don't forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 # sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 brew 'coreutils'
 
@@ -119,6 +121,8 @@ cask 'cyberduck'
 cask 'atom'
 cask 'tower'
 cask 'macdown'
+# http://freemacsoft.net/appcleaner/
+
 # brew install git-lfs
 # brew install git-flow
 # brew install dark-mode
@@ -131,4 +135,3 @@ cask 'macdown'
 # kindle
 # istat menu
 # brackets
-

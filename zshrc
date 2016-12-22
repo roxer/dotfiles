@@ -79,7 +79,7 @@ SAVEHIST=10000
 # install syntax-higlighting first
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails \
-         zsh-autosuggestions \
+         zsh-autosuggestions httpie \
          rake tmux vi-mode dircycle history-substring-search \
          zsh-syntax-highlighting) # always last item
 
