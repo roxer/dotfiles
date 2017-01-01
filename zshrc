@@ -73,6 +73,9 @@ export UPDATE_ZSH_DAYS=31
 HISTTIMEFORMAT="%d/%m/%y %T "
 HISTSIZE=10000
 SAVEHIST=10000
+# don't put a dangerous command into your shell history (prefix cmd with a space)
+setopt HIST_IGNORE_SPACE
+setopt extendedglob # example: print -l ^*jpg
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -134,6 +137,9 @@ if (( $+commands[tag] )); then
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
   alias ag=tag
 fi
+
+unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
+
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 # To have launchd start mongodb at login:

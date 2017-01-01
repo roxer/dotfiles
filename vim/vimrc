@@ -13,14 +13,18 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-characterize' " ga shows info about char; <C-K> shortcut; set list/nolist
-
+Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+"{{{
+    let g:fugitive_gitlab_domains = ['http://git.cubiware.com/main/backend']
+"}}}
+Plug 'vim-scripts/LargeFile'
 Plug 'vim-ruby/vim-ruby'
 "{{{
     let g:rubycomplete_buffer_loading    = 1
@@ -136,6 +140,8 @@ Plug 'easymotion/vim-easymotion'                   " Move around with ease
 Plug 'wincent/terminus'
 " Plugin 'git://git.wincent.com/command-t.git'
 Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
 Plug 'kylef/apiblueprint.vim'
 Plug 'majutsushi/tagbar'
 " Plug 'vim-misc'
@@ -236,7 +242,9 @@ Plug 'scrooloose/syntastic'
 Plug 'yaifa.vim'
 " Plugin 'matchit.zip'
 Plug 'exvim/ex-matchit'
-Plug 'amirh/HTML-AutoCloseTag'
+" Plug 'vim-scripts/HTML-AutoCloseTag'
+Plug 'alvan/vim-closetag'
+    let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
 Plug 'altercation/vim-colors-solarized'
 " Plug 'rking/ag.vim' " depreciated
 " Plug 'ctrlpvim/ctrlp.vim' " depreciated by fzf
@@ -413,7 +421,7 @@ set wildmenu
 set wildmode=list:longest
 
 set visualbell
-set cursorcolumn cursorline " cuc cul - highlight current line and column
+set nocursorcolumn nocursorline " cuc cul - highlight current line and column slows down
 
 " Allow usage of mouse in iTerm
 set ttyfast
@@ -444,7 +452,8 @@ set incsearch
 " Never have to type /g at the end of search / replace again
 set gdefault
 
-autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 tabstop=4 wrap linebreak nolist wrap lbr colorcolumn=0 synmaxcol=999999
+autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 tabstop=4 wrap linebreak nolist wrap lbr colorcolumn=120 synmaxcol=999999
+autocmd BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
 
 " Visually display matching braces
 set showmatch " show bracket matches
@@ -482,16 +491,27 @@ set formatoptions+=j
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 " autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 
-
 set colorcolumn=90
-" highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
-highlight! ColorColumn ctermbg=233 guibg=#131313
-highlight! SignColumn ctermbg=233 guibg=#0D0D0D
-highlight! FoldColumn ctermbg=233 guibg=#0D0D0D
+colorscheme railscasts
+highlight! rubyClass                 guifg=#ff00df ctermfg=200
+highlight! rubyConstant              guifg=#df5f5f ctermfg=167
+highlight! rubyPredefinedConstant    guifg=#d70000 ctermfg=160
+
+highlight! rubyInterpolation         guifg=#FFFFFF ctermfg=15
+highlight! rubyPseudoVariable        guifg=#ffdf5f ctermfg=221
+highlight! rubyStringDelimiter       guifg=#87af5f ctermfg=107
+
+highlight! rubyInstanceVariable      guifg=#00afff ctermfg=39
+highlight! rubyBlockParameter        guifg=#00afff ctermfg=39
+highlight! rubyLocalVariableOrMethod guifg=#d75faf ctermfg=169
+highlight! Special                   guifg=#00ff00 ctermfg=46
+
+highlight! ColorColumn               guibg=#121212 ctermbg=233
+highlight! SignColumn                guibg=#121212 ctermbg=233
+highlight! FoldColumn                guibg=#121212 ctermbg=233
 
 set foldmethod=expr
 set foldlevelstart=4
-colo railscasts
 
 " Set the default encoding to the always trusty UTF-8
 set encoding=utf-8
@@ -537,7 +557,6 @@ set splitright
 " Prevent Vim from clobbering the scrollback buffer. See
 " http://www.shallowsky.com/linux/noaltscreen.html
 " set t_ti= t_te=
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -611,6 +630,7 @@ autocmd Syntax c,cpp,vim,ruby setlocal foldmethod=syntax
 " autocmd Syntax c,cpp,vim,rb normal zR
 
 " Every time the user issues a :w command, Vim will automatically remove all trailing whitespace before saving.
+" See also vim-spacejam plugin
 fun! StripTrailingWhitespace()
     " Don't strip on these filetypes
     if &ft =~ 'markdown\|perl'

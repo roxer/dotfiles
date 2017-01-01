@@ -36,6 +36,7 @@ brew 'gawk'
 brew 'pcre'
 brew 'go'
 brew 'git'
+brew 'git-lfs'
 brew 'hub'
 brew 'nvm'
 brew 'erlang'
@@ -43,6 +44,7 @@ brew 'elixir'
 brew 'gnupg2'
 brew 'gpg-agent'
 brew 'graphviz'
+brew 'highlignt'  # http://www.andre-simon.de/doku/highlight/en/highlight.php
 brew 'proctools'
 brew 'pstree'
 brew 'vnstat'
@@ -52,6 +54,7 @@ brew 'wget',            args: %w(--with-iri)
 brew 'curl',            args: %w(--with-openssl --with-nghttp2)
 # brew 'lsof'
 brew 'homebrew/dupes/openssh'
+brew 'ssh-copy-id' # macOS sierra has it default
 brew 'reattach-to-user-namespace'
 brew 'neovim/neovim/neovim'
 
@@ -123,12 +126,10 @@ cask 'tower'
 cask 'macdown'
 # http://freemacsoft.net/appcleaner/
 
-# brew install git-lfs
 # brew install git-flow
 # brew install dark-mode
 # brew install rename
 # brew install speedtest_cli
-# brew install ssh-copy-id
 # xcode
 # thunderbird
 # navicat
