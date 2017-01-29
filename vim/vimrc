@@ -351,7 +351,7 @@ vnoremap // y/<C-R>"<CR>
 " vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+vnoremap <silent> <Leader>r :call VisualSelection('replace')<CR>
 " map . in visual mode
 vnoremap . :norm.<cr>
 
@@ -371,7 +371,7 @@ map <Space> <C-w>
 map <Space><Space> <C-w><C-p>
 
 " format json file
-com! FormatJSON %!python -m json.tool
+map <Leader>fj :set filetype=json<CR>:%!jq '.'<CR>
 
 " Ensure vim uses bash
 set shell=/bin/bash
@@ -506,9 +506,9 @@ highlight! rubyBlockParameter        guifg=#00afff ctermfg=39
 highlight! rubyLocalVariableOrMethod guifg=#d75faf ctermfg=169
 highlight! Special                   guifg=#00ff00 ctermfg=46
 
-highlight! ColorColumn               guibg=#121212 ctermbg=233
-highlight! SignColumn                guibg=#121212 ctermbg=233
-highlight! FoldColumn                guibg=#121212 ctermbg=233
+highlight! ColorColumn               guibg=#1c1c1c ctermbg=234
+highlight! SignColumn                guibg=#1c1c1c ctermbg=234
+highlight! FoldColumn                guibg=#1c1c1c ctermbg=234
 
 set foldmethod=expr
 set foldlevelstart=4
@@ -521,7 +521,7 @@ nnoremap Y y$
 " TODEL Searching using Ctrl+P
 " map <leader>o :CtrlPMixed<CR>
 " nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <silent> <leader>v :TagbarToggle<CR>
+nnoremap <silent> <Leader>v :TagbarToggle<CR>
 " nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 " nnoremap <leader>sv :source $MYVIMRC<cr>
 
@@ -759,9 +759,10 @@ function! RenameFile()
   endif
 endfunction
 
-map <leader>m :call RenameFile()<CR>
-map <leader>n :NERDTreeToggle<CR>
-map <Leader>c :EasyAlign<CR> <CR>
+map <leader>m  :call RenameFile()<CR>
+map <leader>n  :NERDTreeToggle<CR>
+map <leader>nn :NERDTreeFind<CR>
+map <Leader>c  :EasyAlign<CR> <CR>
 
     " JK motions: Line motions
 " space nnoremap <silent> <leader><space> :Files<CR>
@@ -774,6 +775,7 @@ map <Leader>c :EasyAlign<CR> <CR>
 " d
 " e
 " f omap <Leader>f <Plug>(easymotion-bd-fl)
+" f map  <Leader>fj :set filetype=json<CR>:%!jq '.'<CR>
 " g
 " h
 " i
@@ -784,6 +786,7 @@ map <Leader>c :EasyAlign<CR> <CR>
 " L nnoremap <silent> <leader>L :BLines<CR>
 " m map <leader>n :call RenameFile()<cr>
 " n map <leader>t :NERDTreeToggle<CR>
+" nn map <leader>t :NERDTreeFind<CR>
 " o nnoremap <silent> <leader>o :BTags<CR>
 " O nnoremap <silent> <leader>O :Tags<CR>
 " p map <leader>p :YRShow<cr>
