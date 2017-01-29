@@ -5,88 +5,120 @@ tap 'universal-ctags/universal-ctags'
 tap 'caskroom/cask'
 tap 'aykamko/tag-ag'
 
-brew 'tag-ag'     # https://github.com/aykamko/tag
-brew 'diff-so-fancy'
-brew 'ruby-build' # manage rubies
-brew 'tmux'
-brew 'htop'
-brew 'ncdu'       # to free space on disk
-brew 'pgcli'      # better psql
-brew 'zsh'
-brew 'rpl'        # replace strings recursively http://www.laffeycomputer.com/rpl.html
-brew 'fzf'
-brew 'tig'        # git manager
-brew 'lua'
-brew 'luajit'
-brew 'ag'         # https://github.com/ggreer/the_silver_searcher
-brew 'pv'         # http://www.ivarch.com/programs/pv.shtml
-brew 'openssl'
-brew 'ranger'
-brew 'autojump'   # navigate directories
-# brew 'memcached'
-brew 'node'
-brew 'tree'
-brew 'redis'
-brew 'httpie'
-brew 'sqlite'
-brew 'keybase'    # http://keybase.io
-brew 'python'
-brew 'python3'
-brew 'gawk'
-brew 'pcre'
-brew 'go'
-brew 'git'
-brew 'git-lfs'
-brew 'hub'
-brew 'nvm'
-brew 'erlang'
-brew 'elixir'
-brew 'gnupg2'
-brew 'gpg-agent'
-brew 'graphviz'
-brew 'highlignt'  # http://www.andre-simon.de/doku/highlight/en/highlight.php
-brew 'proctools'
-brew 'pstree'
-brew 'vnstat'
-brew 'ipcalc'
-brew 'universal-ctags', args: %w(HEAD)
-brew 'wget',            args: %w(--with-iri)
-brew 'curl',            args: %w(--with-openssl --with-nghttp2)
 # brew 'lsof'
-brew 'homebrew/dupes/openssh'
-brew 'ssh-copy-id' # macOS sierra has it default
-brew 'reattach-to-user-namespace'
-brew 'neovim/neovim/neovim'
+# brew 'redline'    # ???? check zsh for similar tool
+# brew 'memcached'
 
 # Install GNU core utilities (those that come with OS X are outdated).
 # Don't forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 # sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 brew 'coreutils'
-
 # Install some other useful utilities like `sponge`.
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
+
+brew 'ag'           # https://github.com/ggreer/the_silver_searcher
+brew 'autojump'     # navigate directories
+
+brew 'curl',        args: %w(--with-openssl --with-nghttp2)
+
+brew 'diff-so-fancy'
+
+brew 'elixir'
+brew 'erlang'
+
+brew 'ffmpeg',      args: %w(--with-libvpx --with-libvorbis)
+brew 'findutils'
+brew 'fzf'
+
+brew 'gawk'
+brew 'git'
+brew 'git-lfs'
+brew 'gnu-sed',     args: %w(--with-default-names)
+brew 'gnupg2'
+brew 'go'
+brew 'gpg-agent'
+brew 'graphviz'
+
+brew 'heroku-toolbelt'
+brew 'heroku-toolbelt'
+brew 'highlignt'    # http://www.andre-simon.de/doku/highlight/en/highlight.php
+brew 'homebrew/dupes/openssh'
+brew 'htop'
+brew 'httpie'
+brew 'hub'
+
+brew 'imagemagick', args: %w(--with-webp)
+brew 'ipcalc'
+
+brew 'jq'           # json tool https://stedolan.github.io
+
+brew 'keybase'      # http://keybase.io
+
+brew 'leiningen'    # Install clojure tools
+brew 'links'
+brew 'lua'
+brew 'luajit'
+
 brew 'moreutils'
 
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-brew 'findutils'
+brew 'ncdu'         # to free space on disk
+brew 'neovim/neovim/neovim'
+brew 'netcat'
+brew 'node'
+brew 'nvm'
+
+brew 'openssl'
+
+brew 'pcre'
+brew 'pgcli'        # better psql
+brew 'proctools'
+brew 'protobuf'
+brew 'pstree'
+brew 'pv'           # http://www.ivarch.com/programs/pv.shtml
+brew 'python'
+brew 'python3'
+
+brew 'q'            # https://github.com/harelba/q
+
+brew 'ranger'
 brew 'rbenv'
 brew 'rbenv-default-gems'
-brew 'mongodb'
-brew 'mariadb'
-brew 'rabbitmq'
-brew 'postgresql'
-brew 'elasticsearch'
-brew 'gnu-sed',     args: %w(--with-default-names)
-brew 'imagemagick', args: %w(--with-webp)
-brew 'ffmpeg',      args: %w(--with-libvpx --with-libvorbis)
-# Install clojure tools
-brew 'leiningen'
-# brew 'youtube-dl' # download from youtube
-brew 'heroku-toolbelt'
-brew 'the_silver_searcher'
-brew 'heroku-toolbelt'
-# heroku update
+brew 'reattach-to-user-namespace'
+brew 'rpl'          # replace strings recursively http://www.laffeycomputer.com/rpl.html
+brew 'ruby-build'   # manage rubies
 
-######################################### CASK ##########################################
+brew 'sqlite'
+brew 'ssh-copy-id'  # macOS sierra has it default
+
+brew 'tag-ag'       # https://github.com/aykamko/tag
+brew 'the_silver_searcher'
+brew 'tig'          # git manager
+brew 'tmux'
+brew 'trash'        # https://github.com/ali-rantakari/trash
+brew 'tree'
+
+brew 'universal-ctags', args: %w(HEAD)
+
+brew 'vnstat'
+
+brew 'watch'
+brew 'wget',            args: %w(--with-iri)
+brew 'wrk'              # HTTP benchmarks https://github.com/wg/wrk
+
+brew 'xz'               # similar to gzip http://tukaani.org/xz/
+
+brew 'zsh'
+
+# brew 'youtube-dl'     # download from youtube
+# heroku update
+brew 'redis'            # use docker image
+# brew 'elasticsearch'  use docker image
+# brew 'mariadb'        use docker image
+# brew 'mongodb'        use docker image
+# brew 'postgresql'     use docker image
+# brew 'rabbitmq'       use docker image
+
+##################################### CASK #####################################
 cask_args appdir: '/Applications'
 brew 'caskroom/cask/brew-cask'
 cask 'dropbox'
@@ -102,6 +134,8 @@ cask 'iterm2'
 cask 'alfred'
 # brew cask alfred link
 cask 'java'
+cask 'joe' # check performance with large files
+           # https://github.com/jhallen/joes-sandbox/tree/master/editor-perf
 cask 'macvim', args: %w(--with-cscope
                         --with-lua
                         --with-override-system-vim
@@ -136,3 +170,10 @@ cask 'macdown'
 # kindle
 # istat menu
 # brackets
+#
+# #################### CHROME PLUGINS ##########################################
+# rails panel
+# awesome screenshot
+# jsonview
+# onetab
+# simple web socket client
