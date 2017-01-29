@@ -119,6 +119,7 @@ export ARCHFLAGS="-arch x86_64"
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/gocode/bin:$PATH
 export PATH="$(brew --prefix sqlite)/bin:$PATH"
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # export PGDATA=~/Library/PostgreSQL/9.5/data/
 export PGDATA=/usr/local/var/postgres-9.6/
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications --caskroom=/opt/homebrew-cask/Caskroom"
