@@ -5,6 +5,7 @@ alias root='cd $(git rev-parse --show-cdup)'
 alias path="echo $PATH | tr -s ':' '\n'"
 
 alias rgr=ranger
+alias -g ls='ls --color=auto '
 alias tlf="tail -f"
 alias tac=gtac
 alias b="bundle exec"
@@ -13,7 +14,7 @@ alias b-u="brew update"
 alias b-g="brew upgrade"
 alias truncate=gtruncate
 alias -g se='| ag'
-alias -g jqq='| jq .'
+alias -g jqq='| jq . '
 # alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
 alias -s log="less -MN"
 alias -s rb=vim

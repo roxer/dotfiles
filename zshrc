@@ -73,28 +73,31 @@ export UPDATE_ZSH_DAYS=31
 HISTTIMEFORMAT="%d/%m/%y %T "
 HISTSIZE=10000
 SAVEHIST=10000
-# don't put a dangerous command into your shell history (prefix cmd with a space)
-setopt HIST_IGNORE_SPACE
 setopt extendedglob # example: print -l ^*jpg
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # install syntax-higlighting first
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-plugins=(git osx ruby brew bundler autojump gem github history postgres pow rails \
-         zsh-autosuggestions httpie \
-         rake tmux vi-mode dircycle history-substring-search \
-         zsh-syntax-highlighting) # always last item
+plugins=(git osx go mix ruby brew bundler autojump gem \
+         github history postgres pow rails \
+         zsh-autosuggestions httpie rake tmux vi-mode dircycle \
+         zsh-syntax-highlighting history-substring-search) # always last 2 items
 
 source $ZSH/oh-my-zsh.sh
 # source ~/.autojump/etc/profile.d/autojump.zsh
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
-bindkey '\e[A' history-beginning-search-backward
-bindkey '\e[B' history-beginning-search-forward
 source ~/.zsh/aliases.zsh
 source ~/.zsh/abbreviations.zsh
 source ~/.zsh/functions.zsh
+
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # if [ -f `brew --prefix`/etc/autojump ]; then
 #   . `brew --prefix`/etc/autojump
@@ -127,8 +130,8 @@ export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
 export GOPATH=$HOME/gocode
+export CLICOLOR=1
 
-# eval "$(rbenv init -)"
 eval "$(rbenv init --no-rehash - zsh)"
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
