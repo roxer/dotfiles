@@ -5,7 +5,6 @@ tap 'universal-ctags/universal-ctags'
 tap 'caskroom/cask'
 tap 'aykamko/tag-ag'
 
-# brew 'lsof'
 # brew 'redline'    # ???? check zsh for similar tool
 # brew 'memcached'
 
@@ -58,6 +57,7 @@ brew 'leiningen'    # Install clojure tools
 brew 'links'
 brew 'lua'
 brew 'luajit'
+brew 'lsof'
 
 brew 'moreutils'
 

@@ -27,6 +27,18 @@ BULLETTRAIN_DIR_BG=232
 BULLETTRAIN_DIR_FG=226
 BULLETTRAIN_GIT_BG=233
 BULLETTRAIN_GIT_FG=214
+BULLETTRAIN_PROMPT_CHAR=' $ '
+BULLETTRAIN_PROMPT_ORDER=(
+  status
+  custom
+  dir
+  ruby
+  virtualenv
+  nvm
+  go
+  git
+  cmd_exec_time
+)
 
 RAILS_ENV=development
 
@@ -80,6 +92,7 @@ setopt extendedglob # example: print -l ^*jpg
 # install syntax-higlighting first
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 plugins=(git osx go mix ruby brew bundler autojump gem \
+         docker docker-compose \
          github history postgres pow rails \
          zsh-autosuggestions httpie rake tmux vi-mode dircycle \
          zsh-syntax-highlighting history-substring-search) # always last 2 items
@@ -156,3 +169,9 @@ unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# --files: List files that would be searched but do not search
+# --no-ignore: Do not respect .gitignore, etc...
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
