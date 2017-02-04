@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # install first: homebrew
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -7,16 +7,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 mkdir -p ~/.vim/plugin
-ln -s ./vim/abbreviation.vim ~/.vim/plugin/abbreviation.vim
-ln -s ./Brewfile             ~/Brewfile
-ln -s ./gemrc                ~/.gemrc
-ln -s ./irbrc                ~/.irbrc
-ln -s ./pryrc                ~/.pryrc
-ln -s ./psqlrc               ~/.psqlrc
-ln -s ./tmux.conf            ~/.tmux.conf
-ln -s ./vim/vimrc            ~/.vimrc
-ln -s ./zshrc                ~/.zshrc
-ln -s ./bin/git-churn        /usr/local/bin/
+ln -sf ./vim/abbreviation.vim ~/.vim/plugin/abbreviation.vim
+ln -sf ./Brewfile             ~/Brewfile
+ln -sf ./gemrc                ~/.gemrc
+ln -sf ./irbrc                ~/.irbrc
+ln -sf ./pryrc                ~/.pryrc
+ln -sf ./psqlrc               ~/.psqlrc
+ln -sf ./tmux.conf            ~/.tmux.conf
+ln -sf ./vim/vimrc            ~/.vimrc
+ln -sf ./zshrc                ~/.zshrc
+ln -sf ./bin/git-churn        /usr/local/bin/
 
 brew tap homebrew/bundle
 brew bundle

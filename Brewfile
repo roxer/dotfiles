@@ -74,6 +74,7 @@ brew 'pgcli'        # better psql
 brew 'proctools'
 brew 'protobuf'
 brew 'pstree'
+brew 'pwgen'        # generate random string eg. pwgen -Bsv1 64
 brew 'pv'           # http://www.ivarch.com/programs/pv.shtml
 brew 'python'
 brew 'python3'

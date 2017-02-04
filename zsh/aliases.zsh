@@ -3,6 +3,9 @@
 alias root='cd $(git rev-parse --show-cdup)'
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
+alias vizs="vim ~/.zshrc"
+alias vibrew="vim ~/Brewfile"
+alias viconf="vim ~/.vimrc"
 
 alias rgr=ranger
 alias -g ls='ls --color=auto '

@@ -118,8 +118,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
 # # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -132,8 +130,10 @@ export ARCHFLAGS="-arch x86_64"
 # export CC=/usr/local/bin/gcc-5
 # export CXX=/usr/local/bin/g++-5
 # export CPP=/usr/local/bin/cpp-5
-export PATH="/usr/local/heroku/bin:$PATH"
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/gocode/bin:$PATH
+export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:/usr/local/man:$MANPATH"
+
+export PATH="/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:$PATH"
+export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
 export PATH="$(brew --prefix sqlite)/bin:$PATH"
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # export PGDATA=~/Library/PostgreSQL/9.5/data/
@@ -142,7 +142,7 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications --caskroom=/opt/homebrew-cask
 export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
-export GOPATH=$HOME/gocode
+export GOPATH=$HOME/go
 export CLICOLOR=1
 
 eval "$(rbenv init --no-rehash - zsh)"
