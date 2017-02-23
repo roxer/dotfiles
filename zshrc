@@ -52,6 +52,18 @@ fpath=(~/.zsh/completion $fpath)
 autoload -U zmv
 autoload -Uz compinit && compinit -i
 
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# install syntax-higlighting first
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+plugins=(git osx go mix ruby brew bundler autojump gem \
+         docker docker-compose \
+         github postgres pow rails \
+         zsh-autosuggestions httpie rake tmux vi-mode dircycle \
+         zsh-syntax-highlighting history-substring-search) # always last 2 items
+
+source $ZSH/oh-my-zsh.sh
+
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -82,22 +94,24 @@ export UPDATE_ZSH_DAYS=31
 # in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="yyyy/mm/dd"
-HISTTIMEFORMAT="%d/%m/%y %T "
+
+setopt BANG_HIST               # Treat the '!' character specially during expansion.
+# setopt EXTENDED_HISTORY        # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY      # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY           # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST  # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS        # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS    # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS       # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE       # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS       # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY             # Don't execute immediately upon history expansion.
+# HISTTIMEFORMAT="%d/%m/%y %T "
 HISTSIZE=10000
 SAVEHIST=10000
 setopt extendedglob # example: print -l ^*jpg
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# install syntax-higlighting first
-# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-plugins=(git osx go mix ruby brew bundler autojump gem \
-         docker docker-compose \
-         github history postgres pow rails \
-         zsh-autosuggestions httpie rake tmux vi-mode dircycle \
-         zsh-syntax-highlighting history-substring-search) # always last 2 items
-
-source $ZSH/oh-my-zsh.sh
 # source ~/.autojump/etc/profile.d/autojump.zsh
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -134,6 +148,7 @@ export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:/usr/local/man:$MANPATH"
 
 export PATH="/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:$PATH"
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/curl/bin:$PATH"
 export PATH="$(brew --prefix sqlite)/bin:$PATH"
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # export PGDATA=~/Library/PostgreSQL/9.5/data/
@@ -167,6 +182,16 @@ unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 # mongod --config /usr/local/etc/mongod.conf
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
+  source "$HOME/.gvm/scripts/gvm"
+
+  if [[ -s "$HOME/.gvm/scripts/completion" ]]; then
+    autoload -Uz bashcompinit
+    bashcompinit
+    source "$HOME/.gvm/scripts/completion"
+  fi
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # --files: List files that would be searched but do not search

@@ -9,22 +9,29 @@ let g:mapleader = ','
 " noremap \ ,
 
 call plug#begin('~/.vim/plugged') " Plugins initialization start
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-speeddating'
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-characterize' " ga shows info about char; <C-K> shortcut; set list/nolist
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+"{{{
+    " Alias "write as sudo" as :w!! or use eunuch :SudoWrite :SudoEdit
+    cmap w!! w !sudo tee > /dev/null %
+"}}}
+Plug 'tpope/vim-fireplace'
 Plug 'tpope/vim-fugitive'
 Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
 "{{{
     let g:fugitive_gitlab_domains = ['http://git.cubiware.com/main/backend']
 "}}}
 Plug 'vim-scripts/LargeFile'
+Plug 'vim-scripts/vis' " sort visual selected block
+Plug 'severin-lemaignan/vim-minimap'
 Plug 'vim-ruby/vim-ruby'
 "{{{
     let g:rubycomplete_buffer_loading    = 1
@@ -46,7 +53,9 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
 Plug 'mbbill/undotree'
+"{{{
     nnoremap <F5> :UndotreeToggle<cr>
+"}}}
 " Plug 'sjl/gundo.vim' # requires python 2.4+ but vim compiled with 3+
 "     nnoremap <F5> :GundoToggle<CR>
 
@@ -220,15 +229,29 @@ Plug 'vim-airline/vim-airline'                        " status line
 " Plugin 'itchyny/lightline.vim'
 Plug 'airblade/vim-rooter'
 Plug 'airblade/vim-gitgutter'                   " git status line
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+"{{{
+    let g:ale_sign_column_always = 1
+    let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_text_changed = 1
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    " You can disable this option too
+    " if you don't want linters to run on opening a file
+    let g:ale_lint_on_enter = 0
+"}}}
+" Plug 'scrooloose/syntastic'
 "{{{
     " Do syntax check when the buffer is first loaded
-    let g:syntastic_check_on_open      = 0
-    let g:syntastic_disabled_filetypes = ['m.html']
-    let g:syntastic_html_checkers      = ['']
-    let g:syntastic_ruby_checkers      = ['rubocop', 'mri']
-    let g:syntastic_ruby_mri_exec      = '~/.rbenv/shims/ruby'
-    let g:syntastic_ruby_rubocop_exec  = '~/.rbenv/shims/rubocop'
+    " let g:syntastic_check_on_open      = 0
+    " let g:syntastic_disabled_filetypes = ['m.html']
+    " let g:syntastic_html_checkers      = ['']
+    " let g:syntastic_ruby_checkers      = ['rubocop', 'mri']
+    " let g:syntastic_ruby_mri_exec      = '~/.rbenv/shims/ruby'
+    " let g:syntastic_ruby_rubocop_exec  = '~/.rbenv/shims/rubocop'
+
     " let g:syntastic_quiet_messages     = 0
     " let g:syntastic_html_tidy_ignore_errors = [
     "     \  'plain text isn''t allowed in <head> elements',
@@ -244,7 +267,9 @@ Plug 'yaifa.vim'
 Plug 'exvim/ex-matchit'
 " Plug 'vim-scripts/HTML-AutoCloseTag'
 Plug 'alvan/vim-closetag'
+"{{{
     let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
+"}}}
 Plug 'altercation/vim-colors-solarized'
 " Plug 'rking/ag.vim' " depreciated
 " Plug 'ctrlpvim/ctrlp.vim' " depreciated by fzf
@@ -281,8 +306,8 @@ Plug 'junegunn/fzf.vim'
     " https://github.com/junegunn/fzf.vim/issues/66#issuecomment-169362556
     " let g:fzf_layout = {}
 "}}}
-
 Plug 'SirVer/ultisnips'
+"{{{
     nnoremap <leader>ie :UltiSnipsEdit<CR>
     let g:UltiSnipsSnippetsDir         = '~/.vim/UltiSnips'
     let g:UltiSnipsEditSplit           = 'horizontal'
@@ -291,13 +316,14 @@ Plug 'SirVer/ultisnips'
     let g:UltiSnipsJumpForwardTrigger  = '<c-l>'
     let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
     let g:ulti_expand_or_jump_res      = 0
-
+"}}}
 Plug 'honza/vim-snippets'
+"{{{
     let g:UltiSnipsExpandTrigger       = "<F8>"
     let g:UltiSnipsJumpForwardTrigger  = "<F9>"
     let g:UltiSnipsJumpBackwardTrigger = "<F7>"
     let g:UltiSnipsListSnippets        = "<F6>"
-
+"}}}
 Plug 'mileszs/ack.vim'
 
 " Syntax plugins
@@ -583,15 +609,14 @@ set viminfo=!,h,f1,'100
 
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
-" Alias "write as sudo" as :w!!
-cmap w!! w !sudo tee > /dev/null %
+" %{ALEGetStatusLine()}
 
 " Don't overindent javascript
-let g:SimpleJsIndenter_BriefMode=1
+let g:SimpleJsIndenter_BriefMode = 1
 
 " Hide .DS_Store and .git directories from Vim
-let g:netrw_list_hide='.DS_Store,^\.git/$'
+let g:netrw_list_hide = '.DS_Store,^\.git/$'
+let g:netrw_liststyle = 3
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -732,13 +757,13 @@ if executable('rg')
     " --color: Search color options
         " \   <bang>0 ? fzf#vim#with_preview('up:60%')
         " \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-    command! -bang -nargs=* Find
+    command! -bang -nargs=* Rgg
         \ call fzf#vim#grep(
         \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>),
         \   1,
         \   <bang>0)
-    map <Leader>a :Find<space>
-    nnoremap K :Find <C-R><C-W><CR>
+    map <Leader>a :Rgg<space>
+    nnoremap K :Rgg <C-R><C-W><CR>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

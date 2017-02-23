@@ -16,6 +16,7 @@ brew 'coreutils'
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 
 brew 'ag'           # https://github.com/ggreer/the_silver_searcher
+brew 'apg'          # password generator - see pwgen below
 brew 'autojump'     # navigate directories
 
 brew 'curl',        args: %w(--with-openssl --with-nghttp2)
@@ -51,8 +52,6 @@ brew 'ipcalc'
 
 brew 'jq'           # json tool https://stedolan.github.io
 
-brew 'keybase'      # http://keybase.io
-
 brew 'leiningen'    # Install clojure tools
 brew 'links'
 brew 'lua'
@@ -75,6 +74,9 @@ brew 'proctools'
 brew 'protobuf'
 brew 'pstree'
 brew 'pwgen'        # generate random string eg. pwgen -Bsv1 64
+#                   # openssl rand -base64 20
+#                   # date +%s | sha256sum | base64 | head -c 64 ; echo
+#                   # ruby -e "require 'securerandom'; puts SecureRandom.hex(64)"
 brew 'pv'           # http://www.ivarch.com/programs/pv.shtml
 brew 'python'
 brew 'python3'
@@ -159,6 +161,8 @@ cask 'cyberduck'
 cask 'atom'
 cask 'tower'
 cask 'macdown'
+cask 'keybase'      # http://keybase.io
+
 # http://freemacsoft.net/appcleaner/
 
 # brew install git-flow

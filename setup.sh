@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # install first: homebrew
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # install oh-my-zsh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+zsh < <(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)
 
 mkdir -p ~/.vim/plugin
 ln -sf ./vim/abbreviation.vim ~/.vim/plugin/abbreviation.vim
@@ -16,6 +16,7 @@ ln -sf ./psqlrc               ~/.psqlrc
 ln -sf ./tmux.conf            ~/.tmux.conf
 ln -sf ./vim/vimrc            ~/.vimrc
 ln -sf ./zshrc                ~/.zshrc
+ln -sf ./lftprc               ~/.lftprc
 ln -sf ./bin/git-churn        /usr/local/bin/
 
 brew tap homebrew/bundle
