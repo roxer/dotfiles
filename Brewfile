@@ -15,7 +15,7 @@ brew 'coreutils'
 # Install some other useful utilities like `sponge`.
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 
-brew 'ag'           # https://github.com/ggreer/the_silver_searcher
+brew 'ag'           # prefer ripgrep https://github.com/ggreer/the_silver_searcher
 brew 'apg'          # password generator - see pwgen below
 brew 'autojump'     # navigate directories
 
@@ -28,14 +28,14 @@ brew 'erlang'
 
 brew 'ffmpeg',      args: %w(--with-libvpx --with-libvorbis)
 brew 'findutils'
-brew 'fzf'
+brew 'fzf'          # perfect fuzzy finder :)
 
 brew 'gawk'
 brew 'git'
 brew 'git-lfs'
 brew 'gnu-sed',     args: %w(--with-default-names)
 brew 'gnupg2'
-brew 'go'
+brew 'go'           # install gvm
 brew 'gpg-agent'
 brew 'graphviz'
 
@@ -44,7 +44,7 @@ brew 'heroku-toolbelt'
 brew 'highlignt'    # http://www.andre-simon.de/doku/highlight/en/highlight.php
 brew 'homebrew/dupes/openssh'
 brew 'htop'
-brew 'httpie'
+brew 'httpie'       # better than curl
 brew 'hub'
 
 brew 'imagemagick', args: %w(--with-webp)
@@ -63,7 +63,7 @@ brew 'moreutils'
 brew 'ncdu'         # to free space on disk
 brew 'neovim/neovim/neovim'
 brew 'netcat'
-brew 'node'
+# brew 'node'
 brew 'nvm'
 
 brew 'openssl'
@@ -91,9 +91,10 @@ brew 'rpl'          # replace strings recursively http://www.laffeycomputer.com/
 brew 'ruby-build'   # manage rubies
 
 brew 'sqlite'
-brew 'ssh-copy-id'  # macOS sierra has it default
+brew 'ssh-copy-id'  # macOS >= sierra has it default
+brew 'stow'         # for managing dotfiles
 
-brew 'tag-ag'       # https://github.com/aykamko/tag
+brew 'tag-ag'       # https://github.com/aykamko/tag (optionaly sack)
 brew 'the_silver_searcher'
 brew 'tig'          # git manager
 brew 'tmux'

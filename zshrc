@@ -77,13 +77,13 @@ export UPDATE_ZSH_DAYS=31
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+export DISABLE_AUTO_TITLE=true
 
 # Uncomment following line if you want to disable command autocorrection
-# DISABLE_CORRECTION="true"
+# DISABLE_CORRECTION=true
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+export COMPLETION_WAITING_DOTS=true
 
 # Uncomment following line if you want to disable marking untracked files under
 # VCS as dirty. This makes repository status check for large repositories much,
