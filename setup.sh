@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# http://tech.lauritz.me/caps-lock-as-control-escape/
 # install first: homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -27,12 +28,12 @@ brew linkapps macvim
 git lfs install
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
 
-pip install wharfee
+pip3 install wharfee
 
 mkdir -p ~/.tmux/plugins/tpm
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

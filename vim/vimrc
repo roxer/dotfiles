@@ -6,7 +6,7 @@ set nocompatible
 " Set our mapleader key
 let mapleader   = ','
 let g:mapleader = ','
-" noremap \ ,
+nnoremap § ,
 
 call plug#begin('~/.vim/plugged') " Plugins initialization start
 Plug 'tpope/vim-bundler'
@@ -198,7 +198,7 @@ Plug 'junegunn/vim-slash'
 "}}}
 Plug 'junegunn/vim-easy-align'
 " Plug 'jlanzarotta/bufexplorer' " fzf obsoletes this use <Leader>A
-Plug 'vim-ctrlspace/vim-ctrlspace'
+" Plug 'vim-ctrlspace/vim-ctrlspace' fzf osolete this
 "{{{
     let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
     " let g:CtrlSpaceSearchTiming = 500
@@ -271,10 +271,11 @@ Plug 'alvan/vim-closetag'
     let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
 "}}}
 Plug 'altercation/vim-colors-solarized'
+
 " Plug 'rking/ag.vim' " depreciated
 " Plug 'ctrlpvim/ctrlp.vim' " depreciated by fzf
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" If you installed fzf using Homebrew, the following should suffice:
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" If fzf by Homebrew, the following should suffice but above is for linux
 Plug 'junegunn/fzf.vim'
 "{{{
     let g:fzf_launcher = "fzf_function %s"
@@ -282,6 +283,7 @@ Plug 'junegunn/fzf.vim'
     let g:fzf_buffers_jump = 1
     let g:fzf_tags_command = 'ctags -R'
     nnoremap <silent> <leader><space> :Files<CR>
+    nnoremap <silent> ` :Files<CR>
     nnoremap <silent> <leader>B :Buffers<CR>
     nnoremap <silent> <leader>A :Windows<CR>
     nnoremap <silent> <leader>L :BLines<CR>
@@ -356,7 +358,6 @@ filetype plugin indent on
 syntax enable
 " syntax on
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -400,6 +401,7 @@ map <Space><Space> <C-w><C-p>
 
 " format json file
 map <Leader>fj :set filetype=json<CR>:%!jq '.'<CR>
+map <Leader>fr :set filetype=ruby<CR>
 
 " Ensure vim uses bash
 set shell=/bin/bash
@@ -763,6 +765,7 @@ if executable('rg')
         \   1,
         \   <bang>0)
     map <Leader>a :Rgg<space>
+    map \ :Rgg<space>
     nnoremap K :Rgg <C-R><C-W><CR>
 endif
 
@@ -833,7 +836,8 @@ map <Leader>c  :EasyAlign<CR> <CR>
 
     " JK motions: Line motions
 " space nnoremap <silent> <leader><space> :Files<CR>
-" a map <leader>a :Ag!<space>
+" a map \ :Rgg<space>
+" a map <leader>a :Rgg<space>
 " A nnoremap <silent> <leader>A :Windows<CR>
 " ba map <Leader>ba :1,1000 bd!<cr>
 " b map <leader>f :MBEFocus<CR>
@@ -843,6 +847,7 @@ map <Leader>c  :EasyAlign<CR> <CR>
 " e
 " f omap <Leader>f <Plug>(easymotion-bd-fl)
 " f map  <Leader>fj :set filetype=json<CR>:%!jq '.'<CR>
+" f map  <Leader>fr :set filetype=ruby<CR>
 " g
 " h
 " i
