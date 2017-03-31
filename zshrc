@@ -15,8 +15,8 @@ ZSH_THEME="bullet-train"
 # for list of colors run spectrum_ls
 BULLETTRAIN_DIR_EXTENDED=2
 BULLETTRAIN_TIME_SHOW=false
-BULLETTRAIN_CONTEXT_SHOW=false
-ULLETTRAIN_IS_SSH_CLIENT=true
+BULLETTRAIN_CONTEXT_SHOW=true
+BULLETTRAIN_IS_SSH_CLIENT=true
 BULLETTRAIN_NVM_SHOW=true
 BULLETTRAIN_NVM_BG=022
 BULLETTRAIN_NVM_FG=253
@@ -157,7 +157,6 @@ export HOMEBREW_CASK_OPTS="--appdir=~/Applications --caskroom=/opt/homebrew-cask
 export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
-export GOPATH=$HOME/go
 export CLICOLOR=1
 
 eval "$(rbenv init --no-rehash - zsh)"
@@ -182,6 +181,7 @@ unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 # mongod --config /usr/local/etc/mongod.conf
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source ~/.cargo/env
 
 if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then
   source "$HOME/.gvm/scripts/gvm"
@@ -199,4 +199,5 @@ fi
 # --hidden: Search hidden files and folders
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+export GOPATH=~/go
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

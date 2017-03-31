@@ -90,6 +90,14 @@ fftags() {
     && $EDITOR $(cut -f2 <<< "$line")
 }
 
+vman() {
+  vim -c "SuperMan $*"
+
+  if [ "$?" != "0" ]; then
+    echo "No manual entry for $*"
+  fi
+}
+
 _tmuxinator() {
   local commands projects
   commands=(${(f)"$(tmuxinator commands zsh)"})
@@ -109,6 +117,7 @@ _tmuxinator() {
   return
 }
 
+compdef vman="man"
 compdef _tmuxinator tmuxinator mux
 alias mux="tmuxinator"
 

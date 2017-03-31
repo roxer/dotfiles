@@ -17,9 +17,10 @@ brew 'coreutils'
 
 brew 'ag'           # prefer ripgrep https://github.com/ggreer/the_silver_searcher
 brew 'apg'          # password generator - see pwgen below
-brew 'autojump'     # navigate directories
+# brew 'autojump'     # prefer jump navigate directories
 
 brew 'curl',        args: %w(--with-openssl --with-nghttp2)
+brew 'ctop'         # top for docker containers
 
 brew 'diff-so-fancy'
 
@@ -51,6 +52,7 @@ brew 'imagemagick', args: %w(--with-webp)
 brew 'ipcalc'
 
 brew 'jq'           # json tool https://stedolan.github.io
+brew 'jump'
 
 brew 'leiningen'    # Install clojure tools
 brew 'links'
@@ -59,6 +61,12 @@ brew 'luajit'
 brew 'lsof'
 
 brew 'moreutils'
+cask 'macvim', args: %w(--with-cscope
+                        --with-lua
+                        --with-override-system-vim
+                        --with-luajit
+                        --with-python3)
+# brew 'vim', args: ['--override-system-vi'] - macvim does this job
 
 brew 'ncdu'         # to free space on disk
 brew 'neovim/neovim/neovim'
@@ -140,12 +148,6 @@ cask 'alfred'
 cask 'java'
 cask 'joe' # check performance with large files
            # https://github.com/jhallen/joes-sandbox/tree/master/editor-perf
-cask 'macvim', args: %w(--with-cscope
-                        --with-lua
-                        --with-override-system-vim
-                        --with-luajit
-                        --with-python3)
-# brew 'vim', args: ['--override-system-vi'] - macvim does this job
 cask 'heroku-toolbelt'
 # cask 'charles'
 cask 'skype'

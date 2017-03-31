@@ -32,6 +32,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-scripts/LargeFile'
 Plug 'vim-scripts/vis' " sort visual selected block
 Plug 'severin-lemaignan/vim-minimap'
+Plug 'thoughtbot/vim-rspec'
 Plug 'vim-ruby/vim-ruby'
 "{{{
     let g:rubycomplete_buffer_loading    = 1
@@ -161,41 +162,42 @@ Plug 'majutsushi/tagbar'
 Plug 'kchmck/vim-coffee-script'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'jez/vim-superman'
 
-Plug 'junegunn/vim-slash'
-"{{{
-    function! s:blink(times, delay)
-      let s:blink = { 'ticks': 2 * a:times, 'delay': a:delay }
+"Plug 'junegunn/vim-slash'
+""{{{
+"    function! s:blink(times, delay)
+"      let s:blink = { 'ticks': 2 * a:times, 'delay': a:delay }
 
-      function! s:blink.tick(_)
-        let self.ticks -= 1
-        let active = self == s:blink && self.ticks > 0
+"      function! s:blink.tick(_)
+"        let self.ticks -= 1
+"        let active = self == s:blink && self.ticks > 0
 
-        if !self.clear() && active && &hlsearch
-          let [line, col] = [line('.'), col('.')]
-          let w:blink_id = matchadd('IncSearch',
-                \ printf('\%%%dl\%%>%dc\%%<%dc', line, max([0, col-2]), col+2))
-        endif
-        if active
-          call timer_start(self.delay, self.tick)
-        endif
-      endfunction
+"        if !self.clear() && active && &hlsearch
+"          let [line, col] = [line('.'), col('.')]
+"          let w:blink_id = matchadd('IncSearch',
+"                \ printf('\%%%dl\%%>%dc\%%<%dc', line, max([0, col-2]), col+2))
+"        endif
+"        if active
+"          call timer_start(self.delay, self.tick)
+"        endif
+"      endfunction
 
-      function! s:blink.clear()
-        if exists('w:blink_id')
-          call matchdelete(w:blink_id)
-          unlet w:blink_id
-          return 1
-        endif
-      endfunction
+"      function! s:blink.clear()
+"        if exists('w:blink_id')
+"          call matchdelete(w:blink_id)
+"          unlet w:blink_id
+"          return 1
+"        endif
+"      endfunction
 
-      call s:blink.clear()
-      call s:blink.tick(0)
-      return ''
-    endfunction
+"      call s:blink.clear()
+"      call s:blink.tick(0)
+"      return ''
+"    endfunction
 
-    noremap <expr> <plug>(slash-after) <sid>blink(2, 50)
-"}}}
+"    noremap <expr> <plug>(slash-after) <sid>blink(2, 50)
+""}}}
 Plug 'junegunn/vim-easy-align'
 " Plug 'jlanzarotta/bufexplorer' " fzf obsoletes this use <Leader>A
 " Plug 'vim-ctrlspace/vim-ctrlspace' fzf osolete this
@@ -238,6 +240,8 @@ Plug 'w0rp/ale'
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
     let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    let g:ale_python_flake8_executable = 'python3'
+    let g:ale_python_flake8_args = '-m flake8'
     " You can disable this option too
     " if you don't want linters to run on opening a file
     let g:ale_lint_on_enter = 0
@@ -283,7 +287,6 @@ Plug 'junegunn/fzf.vim'
     let g:fzf_buffers_jump = 1
     let g:fzf_tags_command = 'ctags -R'
     nnoremap <silent> <leader><space> :Files<CR>
-    nnoremap <silent> ` :Files<CR>
     nnoremap <silent> <leader>B :Buffers<CR>
     nnoremap <silent> <leader>A :Windows<CR>
     nnoremap <silent> <leader>L :BLines<CR>
@@ -783,6 +786,24 @@ let g:used_javascript_libs = 'react,lodash'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function SelectIndent()
+  let cur_line = line(".")
+  let cur_ind = indent(cur_line)
+  let line = cur_line
+  while indent(line - 1) >= cur_ind
+    let line = line - 1
+  endw
+  exe "normal " . line . "G"
+  exe "normal V"
+  let line = cur_line
+  while indent(line + 1) >= cur_ind
+    let line = line + 1
+  endw
+  exe "normal " . line . "G"
+endfunction
+" Visual selection of indent block
+nnoremap viP :call SelectIndent()<CR>
+
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar

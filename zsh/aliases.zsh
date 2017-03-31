@@ -7,17 +7,19 @@ alias vizs="vim ~/.zshrc"
 alias vibrew='vim ~/Brewfile'
 alias viconf="vim ~/.vimrc"
 
-alias h='history'
-alias xc='clear'
-alias rgr='ranger'
-alias -g ls='ls --color=auto '
-alias tlf="tail -f"
-alias tac=gtac
-alias b='bundle exec'
+alias b-g='brew upgrade'
 alias b-s='brew services'
 alias b-u='brew update'
-alias b-g='brew upgrade'
+alias b='bundle exec'
+alias h='history'
+alias rgr='ranger'
+alias man='PAGER=most man'
+alias tac=gtac
+alias tail=gtail
+alias tlf="tail -f"
 alias truncate=gtruncate
+alias xc='clear'
+alias -g ls='ls --color=auto '
 alias -g se='| ag'
 alias -g jqq='| jq . '
 # alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
