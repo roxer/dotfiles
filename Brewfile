@@ -1,6 +1,7 @@
 # vi:ft=ruby:
 tap 'homebrew/services'
 tap 'homebrew/versions'
+tap 'homebrew/dupes'
 tap 'universal-ctags/universal-ctags'
 tap 'caskroom/cask'
 tap 'aykamko/tag-ag'
@@ -16,10 +17,10 @@ brew 'coreutils'
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 
 brew 'ag'           # prefer ripgrep https://github.com/ggreer/the_silver_searcher
-brew 'apg'          # password generator - see pwgen below
+# brew 'apg'          # password generator - see pwgen below
 # brew 'autojump'     # prefer jump navigate directories
 
-brew 'curl',        args: %w(--with-openssl --with-nghttp2)
+brew 'curl',        args: %w[--with-openssl --with-nghttp2]
 brew 'ctop'         # top for docker containers
 
 brew 'diff-so-fancy'
@@ -27,14 +28,14 @@ brew 'diff-so-fancy'
 brew 'elixir'
 brew 'erlang'
 
-brew 'ffmpeg',      args: %w(--with-libvpx --with-libvorbis)
+brew 'ffmpeg',      args: %w[--with-libvpx --with-libvorbis]
 brew 'findutils'
 brew 'fzf'          # perfect fuzzy finder :)
 
 brew 'gawk'
 brew 'git'
 brew 'git-lfs'
-brew 'gnu-sed',     args: %w(--with-default-names)
+brew 'gnu-sed',     args: %w[--with-default-names]
 brew 'gnupg2'
 brew 'go'           # install gvm
 brew 'gpg-agent'
@@ -42,13 +43,13 @@ brew 'graphviz'
 
 brew 'heroku-toolbelt'
 brew 'heroku-toolbelt'
-brew 'highlignt'    # http://www.andre-simon.de/doku/highlight/en/highlight.php
-brew 'homebrew/dupes/openssh'
+brew 'highlight'    # http://www.andre-simon.de/doku/highlight/en/highlight.php
+brew 'openssh'
 brew 'htop'
 brew 'httpie'       # better than curl
 brew 'hub'
 
-brew 'imagemagick', args: %w(--with-webp)
+brew 'imagemagick', args: %w[--with-webp]
 brew 'ipcalc'
 
 brew 'jq'           # json tool https://stedolan.github.io
@@ -61,15 +62,11 @@ brew 'luajit'
 brew 'lsof'
 
 brew 'moreutils'
-cask 'macvim', args: %w(--with-cscope
-                        --with-lua
-                        --with-override-system-vim
-                        --with-luajit
-                        --with-python3)
+cask 'macvim', args: %w[--with-cscope --with-lua --with-override-system-vim --with-luajit --with-python3]
 # brew 'vim', args: ['--override-system-vi'] - macvim does this job
 
 brew 'ncdu'         # to free space on disk
-brew 'neovim/neovim/neovim'
+# brew 'neovim/neovim/neovim'
 brew 'netcat'
 # brew 'node'
 brew 'nvm'
@@ -132,12 +129,12 @@ brew 'redis'            # use docker image
 
 ##################################### CASK #####################################
 cask_args appdir: '/Applications'
-brew 'caskroom/cask/brew-cask'
+# brew 'caskroom/cask/brew-cask'
 cask 'dropbox'
 cask 'evernote'
 cask 'flux'
 cask 'karabiner'
-cash 'path-finder'
+cask 'path-finder'
 cask '1password'
 cask 'slack'
 # cask 'dashlane'

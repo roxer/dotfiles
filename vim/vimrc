@@ -202,7 +202,7 @@ Plug 'junegunn/vim-easy-align'
 " Plug 'jlanzarotta/bufexplorer' " fzf obsoletes this use <Leader>A
 " Plug 'vim-ctrlspace/vim-ctrlspace' fzf osolete this
 "{{{
-    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+    " let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
     " let g:CtrlSpaceSearchTiming = 500
 "}}}
 Plug 'edkolev/tmuxline.vim'
@@ -524,6 +524,7 @@ set formatoptions+=j
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 " autocmd FileType * setlocal formatoptions-=r formatoptions-=o
 
+setlocal cm=blowfish2
 set colorcolumn=90
 colorscheme railscasts
 highlight! rubyClass                 guifg=#ff00df ctermfg=200
