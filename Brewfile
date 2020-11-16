@@ -19,15 +19,23 @@ brew 'coreutils'
 brew 'ag'           # prefer ripgrep https://github.com/ggreer/the_silver_searcher
 # brew 'apg'          # password generator - see pwgen below
 # brew 'autojump'     # prefer jump navigate directories
+brew 'aspell'
+
+brew 'bash'
+brew 'bat'
 
 brew 'curl',        args: %w[--with-openssl --with-nghttp2]
+brew 'coreutils'
+brew 'ctags'
 brew 'ctop'         # top for docker containers
 
 brew 'diff-so-fancy'
+brew 'direnv'
 
 brew 'elixir'
 brew 'erlang'
 
+brew 'fd'
 brew 'ffmpeg',      args: %w[--with-libvpx --with-libvorbis]
 brew 'findutils'
 brew 'fzf'          # perfect fuzzy finder :)
@@ -54,6 +62,13 @@ brew 'ipcalc'
 
 brew 'jq'           # json tool https://stedolan.github.io
 brew 'jump'
+
+# kubectx
+# kubernetes-cli
+# kubetail
+# stern
+# aws-sam-cli
+# awscli
 
 brew 'leiningen'    # Install clojure tools
 brew 'links'
@@ -92,6 +107,7 @@ brew 'ranger'
 brew 'rbenv'
 brew 'rbenv-default-gems'
 brew 'reattach-to-user-namespace'
+brew 'ripgrep'
 brew 'rpl'          # replace strings recursively http://www.laffeycomputer.com/rpl.html
 brew 'ruby-build'   # manage rubies
 
@@ -102,6 +118,7 @@ brew 'stow'         # for managing dotfiles
 brew 'tag-ag'       # https://github.com/aykamko/tag (optionaly sack)
 brew 'the_silver_searcher'
 brew 'tig'          # git manager
+brew 'tldr'
 brew 'tmux'
 brew 'trash'        # https://github.com/ali-rantakari/trash
 brew 'tree'
@@ -109,6 +126,8 @@ brew 'tree'
 brew 'universal-ctags', args: %w(HEAD)
 
 brew 'vnstat'
+
+brew 'yarn'
 
 brew 'watch'
 brew 'wget',            args: %w(--with-iri)
