@@ -9,6 +9,7 @@
 # - jump
 # - ranger
 # - direnv
+# - q "text as data"
 # - jq json parser https://stedolan.github.io/jq/
 # - wharfee (docker CLI)
 # - ctop (top for docker)
@@ -43,6 +44,7 @@ export INSTALL_CTOP='0.7.5'
 export INSTALL_BAT='0.16.0'
 export INSTALL_FD='8.1.1'
 export INSTALL_TAG_AG='1.4.1'
+export INSTALL_Q='2.0.19'
 export INSTALL_CURL='7.73.0'
 # export INSTALL_DOCKER='18.09.0'
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-from-a-package
@@ -180,6 +182,9 @@ sudo dpkg -i fd_${INSTALL_FD}_amd64.deb
 # #############################################################################
 git clone https://github.com/jonas/tig.git ~/src/tig
 cd ~/src/tig && make && make install
+
+cd ~/src && https://github.com/harelba/q/releases/download/${INSTALL_Q}/q-text-as-data_${INSTALL_Q}-2_amd64.deb
+sudo dpkg -i q-text-as-data_${INSTALL_Q}-2_amd64.deb
 
 # #############################################################################
 #   ZSH

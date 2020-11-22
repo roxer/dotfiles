@@ -54,6 +54,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git docker golang docker-compose \
 	       httpie dircycle zsh-nvm \
 	       bundler gem \
+	       alias-tips \
 	       zsh-autosuggestions tmux vi-mode \
          zsh-syntax-highlighting history-substring-search)
 

@@ -56,7 +56,8 @@ autoload -Uz compinit && compinit -i
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # install syntax-higlighting first
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-plugins=(git osx golang mix ruby brew bundler autojump gem \
+plugins=(git osx golang mix ruby brew bundler gem \
+         alias-tips \
          docker docker-compose \
          github postgres pow rails \
          zsh-autosuggestions httpie rake tmux vi-mode dircycle \
@@ -158,18 +159,17 @@ export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
 export CLICOLOR=1
-# export TAG_SEARCH_PROG=rg
 
 unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 
 eval "$(rbenv init --no-rehash - zsh)"
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+eval "$(direnv hook zsh)"
+eval "$(jump shell)"
 
 if (( $+commands[tag] )); then
-  # https://github.com/aykamko/tag OR https://github.com/sampson-chen/sack
-
+  export TAG_SEARCH_PROG=rg  # replace with rg for ripgrep
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
-  alias ag=tag
+  alias rg=tag  # replace with rg for ripgrep
 fi
 
 # ssh
