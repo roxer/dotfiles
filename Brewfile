@@ -95,6 +95,7 @@ brew 'reattach-to-user-namespace'
 brew 'rpl'          # replace strings recursively http://www.laffeycomputer.com/rpl.html
 brew 'ruby-build'   # manage rubies
 
+brew 'shellcheck'   # linter for bash scripts
 brew 'sqlite'
 brew 'ssh-copy-id'  # macOS >= sierra has it default
 brew 'stow'         # for managing dotfiles

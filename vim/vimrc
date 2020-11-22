@@ -26,6 +26,8 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-dispatch'
+" Plug 'janko-m/vim-test'
 "{{{
     let g:fugitive_gitlab_domains = ['http://git.cubiware.com/main/backend']
 "}}}
@@ -266,7 +268,7 @@ Plug 'w0rp/ale'
     "     \  '</head> isn''t allowed in <body> elements'
     "     \ ]
 "}}}
-Plug 'yaifa.vim'
+Plug 'vim-scripts/yaifa.vim'
 " Plugin 'matchit.zip'
 Plug 'exvim/ex-matchit'
 " Plug 'vim-scripts/HTML-AutoCloseTag'
@@ -347,7 +349,7 @@ Plug 'posva/vim-vue' " vue syntax hightlight
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'jiangmiao/simple-javascript-indenter'
 Plug 'puppetlabs/puppet-syntax-vim'
-Plug 'jQuery'
+Plug 'vim-scripts/jQuery'
 Plug 'groenewege/vim-less'
 Plug 'fatih/vim-go'
 Plug 'wellle/targets.vim'

@@ -56,7 +56,7 @@ autoload -Uz compinit && compinit -i
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # install syntax-higlighting first
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-plugins=(git osx go mix ruby brew bundler autojump gem \
+plugins=(git osx golang mix ruby brew bundler autojump gem \
          docker docker-compose \
          github postgres pow rails \
          zsh-autosuggestions httpie rake tmux vi-mode dircycle \
@@ -158,6 +158,9 @@ export EDITOR=vim
 export GIT_EDITOR=vim
 export TERM="xterm-256color"
 export CLICOLOR=1
+# export TAG_SEARCH_PROG=rg
+
+unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 
 eval "$(rbenv init --no-rehash - zsh)"
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
@@ -168,8 +171,6 @@ if (( $+commands[tag] )); then
   tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
   alias ag=tag
 fi
-
-unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
@@ -201,3 +202,6 @@ fi
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export GOPATH=~/go
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
