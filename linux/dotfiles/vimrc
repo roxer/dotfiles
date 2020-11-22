@@ -1,0 +1,891 @@
+scriptencoding utf-8
+set encoding=utf-8
+" Need to call on initially to support git
+filetype on
+filetype off
+set nocompatible
+
+" Set our mapleader key
+let mapleader   = ','
+let g:mapleader = ','
+nnoremap § ,
+
+call plug#begin('~/.vim/plugged') " Plugins initialization start
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'edkolev/tmuxline.vim'
+
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-characterize' " ga shows info about char; <C-K> shortcut; set list/nolist
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+"{{{
+    " Alias "write as sudo" as :w!! or use eunuch :SudoWrite :SudoEdit
+    cmap w!! w !sudo tee > /dev/null %
+"}}}
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-surround'
+"{{{
+    let g:fugitive_gitlab_domains = ['http://git.cubiware.com/main/backend']
+"}}}
+Plug 'vim-scripts/LargeFile'
+Plug 'vim-scripts/vis' " sort visual selected block
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'vim-ruby/vim-ruby'
+"{{{
+    let g:rubycomplete_buffer_loading    = 1
+    let g:rubycomplete_classes_in_global = 1
+    let g:rubycomplete_rails             = 1
+    let g:rubycomplete_load_gemfile      = 0
+    let g:rubycomplete_use_bundler       = 0
+"}}}
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'mudge/runspec.vim'
+Plug 'vim-scripts/YankRing.vim'
+"{{{
+    set modifiable
+    map <leader>p :YRShow<cr>
+"}}}
+Plug 'benmills/vimux'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+Plug 'mbbill/undotree'
+"{{{
+    nnoremap <F5> :UndotreeToggle<cr>
+"}}}
+" Plug 'sjl/gundo.vim' # requires python 2.4+ but vim compiled with 3+
+"     nnoremap <F5> :GundoToggle<CR>
+
+Plug 'flazz/vim-colorschemes'
+Plug 'Konfekt/FastFold'
+" git: git://github.com/garbas/vim-snipmate.git
+" vim-addon-mw-utils: #needed for snipmate
+" git: git://github.com/MarcWeber/vim-addon-mw-utils.git
+" tlib: #needed for snipmate
+" git: git://github.com/tomtom/tlib_vim.git
+" git: https://github.com/lukaszkorecki/CoffeeTags.git
+
+" Plugin 'mhinz/vim-signify'
+
+" Plug 'ervandew/supertab' " YouCompleteMe obsoletes it
+" Plug 'Shougo/neocomplete.vim' " YouCompleteMe obsoletes it
+Plug 'Valloric/YouCompleteMe'
+" {{{
+    let g:ycm_use_ultisnips_completer      = 1
+    let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
+    let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    let g:ycm_seed_identifiers_with_syntax = 1
+    let g:ycm_key_invoke_completion        = '<c-j>'
+    let g:ycm_complete_in_strings          = 1
+    let g:ycm_min_num_of_chars_for_completion = 2
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1
+" }}}
+
+" Plugin 'maksimr/vim-jsbeautify'
+Plug 'haya14busa/incsearch.vim'
+" {{{
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+" }}}
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'easymotion/vim-easymotion'                   " Move around with ease
+" {{{
+    " :h g:incsearch#auto_nohlsearch
+    set hlsearch
+    map <Leader> <Plug>(easymotion-prefix)
+    " map <Leader><Leader> <Plug>(easymotion-prefix)
+    " use ALT + key w, t, w, s, j, k respectively
+    " map ∑ <Plug>(easymotion-bd-w)
+    map <Leader>w <Plug>(easymotion-bd-w)
+    omap <Leader>t <Plug>(easymotion-bd-tl)
+    omap <Leader>f <Plug>(easymotion-bd-fl)
+    nmap <Leader>w <Plug>(easymotion-overwin-w)
+    nmap <Leader>s <Plug>(easymotion-overwin-f2)
+    " JK motions: Line motions
+    map <Leader>j <Plug>(easymotion-j)
+    map <Leader>k <Plug>(easymotion-k)
+
+    " map <Leader><Leader> <Plug>(easymotion-prefix)
+    let g:incsearch#auto_nohlsearch    = 1
+    let g:EasyMotion_do_mapping        = 1
+    " Smartsign (type `3` and match `3`&`#`)
+    let g:EasyMotion_smartcase         = 1
+    let g:EasyMotion_off_screen_search = 0
+    " Jump to anywhere with only `s{char}{target}`
+    " `s<CR>` repeat last find motion.
+    " nmap s <Plug>(easymotion-s)
+    " nmap ; <Plug>(easymotion-s2)
+    " Bidirectional & within line 't' motion
+    omap t <Plug>(easymotion-bd-tl)
+    " Use uppercase target labels and type as a lower case
+    let g:EasyMotion_use_upper         = 0
+     " type `l` and match `l`&`L`
+    let g:EasyMotion_use_smartsign_us  = 1
+    map n  <Plug>(incsearch-nohl-n)
+    map N  <Plug>(incsearch-nohl-N)
+    map *  <Plug>(incsearch-nohl-*)
+    map #  <Plug>(incsearch-nohl-#)
+    map g* <Plug>(incsearch-nohl-g*)
+    map g# <Plug>(incsearch-nohl-g#)
+    " function! s:config_easyfuzzymotion(...) abort
+    "     return extend(copy({
+    "     \   'converters': [incsearch#config#fuzzyword#converter()],
+    "     \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+    "     \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+    "     \   'is_expr': 0,
+    "     \   'is_stay': 1
+    "     \ }), get(a:, 1, {}))
+    " endfunction
+
+    " noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+" }}}
+
+" Plugin 'AndrewRadev/splitjoin.vim'             " Split join: gS to split, gJ to join/
+Plug 'wincent/terminus'
+" Plugin 'git://git.wincent.com/command-t.git'
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
+Plug 'kylef/apiblueprint.vim'
+Plug 'majutsushi/tagbar'
+" Plug 'vim-misc'
+" Plug 'xolox/vim-easytags'
+    " let g:easytags_suppress_ctags_warning = 1
+" Plug 'taglist.vim'
+"
+Plug 'kchmck/vim-coffee-script'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'junegunn/vim-slash'
+"{{{
+    function! s:blink(times, delay)
+      let s:blink = { 'ticks': 2 * a:times, 'delay': a:delay }
+
+      function! s:blink.tick(_)
+        let self.ticks -= 1
+        let active = self == s:blink && self.ticks > 0
+
+        if !self.clear() && active && &hlsearch
+          let [line, col] = [line('.'), col('.')]
+          let w:blink_id = matchadd('IncSearch',
+                \ printf('\%%%dl\%%>%dc\%%<%dc', line, max([0, col-2]), col+2))
+        endif
+        if active
+          call timer_start(self.delay, self.tick)
+        endif
+      endfunction
+
+      function! s:blink.clear()
+        if exists('w:blink_id')
+          call matchdelete(w:blink_id)
+          unlet w:blink_id
+          return 1
+        endif
+      endfunction
+
+      call s:blink.clear()
+      call s:blink.tick(0)
+      return ''
+    endfunction
+
+    noremap <expr> <plug>(slash-after) <sid>blink(2, 50)
+"}}}
+Plug 'junegunn/vim-easy-align'
+" Plug 'jlanzarotta/bufexplorer' " fzf obsoletes this use <Leader>A
+" Plug 'vim-ctrlspace/vim-ctrlspace'
+"{{{
+    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+    " let g:CtrlSpaceSearchTiming = 500
+"}}}
+Plug 'edkolev/tmuxline.vim'
+Plug 'weynhamz/vim-plugin-minibufexpl'
+"{{{
+    " map <leader>e :MBEOpen<cr>
+    " map <leader>c :MBEClose<cr>
+    map <leader>b :MBEFocus<CR>
+
+    " Switching between tabs using Shift+Tab
+    nnoremap <Tab>   :bnext<CR>
+    nnoremap <S-Tab> :bprevious<CR>
+    " Switching between buffers using Ctrl+Tab
+    nnoremap <leader><Tab>   :tabnext<CR>
+    nnoremap <leader><S-Tab> :tabprevious<CR>
+"}}}
+" Plugin 'powerline/powerline'
+" TODEL Plug 'bling/vim-bufferline'
+Plug 'Raimondi/delimitMate'
+Plug 'vim-airline/vim-airline'                        " status line
+"{{{
+    let g:airline#extensions#tabline#enabled = 0
+    let g:airline#extensions#tabline#buffer_nr_show = 0
+"}}}
+" Plug 'vim-airline/vim-airline-themes'
+" Plugin 'itchyny/lightline.vim'
+Plug 'airblade/vim-rooter'
+Plug 'airblade/vim-gitgutter'                   " git status line
+Plug 'w0rp/ale'
+"{{{
+    let g:ale_sign_column_always = 1
+    let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_text_changed = 1
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+    " You can disable this option too
+    " if you don't want linters to run on opening a file
+    let g:ale_lint_on_enter = 0
+"}}}
+" Plug 'scrooloose/syntastic'
+"{{{
+    " Do syntax check when the buffer is first loaded
+    " let g:syntastic_check_on_open      = 0
+    " let g:syntastic_disabled_filetypes = ['m.html']
+    " let g:syntastic_html_checkers      = ['']
+    " let g:syntastic_ruby_checkers      = ['rubocop', 'mri']
+    " let g:syntastic_ruby_mri_exec      = '~/.rbenv/shims/ruby'
+    " let g:syntastic_ruby_rubocop_exec  = '~/.rbenv/shims/rubocop'
+
+    " let g:syntastic_quiet_messages     = 0
+    " let g:syntastic_html_tidy_ignore_errors = [
+    "     \  'plain text isn''t allowed in <head> elements',
+    "     \  '<base> escaping malformed URI reference',
+    "     \  'discarding unexpected <body>',
+    "     \  '<script> escaping malformed URI reference',
+    "     \  'content occurs after end of body',
+    "     \  '</head> isn''t allowed in <body> elements'
+    "     \ ]
+"}}}
+" Plug 'yaifa.vim'
+" Plugin 'matchit.zip'
+Plug 'exvim/ex-matchit'
+" Plug 'vim-scripts/HTML-AutoCloseTag'
+Plug 'alvan/vim-closetag'
+"{{{
+    let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
+"}}}
+Plug 'altercation/vim-colors-solarized'
+" Plug 'rking/ag.vim' " depreciated
+" Plug 'ctrlpvim/ctrlp.vim' " depreciated by fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" If you installed fzf using Homebrew, the following should suffice:
+Plug 'junegunn/fzf.vim'
+"{{{
+    let g:fzf_launcher = "fzf_function %s"
+    set rtp+=/usr/local/opt/fzf
+    let g:fzf_buffers_jump = 1
+    let g:fzf_tags_command = 'ctags -R'
+    nnoremap <silent> <leader><space> :Files<CR>
+    nnoremap <silent> <leader>B :Buffers<CR>
+    nnoremap <silent> <leader>A :Windows<CR>
+    nnoremap <silent> <leader>L :BLines<CR>
+    nnoremap <silent> <leader>O :BTags<CR>
+    nnoremap <silent> <leader>o :Tags<CR>
+    nnoremap <silent> <leader>? :History<CR>
+    " nnoremap <leader>t :Files<cr>
+    " nnoremap <leader>b :Buffers<cr>
+
+    " nmap <leader><tab> <plug>(fzf-maps-n)
+    " xmap <leader><tab> <plug>(fzf-maps-x)
+    " omap <leader><tab> <plug>(fzf-maps-o)
+
+    " Insert mode completion
+    imap <C-x><C-f> <plug>(fzf-complete-path)
+    imap <C-x><C-j> <plug>(fzf-complete-file-ag)
+    imap <S-Tab>    <plug>(fzf-complete-line)
+    " imap <C-x><C-l> <plug>(fzf-complete-line)
+    " inoremap <S-Tab> <C-x><C-l>
+
+    " makes fzf never use tmux
+    " https://github.com/junegunn/fzf.vim/issues/66#issuecomment-169362556
+    " let g:fzf_layout = {}
+"}}}
+Plug 'SirVer/ultisnips'
+"{{{
+    nnoremap <leader>ie :UltiSnipsEdit<CR>
+    let g:UltiSnipsSnippetsDir         = '~/.vim/UltiSnips'
+    let g:UltiSnipsEditSplit           = 'horizontal'
+    let g:UltiSnipsListSnippets        = '<nop>'
+    let g:UltiSnipsExpandTrigger       = '<c-l>'
+    let g:UltiSnipsJumpForwardTrigger  = '<c-l>'
+    let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
+    let g:ulti_expand_or_jump_res      = 0
+"}}}
+Plug 'honza/vim-snippets'
+"{{{
+    let g:UltiSnipsExpandTrigger       = "<F8>"
+    let g:UltiSnipsJumpForwardTrigger  = "<F9>"
+    let g:UltiSnipsJumpBackwardTrigger = "<F7>"
+    let g:UltiSnipsListSnippets        = "<F6>"
+"}}}
+Plug 'mileszs/ack.vim'
+
+" Syntax plugins
+Plug 'elzr/vim-json'
+Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-haml'
+Plug 'slim-template/vim-slim'
+Plug 'docker/docker' , {'rtp': '/contrib/syntax/vim/'}
+Plug 'ekalinin/Dockerfile.vim'
+Plug 'yaml/yaml.vim'
+
+Plug 'hail2u/vim-css3-syntax'
+Plug 'othree/html5-syntax.vim'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'posva/vim-vue' " vue syntax hightlight
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'jiangmiao/simple-javascript-indenter'
+Plug 'puppetlabs/puppet-syntax-vim'
+" Plug 'jQuery'
+Plug 'groenewege/vim-less'
+Plug 'fatih/vim-go'
+Plug 'wellle/targets.vim'
+Plug 'sunaku/vim-ruby-minitest'
+
+" call vundle#end()
+call plug#end()
+filetype plugin indent on
+
+" Enable syntax
+syntax enable
+" syntax on
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb " nowritebackup
+set noswapfile
+set ff=unix " display DOS file endings
+set copyindent
+set preserveindent
+set clipboard=unnamed,unnamedplus
+
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+" vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap // y/<C-R>"<CR>
+" vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" When you press <leader>r you can search and replace the selected text
+vnoremap <silent> <Leader>r :call VisualSelection('replace')<CR>
+" map . in visual mode
+vnoremap . :norm.<cr>
+
+" unmap F1 help
+nmap <F1> <nop>
+imap <F1> <nop>
+
+" unmap ex mode: 'Type visual to go into Normal mode.'
+nnoremap Q <nop>
+
+" move line down and up
+map - ddp
+map _ ddkP
+" vmap - dp
+" vmap - dkP
+map <Space> <C-w>
+map <Space><Space> <C-w><C-p>
+
+" format json file
+map <Leader>fj :set filetype=json<CR>:%!jq '.'<CR>
+map <Leader>fr :set filetype=ruby<CR>
+
+" Ensure vim uses bash
+set shell=/bin/bash
+
+" Some kind of security thing
+set modelines=1
+
+" Set the default font
+set guifont=Meslo\ LG\ S\ for\ Powerline:h12
+let g:airline_powerline_fonts = 1
+set listchars=eol:¬,tab:»·,trail:~,extends:>,precedes:<,space:␣
+" let g:airline_theme = "base16_solarized"
+" set guifont=Monaco:h12
+
+" Automatically reload on file changes
+set autoread
+set autowrite
+
+" Automatically attempt to handle indentation
+set autoindent
+set si
+
+" stolen from https://bitbucket.org/sjl/dotfiles/src/tip/vim/vimrc
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Automatically attempt to set the working directory to the current
+" file. This value will be superceeded by rooter if it is installed
+set autochdir
+
+" Display the current mode at the bottom of the window
+set showmode
+
+" Extra information about the command you're running in the status bar
+set showcmd
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden
+" set ttimeoutlen=50        " Make Esc work faster"
+set timeout timeoutlen=500 ttimeoutlen=100
+
+" Auto complete filenames when in :Ex mode, etc
+set wildmenu
+" set wildmenu=full
+set wildmode=list:longest
+
+set visualbell
+set nocursorcolumn nocursorline " cuc cul - highlight current line and column slows down
+
+" Allow usage of mouse in iTerm
+set ttyfast
+set mouse=a
+
+" For regular expressions turn magic on
+set magic
+
+" Height of the command bar
+set cmdheight=2
+
+let g:html_use_css = "1"
+let xml_use_xhtml = 1
+let g:go_fmt_command = "goimports"
+" disable fmt on save if it slows down vim
+" let g:go_fmt_autosave = 0
+
+set background=dark
+set history=7000
+" ignore case - ignorowanie wielkosci znakow przy
+" przeszukiwaniu tekstu
+set ic
+set scs
+" Smart case searching. Case insensitive if all lowercase, but if you
+" provide uppercase it will force matching case
+set ignorecase smartcase
+set incsearch
+" Never have to type /g at the end of search / replace again
+set gdefault
+
+autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 tabstop=4 wrap linebreak nolist wrap lbr colorcolumn=120 synmaxcol=999999
+autocmd BufEnter *.png,*.jpg,*gif exec "! ~/.iterm2/imgcat ".expand("%") | :bw
+
+" Visually display matching braces
+set showmatch " show bracket matches
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+set ruler
+
+" set backspace=2
+set backspace=indent,eol,start
+
+" Always show the status line
+set laststatus=2
+set scrolloff=3
+
+set cindent
+
+" Line number rules
+set number
+set relativenumber " show relative line numbers
+
+" Tab rules
+set expandtab
+set smarttab " Be smart when using tabs ;)
+
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+
+" set cm=blowfish2 " this brakes neovim
+set textwidth=90
+set formatoptions=qrn1
+" Delete comment character when joining commented lines
+set formatoptions+=j
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+" autocmd FileType * setlocal formatoptions-=r formatoptions-=o
+
+set colorcolumn=90
+colorscheme railscasts
+highlight! rubyClass                 guifg=#ff00df ctermfg=200
+highlight! rubyConstant              guifg=#df5f5f ctermfg=167
+highlight! rubyPredefinedConstant    guifg=#d70000 ctermfg=160
+
+highlight! rubyInterpolation         guifg=#FFFFFF ctermfg=15
+highlight! rubyPseudoVariable        guifg=#ffdf5f ctermfg=221
+highlight! rubyStringDelimiter       guifg=#87af5f ctermfg=107
+
+highlight! rubyInstanceVariable      guifg=#00afff ctermfg=39
+highlight! rubyBlockParameter        guifg=#00afff ctermfg=39
+highlight! rubyLocalVariableOrMethod guifg=#d75faf ctermfg=169
+highlight! Special                   guifg=#00ff00 ctermfg=46
+
+highlight! ColorColumn               guibg=#1c1c1c ctermbg=234
+highlight! SignColumn                guibg=#1c1c1c ctermbg=234
+highlight! FoldColumn                guibg=#1c1c1c ctermbg=234
+
+set foldmethod=expr
+set foldlevelstart=4
+
+" Set the default encoding to the always trusty UTF-8
+set encoding=utf-8
+
+nnoremap Y y$
+
+" TODEL Searching using Ctrl+P
+" map <leader>o :CtrlPMixed<CR>
+" nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <silent> <Leader>v :TagbarToggle<CR>
+" nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+" nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Disable highlight when <leader>, is pressed
+map <silent> <Leader><Leader><Leader> :nohlsearch<cr>
+" map <silent> <leader>, :noh<cr>
+
+" Close all the buffers
+map <Leader>ba :1,1000 bd!<cr>
+" Quickly close windows
+nnoremap <Leader>x :x<cr>
+nnoremap <Leader>X :q!<cr>
+
+" zoom a vim pane, <C-w>= to re-balance
+nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
+nnoremap <Leader>= :wincmd =<cr>
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" wrap quickfix window
+autocmd FileType qf setlocal wrap linebreak
+
+set splitbelow
+set splitright
+
+" Stop Vim dying if there's massively long lines.
+" set synmaxcol=250
+
+" new file in current directory
+" map <Leader>nf :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Prevent Vim from clobbering the scrollback buffer. See
+" http://www.shallowsky.com/linux/noaltscreen.html
+" set t_ti= t_te=
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+" set viminfo^=%
+" ! save global variables that doesn't contains lowercase letters
+" h disable the effect of 'hlsearch' when loading the viminfo
+" f1 store marks
+" '100 remember 100 previously edited files
+set viminfo=!,h,f1,'100
+" TODO set viminfo='50,<1000,s100,h " Set max buffer size to 1000 lines (default 50)
+" TODO set lazyredraw
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+" %{ALEGetStatusLine()}
+
+" Don't overindent javascript
+let g:SimpleJsIndenter_BriefMode = 1
+
+" Hide .DS_Store and .git directories from Vim
+let g:netrw_list_hide = '.DS_Store,^\.git/$'
+let g:netrw_liststyle = 3
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+" let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+" let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" rabl files
+au BufRead,BufNewFile *.rabl setf ruby
+let ruby_fold = 1
+
+" vim-ruby setting
+let g:ruby_indent_block_style = 'do'
+
+autocmd Syntax c,cpp,vim,ruby setlocal foldmethod=syntax
+" autocmd Syntax c,cpp,vim,rb normal zR
+
+" Every time the user issues a :w command, Vim will automatically remove all trailing whitespace before saving.
+" See also vim-spacejam plugin
+fun! StripTrailingWhitespace()
+    " Don't strip on these filetypes
+    if &ft =~ 'markdown\|perl'
+        return
+    endif
+    %s/\s\+$//e
+endfun
+autocmd BufWritePre * call StripTrailingWhitespace()
+
+" Do :help cope if you are unsure what cope is. It's super useful!
+"
+" When you search with vimgrep, display your results in cope by doing:
+"   <leader>cc
+"
+" To go to the next search result do:
+"   <leader>n
+"
+" To go to the previous search results do:
+"   <leader>p
+"
+" map <leader>cc :botright cope<cr>
+" map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+" map <leader>n :cn<cr>
+" map <leader>p :cp<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => The Silver Searcher
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" if executable('ag')
+  " Searching using Ag
+  " map <Leader>a :Ag!<space>
+  " Use ag over grep
+  " set grepprg=ag\ --nogroup\ --nocolor
+  " set wildignore=*.so,*.swp,*.aux,*.zip
+  " set wildignore+=*.o,*.obj,*~ "stuff to ignore when tab completing
+  " set wildignore+=*vim/backups*
+  " set wildignore+=*sass-cache*
+  " set wildignore+=*DS_Store*
+  " set wildignore+=vendor/rails/**
+  " set wildignore+=vendor/cache/**
+  " set wildignore+=*.git,*.svn
+  " set wildignore+=tags,*.tags
+  " set wildignore+=*.gem,*.class,*.mo
+  " set wildignore+=node_modules,_site
+  " set wildignore+=log/**
+  " set wildignore+=tmp/**
+  " set wildignore+=*.png,*.jpg,*jpeg,*.gif,*.xpm
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  " let g:ctrlp_use_caching           = 0
+  " let g:ctrlp_max_height            = 30
+  " let g:ctrlp_working_path_mode     = 0
+  " let g:ctrlp_match_window_reversed = 0
+  " let g:ag_working_path_mode        = "r"
+  " let g:ackprg = 'ag --vimgrep --smart-case'
+  " cnoreabbrev ag Ack
+  " cnoreabbrev aG Ack
+  " cnoreabbrev Ag Ack
+  " cnoreabbrev AG Ack
+  " search for word under the cursor
+  " nnoremap K :Ack! "\b<C-R><C-W>\b"<CR>
+  " nnoremap K :Ag <C-R><C-W><CR>
+" endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ripgrep
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if executable('rg')
+    set grepprg=rg\ --vimgrep
+    set wildignore=*.so,*.swp,*.aux,*.zip
+    set wildignore+=*.o,*.obj,*~ "stuff to ignore when tab completing
+    set wildignore+=*vim/backups*
+    set wildignore+=*sass-cache*
+    set wildignore+=*DS_Store*
+    set wildignore+=vendor/rails/**
+    set wildignore+=vendor/cache/**
+    set wildignore+=*.git,*.svn
+    set wildignore+=tags,*.tags
+    set wildignore+=*.gem,*.class,*.mo
+    set wildignore+=node_modules,_site
+    set wildignore+=log/**
+    set wildignore+=tmp/**
+    set wildignore+=*.png,*.jpg,*jpeg,*.gif,*.xpm
+    " --column: Show column number
+    " --line-number: Show line number
+    " --no-heading: Do not show file headings in results
+    " --fixed-strings: Search term as a literal string
+    " --ignore-case: Case insensitive search
+    " --no-ignore: Do not respect .gitignore, etc...
+    " --hidden: Search hidden files and folders
+    " --follow: Follow symlinks
+    " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+    " --color: Search color options
+        " \   <bang>0 ? fzf#vim#with_preview('up:60%')
+        " \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    command! -bang -nargs=* Rgg
+        \ call fzf#vim#grep(
+        \   'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --glob "!tags" --color "always" '.shellescape(<q-args>),
+        \   1,
+        \   <bang>0)
+    map <Leader>a :Rgg<space>
+    map \ :Rgg<space>
+    nnoremap K :Rgg <C-R><C-W><CR>
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Coffeescript
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+autocmd BufRead,BufNewFile     *.es6    setfiletype javascript
+autocmd BufRead,BufNewFile     *.ts     setfiletype javascript
+"autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+let coffee = '/usr/local/bin/coffee'
+" special highlighting for React and Lodash
+let g:used_javascript_libs = 'react,lodash'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    en
+    return ''
+endfunction
+
+" rename current file, via Gary Bernhardt
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'))
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+
+map <leader>m  :call RenameFile()<CR>
+map <leader>n  :NERDTreeToggle<CR>
+map <leader>nn :NERDTreeFind<CR>
+map <Leader>c  :EasyAlign<CR> <CR>
+
+    " JK motions: Line motions
+" space nnoremap <silent> <leader><space> :Files<CR>
+" a map \ :Rgg<space>
+" a map <leader>a :Rgg<space>
+" A nnoremap <silent> <leader>A :Windows<CR>
+" ba map <Leader>ba :1,1000 bd!<cr>
+" b map <leader>f :MBEFocus<CR>
+" B nnoremap <silent> <leader>B :Buffers<CR>
+" c map <Leader>c :EasyAlign<CR> <CR>
+" d
+" e
+" f omap <Leader>f <Plug>(easymotion-bd-fl)
+" f map  <Leader>fj :set filetype=json<CR>:%!jq '.'<CR>
+" f map  <Leader>fr :set filetype=ruby<CR>
+" g
+" h
+" i
+" ie nnoremap <leader>ie :UltiSnipsEdit<CR>
+" j map <Leader>j <Plug>(easymotion-j)
+" k map <Leader>k <Plug>(easymotion-k)
+" l
+" L nnoremap <silent> <leader>L :BLines<CR>
+" m map <leader>n :call RenameFile()<cr>
+" n map <leader>t :NERDTreeToggle<CR>
+" nn map <leader>t :NERDTreeFind<CR>
+" o nnoremap <silent> <leader>o :BTags<CR>
+" O nnoremap <silent> <leader>O :Tags<CR>
+" p map <leader>p :YRShow<cr>
+" q
+" r vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
+" s nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" t omap <Leader>t <Plug>(easymotion-bd-tl)
+" w map <Leader>w <Plug>(easymotion-bd-w)
+" w nmap <Leader>w <Plug>(easymotion-overwin-w)
+" v nnoremap <silent> <leader>b :TagbarToggle<CR>
+" x nnoremap <Leader>x :x<cre>
+" X nnoremap <Leader>X :q!<cr>
+" y
+" z
+" ? nnoremap <silent> <leader>? :History<CR>
+" zoom a vim pane, <C-w>= to re-balance
+" - nnoremap <Leader>- :wincmd _<cr>:wincmd \|<cr>
+" = nnoremap <Leader>= :wincmd =<cr>
+
+" nnoremap <leader><Tab>   :tabnext<CR>
+" nnoremap <leader><S-Tab> :tabprevious<CR>
+"
+" " map <leader>e :MBEOpen<cr>
+" " map <leader>c :MBEClose<cr>
+
+" vim: set sw=4 ts=4 et foldlevel=0 foldmethod=marker:

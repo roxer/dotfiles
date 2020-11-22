@@ -1,0 +1,140 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export ZSH=/home/$(whoami)/.oh-my-zsh
+
+ZSH_THEME="bullet-train"
+# for list of colors run spectrum_ls
+BULLETTRAIN_DIR_EXTENDED=2
+BULLETTRAIN_TIME_SHOW=false
+BULLETTRAIN_CONTEXT_SHOW=true
+BULLETTRAIN_CONTEXT_BG=022
+BULLETTRAIN_CONTEXT_FG=253
+ULLETTRAIN_IS_SSH_CLIENT=true
+BULLETTRAIN_NVM_SHOW=true
+BULLETTRAIN_NVM_BG=022
+BULLETTRAIN_NVM_FG=253
+BULLETTRAIN_RUBY_BG=235
+BULLETTRAIN_RUBY_FG=red
+BULLETTRAIN_GO_SHOW=true
+BULLETTRAIN_DIR_BG=232
+BULLETTRAIN_DIR_FG=226
+BULLETTRAIN_GIT_BG=233
+BULLETTRAIN_GIT_FG=214
+BULLETTRAIN_PROMPT_CHAR=' $ '
+BULLETTRAIN_PROMPT_ROOT=true
+BULLETTRAIN_PROMPT_ORDER=(
+  status
+  custom
+  context
+  dir
+  ruby
+  git
+  cmd_exec_time
+)
+
+DISABLE_AUTO_UPDATE="true"
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git docker golang docker-compose \
+	       httpie dircycle zsh-nvm \
+	       bundler gem \
+	       zsh-autosuggestions tmux vi-mode \
+         zsh-syntax-highlighting history-substring-search)
+
+source $ZSH/oh-my-zsh.sh
+
+export EDITOR=vim
+export GIT_EDITOR=vim
+export TERM="xterm-256color"
+
+export PATH="/usr/local/share/vim:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init --no-rehash - zsh)"
+eval "$(direnv hook zsh)"
+eval "$(jump shell)"
+
+if (( $+commands[tag] )); then
+  export TAG_SEARCH_PROG=rg  # replace with rg for ripgrep
+  tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
+  alias rg=tag  # replace with rg for ripgrep
+fi
+
+autoload -Uz compinit && compinit -i
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+source /home/$(whoami)/.gvm/scripts/gvm
+# source ~/.cargo/env
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+_tmuxinator() {
+  local commands projects
+  commands=(${(f)"$(tmuxinator commands zsh)"})
+  projects=(${(f)"$(tmuxinator completions start)"})
+
+  if (( CURRENT == 2 )); then
+    _describe -t commands "tmuxinator subcommands" commands
+    _describe -t projects "tmuxinator projects" projects
+  elif (( CURRENT == 3)); then
+    case $words[2] in
+      copy|debug|delete|open|start)
+        _arguments '*:projects:($projects)'
+      ;;
+    esac
+  fi
+
+  return
+}
+
+# compdef _tmuxinator tmuxinator mux
+alias mux="tmuxinator"
+
+# Local Variables:
+# mode: Shell-Script
+# sh-indentation: 2
+# indent-tabs-mode: nil
+# sh-basic-offset: 2
+# End:
+# vim: ft=zsh sw=2 ts=2 et

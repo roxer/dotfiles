@@ -4,7 +4,7 @@
 # includes:
 # - ZSH with zsh syntax highlighting
 # - docker setup
-# - silver searcher with sack (use sag {search_token} | F nr )
+# - ripgrep with tag-ag
 # - fzf (enhance Ctrl-r, e.g. use: cd **<TAB> )
 # - jump
 # - ranger
