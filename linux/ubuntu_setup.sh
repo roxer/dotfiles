@@ -8,6 +8,7 @@
 # - fzf (enhance Ctrl-r, e.g. use: cd **<TAB> )
 # - jump
 # - ranger
+# - direnv
 # - jq json parser https://stedolan.github.io/jq/
 # - wharfee (docker CLI)
 # - ctop (top for docker)
@@ -173,12 +174,6 @@ sudo dpkg -i bat_${INSTALL_BAT}_amd64.deb
 # #############################################################################
 cd ~/src && wget https://github.com/sharkdp/fd/releases/download/v${INSTALL_FD}/fd_${INSTALL_FD}_amd64.deb
 sudo dpkg -i fd_${INSTALL_FD}_amd64.deb
-
-# #############################################################################
-#   SACK
-# #############################################################################
-git clone https://github.com/sampson-chen/sack.git ~/src/sack
-cd ~/src/sack && chmod +x install_sack.sh && ./install_sack.sh
 
 # #############################################################################
 #   TIG (git client)
