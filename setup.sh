@@ -9,20 +9,20 @@ zsh < <(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mast
 
 mkdir -p ~/.vim/plugin
 mkdir -p ~/.zsh
-ln -sf ./vim/abbreviation.vim  ~/.vim/plugin/abbreviation.vim
-ln -sf ./Brewfile              ~/Brewfile
-ln -sf ./gemrc                 ~/.gemrc
-ln -sf ./irbrc                 ~/.irbrc
-ln -sf ./pryrc                 ~/.pryrc
-ln -sf ./psqlrc                ~/.psqlrc
-ln -sf ./tmux.conf             ~/.tmux.conf
-ln -sf ./vim/vimrc             ~/.vimrc
-ln -sf ./zshrc                 ~/.zshrc
-ln -sf ./lftprc                ~/.lftprc
-ln -sf ./zsh/aliases.zsh       ~/.zsh/aliases.zsh
-ln -sf ./zsh/abbreviations.zsh ~/.zsh/abbreviations.zsh
-ln -sf ./zsh/functions.zsh     ~/.zsh/functions.zsh
-ln -sf ./bin/git-churn         /usr/local/bin/
+ln -sf $(pwd)/vim/abbreviation.vim  ~/.vim/plugin/abbreviation.vim
+ln -sf $(pwd)/Brewfile              ~/Brewfile
+ln -sf $(pwd)/gemrc                 ~/.gemrc
+ln -sf $(pwd)/irbrc                 ~/.irbrc
+ln -sf $(pwd)/pryrc                 ~/.pryrc
+ln -sf $(pwd)/psqlrc                ~/.psqlrc
+ln -sf $(pwd)/tmux.conf             ~/.tmux.conf
+ln -sf $(pwd)/vim/vimrc             ~/.vimrc
+ln -sf $(pwd)/zshrc                 ~/.zshrc
+ln -sf $(pwd)/lftprc                ~/.lftprc
+ln -sf $(pwd)/zsh/aliases.zsh       ~/.zsh/aliases.zsh
+ln -sf $(pwd)/zsh/abbreviations.zsh ~/.zsh/abbreviations.zsh
+ln -sf $(pwd)/zsh/functions.zsh     ~/.zsh/functions.zsh
+ln -sf $(pwd)/bin/git-churn         /usr/local/bin/
 
 brew tap homebrew/bundle
 brew bundle
@@ -39,6 +39,11 @@ number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
 
 pip3 install wharfee
+
+# powerline fonts
+git clone https://github.com/powerline/fonts.git ~/src
+pip install --user git+git://github.com/powerline/powerline
+# from powerline repo manually install font Meslo 
 
 cd ~/.oh-my-zsh/themes && wget https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme
 mkdir -p ~/.tmux/plugins/tpm
