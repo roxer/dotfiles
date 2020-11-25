@@ -80,7 +80,9 @@ pip3 install --upgrade pip
 # sudo chown $(whoami):$(whoami) /usr/local/bin/wharfee
 sudo pip3 install pgcli
 sudo pip3 install httpie
-sudp pip3 install docker-compose
+sudo pip3 install docker-compose
+sudo pip3 install awscli
+sudo pip3 install awscli-plugin-endpoint
 
 # #############################################################################
 #   GO LANG
