@@ -38,26 +38,26 @@ sudo apt install -y git tree htop ncdu \
                     links jq lftp highlight stow \
                     network-manager
 
-export INSTALL_RUBY='2.7.1'
-export INSTALL_GO='1.15.5'
+export INSTALL_RUBY='2.7.2'
+export INSTALL_GO='1.15.6'
 export INSTALL_CTOP='0.7.5'
-export INSTALL_BAT='0.16.0'
-export INSTALL_FD='8.1.1'
+export INSTALL_BAT='0.17.1'
+export INSTALL_FD='8.2.1'
 export INSTALL_TAG_AG='1.4.1'
 export INSTALL_Q='2.0.19'
-export INSTALL_CURL='7.73.0'
-# export INSTALL_DOCKER='18.09.0'
-# https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-from-a-package
-export INSTALL_DOCKER_COMPOSE='1.27.4'
-# wget https://github.com/docker/compose/releases/download/$INSTALL_DOCKER_COMPOSE/docker-compose-Linux-x86_64
-export INSTALL_DIRENV='2.24.0'
+export INSTALL_CURL='7.74.0'
+export INSTALL_DIRENV='2.25.2'
 # wget https://github.com/direnv/direnv/releases/download/$INSTALL_DIRENV/direnv.linux-amd64
 export INSTALL_TMUX='3.1c'
 # wget https://github.com/tmux/tmux/releases/download/${INSTALL_TMUX}/tmux-${INSTALL_TMUX}.tar.gz
-export INSTALL_FZF='0.24.3'
+export INSTALL_FZF='0.24.4'
 # wget https://github.com/junegunn/fzf/archive/$INSTALL_FZF.tar.gz
 export INSTALL_JUMP='0.30.1'
 # wget https://github.com/gsamokovarov/jump/releases/download/v$INSTALL_JUMP/jump_$INSTALL_JUMP_amd64.deb
+
+# https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-from-a-package
+# export INSTALL_DOCKER_COMPOSE='1.27.4' - install by pip3
+# wget https://github.com/docker/compose/releases/download/$INSTALL_DOCKER_COMPOSE/docker-compose-Linux-x86_64
 
 # git config --global user.email "deploy@hattec.com"
 # git config --global user.name "Deploy MW"
@@ -118,9 +118,9 @@ source ~/.profile
 rbenv install $INSTALL_RUBY
 rbenv rehash
 rbenv global $INSTALL_RUBY
-gem install bundler
-gem install pry
-gem install tmuxinator
+gem i -N bundler
+gem i -N pry
+gem i -N tmuxinator
 
 # #############################################################################
 #   DOCKER
@@ -185,7 +185,7 @@ sudo dpkg -i fd_${INSTALL_FD}_amd64.deb
 git clone https://github.com/jonas/tig.git ~/src/tig
 cd ~/src/tig && make && make install
 
-cd ~/src && https://github.com/harelba/q/releases/download/${INSTALL_Q}/q-text-as-data_${INSTALL_Q}-2_amd64.deb
+cd ~/src && wget https://github.com/harelba/q/releases/download/${INSTALL_Q}/q-text-as-data_${INSTALL_Q}-2_amd64.deb
 sudo dpkg -i q-text-as-data_${INSTALL_Q}-2_amd64.deb
 
 # #############################################################################
@@ -207,8 +207,9 @@ sudo make install
 sudo usermod -s `which zsh` $(whoami)
 
 cd ~/src && curl -fsOL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-sudo bash ./install.sh
+bash ./install.sh
 git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+git clone https://github.com/djui/alias-tips ~/.oh-my-zsh/custom/plugins/alias-tips
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 cd ~/.oh-my-zsh/themes && wget https://raw.githubusercontent.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme
@@ -265,9 +266,9 @@ cd ~/src/vim
             --enable-luainterp=yes \
             --with-luajit
 
-            --enable-pythoninterp=dynamic \
-            --enable-python3interp \
-            --with-python3-config-dir=/usr/lib/python3.8/config-3.8-x86_64-linux-gnu \
+            # --enable-pythoninterp=dynamic \
+            # --enable-python3interp \
+            # --with-python3-config-dir=/usr/lib/python3.8/config-3.8-x86_64-linux-gnu \
 
 make VIMRUNTIMEDIR=/usr/local/share/vim/vim82
 # sudo checkinstall
