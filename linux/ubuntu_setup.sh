@@ -248,6 +248,28 @@ sudo make install
 sudo ldconfig
 sudo apt -y remove curl
 
+# #############################################################################
+#   ImageMagick
+# #############################################################################
+wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+tar xvzf ImageMagick.tar.gz
+cd ImageMagick-7.0.fixme
+sudo make install
+make
+sudo make install
+sudo ldconfig /usr/local/lib
+
+# #############################################################################
+#   Let's Encrypt
+# #############################################################################
+# https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
+sudo apt install certbot python3-certbot-nginx
+
+sudo ufw allow 'Nginx Full'
+sudo ufw allow 'OpenSSH'
+sudo ufw enable
+
 ######## OPTIONAL #########
 
 : <<'END'
