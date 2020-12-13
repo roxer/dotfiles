@@ -31,7 +31,8 @@ sudo apt install -y libz-dev make autoconf yodl libncursesw5-dev texinfo libeven
                     software-properties-common gnupg-agent \
                     python3-pip cmake exuberant-ctags checkinstall \
                     libncurses5-dev python-dev python3-dev ruby-dev \
-                    lua5.3 liblua5.3-dev libperl-dev geoip-bin libgeoip-dev
+                    lua5.3 liblua5.3-dev libperl-dev geoip-bin libgeoip-dev \
+                    libpng-dev libjpeg-dev # to build ImageMagick
 
 sudo apt install -y git tree htop ncdu \
                     shellcheck curl \
@@ -252,9 +253,10 @@ sudo apt -y remove curl
 #   ImageMagick
 # #############################################################################
 wget https://www.imagemagick.org/download/ImageMagick.tar.gz
+# sudo apt install libpng-dev libjpeg-dev
 tar xvzf ImageMagick.tar.gz
 cd ImageMagick-7.0.fixme
-sudo make install
+./configure
 make
 sudo make install
 sudo ldconfig /usr/local/lib
