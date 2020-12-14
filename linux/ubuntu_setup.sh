@@ -232,6 +232,14 @@ nvm install node
 npm install -g diff-so-fancy
 
 # #############################################################################
+#   YARN
+# #############################################################################
+
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt install -y --no-install-recommends yarn
+
+# #############################################################################
 #   FZF
 # #############################################################################
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
