@@ -39,21 +39,21 @@ sudo apt install -y git tree htop ncdu \
                     links jq lftp highlight stow \
                     network-manager
 
-export INSTALL_RUBY='2.7.2'
-export INSTALL_GO='1.15.6'
+export INSTALL_RUBY='3.0.1'
+export INSTALL_GO='1.16.5'
 export INSTALL_CTOP='0.7.5'
 export INSTALL_BAT='0.17.1'
 export INSTALL_FD='8.2.1'
 export INSTALL_TAG_AG='1.4.1'
 export INSTALL_Q='2.0.19'
-export INSTALL_CURL='7.74.0'
-export INSTALL_DIRENV='2.25.2'
+export INSTALL_CURL='7.77.0'
+export INSTALL_DIRENV='2.28.0'
 # wget https://github.com/direnv/direnv/releases/download/$INSTALL_DIRENV/direnv.linux-amd64
-export INSTALL_TMUX='3.1c'
+export INSTALL_TMUX='3.2a'
 # wget https://github.com/tmux/tmux/releases/download/${INSTALL_TMUX}/tmux-${INSTALL_TMUX}.tar.gz
-export INSTALL_FZF='0.24.4'
+export INSTALL_FZF='0.27.2'
 # wget https://github.com/junegunn/fzf/archive/$INSTALL_FZF.tar.gz
-export INSTALL_JUMP='0.30.1'
+export INSTALL_JUMP='0.40.0'
 # wget https://github.com/gsamokovarov/jump/releases/download/v$INSTALL_JUMP/jump_$INSTALL_JUMP_amd64.deb
 
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-from-a-package
@@ -251,7 +251,7 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 cd ~/src || exit
 wget http://curl.haxx.se/download/curl-${INSTALL_CURL}.tar.bz2 && tar xjf curl-${INSTALL_CURL}.tar.bz2
 cd curl-${INSTALL_CURL}
-./configure
+./configure --with-openssl --with-gnutls
 make
 sudo make install
 sudo ldconfig
