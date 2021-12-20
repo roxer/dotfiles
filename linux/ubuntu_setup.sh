@@ -56,6 +56,8 @@ export INSTALL_FZF='0.28.0'
 export INSTALL_JUMP='0.40.0'
 export INSTALL_DOCKER_COMPOSE='2.2.2'
 
+mkdir -p ~/src
+
 # git config --global user.email "deploy@hattec.com"
 # git config --global user.name "Deploy MW"
 # git config comes from ~/.gitconfig (see below)
@@ -140,15 +142,13 @@ curl -sfL https://direnv.net/install.sh | bash
 # #############################################################################
 #   CTOP for Docker
 # #############################################################################
-sudo wget https://github.com/bcicen/ctop/releases/download/v${INSTALL_CTOP}/ctop-${INSTALL_CTOP}-linux-amd64 -O /usr/local/bin/ctop
+sudo wget https://github.com/bcicen/ctop/releases/download/${INSTALL_CTOP}/ctop-${INSTALL_CTOP}-linux-amd64 -O /usr/local/bin/ctop
 sudo chmod +x /usr/local/bin/ctop
 
 # zsh from source is bellow
 # sudo apt install zsh
 sudo apt -y remove tmux
 sudo apt -y autoremove
-
-mkdir -p ~/src
 
 # #############################################################################
 #   TMUX
@@ -185,8 +185,11 @@ sudo dpkg -i fd_${INSTALL_FD}_amd64.deb
 git clone https://github.com/jonas/tig.git ~/src/tig
 cd ~/src/tig && make && make install
 
-cd ~/src && wget https://github.com/harelba/q/releases/download/${INSTALL_Q}/q-text-as-data_${INSTALL_Q}-2_amd64.deb
-sudo dpkg -i q-text-as-data_${INSTALL_Q}-2_amd64.deb
+# #############################################################################
+#   Q (sql for csv)
+# #############################################################################
+cd ~/src && wget https://github.com/harelba/q/releases/download/v${INSTALL_Q}/q-text-as-data-${INSTALL_Q}-1.x86_64.deb
+sudo dpkg -i q-text-as-data-${INSTALL_Q}-1.x86_64.deb
 
 # #############################################################################
 #   ZSH
