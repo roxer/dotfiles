@@ -54,10 +54,7 @@ export INSTALL_TMUX='3.2a'
 export INSTALL_FZF='0.28.0'
 # wget https://github.com/junegunn/fzf/archive/$INSTALL_FZF.tar.gz
 export INSTALL_JUMP='0.40.0'
-
-# https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-from-a-package
-# export INSTALL_DOCKER_COMPOSE='1.27.4' - install by pip3
-# wget https://github.com/docker/compose/releases/download/$INSTALL_DOCKER_COMPOSE/docker-compose-Linux-x86_64
+export INSTALL_DOCKER_COMPOSE='2.2.2'
 
 # git config --global user.email "deploy@hattec.com"
 # git config --global user.name "Deploy MW"
@@ -80,7 +77,6 @@ pip3 install --upgrade pip
 # sudo chown $(whoami):$(whoami) /usr/local/bin/wharfee
 sudo pip3 install pgcli
 sudo pip3 install httpie
-sudo pip3 install docker-compose
 sudo pip3 install awscli
 sudo pip3 install awscli-plugin-endpoint
 
@@ -131,6 +127,10 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io
 sudo usermod -aG docker $(whoami)
 # sudo gpasswd -a deploy docker
+# https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-from-a-package
+wget https://github.com/docker/compose/releases/download/v${INSTALL_DOCKER_COMPOSE}/docker-compose-linux-x86_64
+sudo mv docker-compose-linux-x86_64 /usr/libexec/docker/cli-plugins/
+sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose-linux-x86_64
 
 # #############################################################################
 #   DIRENV
