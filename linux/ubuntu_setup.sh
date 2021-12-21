@@ -55,6 +55,7 @@ export INSTALL_FZF='0.28.0'
 # wget https://github.com/junegunn/fzf/archive/$INSTALL_FZF.tar.gz
 export INSTALL_JUMP='0.40.0'
 export INSTALL_DOCKER_COMPOSE='2.2.2'
+export INSTALL_NVM='0.39.1'
 
 mkdir -p ~/src
 
@@ -230,6 +231,7 @@ source ~/.zshrc
 # #############################################################################
 #   NODE
 # #############################################################################
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${INSTALL_NVM}/install.sh | bash
 nvm install node
 npm install -g diff-so-fancy
 
