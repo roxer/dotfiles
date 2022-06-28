@@ -56,7 +56,7 @@ autoload -Uz compinit && compinit -i
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # install syntax-higlighting first
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
-plugins=(git osx golang mix ruby brew bundler gem \
+plugins=(git macos golang mix ruby brew bundler gem \
          alias-tips \
          docker docker-compose \
          github postgres pow rails \
