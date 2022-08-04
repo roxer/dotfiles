@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# for UBUNTU 20.04LTS
+# for UBUNTU 22.04LTS
 # includes:
 # - ZSH with zsh syntax highlighting
 # - docker setup
@@ -30,7 +30,7 @@ sudo apt install -y libz-dev make autoconf yodl libncursesw5-dev texinfo libeven
                     automake libpcre3-dev zlib1g-dev liblzma-dev \
                     software-properties-common gnupg-agent \
                     python3-pip cmake exuberant-ctags checkinstall \
-                    libncurses5-dev python-dev python3-dev ruby-dev \
+                    libncurses5-dev python3-dev ruby-dev \
                     lua5.3 liblua5.3-dev libperl-dev geoip-bin libgeoip-dev \
                     libpng-dev libjpeg-dev libxml2-dev libjbig-dev libbz2-dev libfontconfig-dev libfreetype-dev # to build ImageMagick
 
@@ -39,22 +39,21 @@ sudo apt install -y git tree htop ncdu \
                     links jq lftp highlight stow \
                     network-manager
 
-export INSTALL_RUBY='3.0.3'
-export INSTALL_GO='1.17.5'
-export INSTALL_CTOP='0.7.6'
-export INSTALL_BAT='0.18.3'
-export INSTALL_FD='8.3.0'
-# go install - export INSTALL_TAG_AG='1.4.0' # https://github.com/aykamko/tag
+export INSTALL_RUBY='3.0.4'
+export INSTALL_GO='1.19'
+export INSTALL_CTOP='0.7.7'
+export INSTALL_BAT='0.21.0'
+export INSTALL_FD='8.4.0'
 export INSTALL_Q='3.1.6'
-export INSTALL_CURL='7.80.0'
-export INSTALL_DIRENV='2.29.0'
+export INSTALL_CURL='7.84.0'
+export INSTALL_DIRENV='2.32.1'
 # wget https://github.com/direnv/direnv/releases/download/$INSTALL_DIRENV/direnv.linux-amd64
-export INSTALL_TMUX='3.2a'
+export INSTALL_TMUX='3.3a'
 # wget https://github.com/tmux/tmux/releases/download/${INSTALL_TMUX}/tmux-${INSTALL_TMUX}.tar.gz
-export INSTALL_FZF='0.28.0'
+export INSTALL_FZF='0.32.0'
 # wget https://github.com/junegunn/fzf/archive/$INSTALL_FZF.tar.gz
-export INSTALL_JUMP='0.40.0'
-export INSTALL_DOCKER_COMPOSE='2.2.2'
+export INSTALL_JUMP='0.50.0'
+export INSTALL_DOCKER_COMPOSE='2.9.0'
 export INSTALL_NVM='0.39.1'
 
 mkdir -p ~/src
@@ -63,6 +62,8 @@ mkdir -p ~/src
 # git config --global user.name "Deploy MW"
 # git config comes from ~/.gitconfig (see below)
 
+sudo adduser ubuntu
+sudo usermod -aG sudo ubuntu
 # #############################################################################
 #   JUMP
 # #############################################################################
@@ -79,6 +80,7 @@ pip3 install --upgrade pip
 # sudo pip3 install wharfee # TODO: incompatible with pgcli
 # sudo chown $(whoami):$(whoami) /usr/local/bin/wharfee
 sudo pip3 install pgcli
+sudo pip3 install iredis
 sudo pip3 install httpie
 sudo pip3 install awscli
 sudo pip3 install awscli-plugin-endpoint
@@ -90,6 +92,7 @@ bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/bins
 source /home/$(whoami)/.gvm/scripts/gvm
 gvm install go${INSTALL_GO} -B
 gvm use     go${INSTALL_GO} --default
+
 # #############################################################################
 #   TAG-AG
 #   https://github.com/aykamko/tag
@@ -143,7 +146,7 @@ curl -sfL https://direnv.net/install.sh | bash
 # #############################################################################
 #   CTOP for Docker
 # #############################################################################
-sudo wget https://github.com/bcicen/ctop/releases/download/${INSTALL_CTOP}/ctop-${INSTALL_CTOP}-linux-amd64 -O /usr/local/bin/ctop
+sudo wget https://github.com/bcicen/ctop/releases/download/v${INSTALL_CTOP}/ctop-${INSTALL_CTOP}-linux-amd64 -O /usr/local/bin/ctop
 sudo chmod +x /usr/local/bin/ctop
 
 # zsh from source is bellow
@@ -280,7 +283,7 @@ sudo ldconfig /usr/local/lib
 # https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04
 # https://certbot.eff.org/
 
-sudo ufw allow 'Nginx Full'
+sudo ufw allow 'Nginx Full' # https://stackoverflow.com/questions/57924093/error-could-not-find-a-profile-matching-nginx-full
 sudo ufw allow 'OpenSSH'
 sudo ufw enable
 
@@ -288,9 +291,9 @@ sudo ufw enable
 
 : <<'END'
 # #############################################################################
-#   VIM 8.2 + plugins
+#   VIM 9.0 + plugins
 # #############################################################################
-git clone https://github.com/vim/vim.git ~/src/vim
+git clone --depth 2 https://github.com/vim/vim.git ~/src/vim
 cd ~/src/vim
 ./configure --with-features=huge \
             --enable-multibyte \
@@ -306,7 +309,7 @@ cd ~/src/vim
             # --enable-python3interp \
             # --with-python3-config-dir=/usr/lib/python3.8/config-3.8-x86_64-linux-gnu \
 
-make VIMRUNTIMEDIR=/usr/local/share/vim/vim82
+make VIMRUNTIMEDIR=/usr/local/share/vim/vim90
 # sudo checkinstall
 sudo make install
 
