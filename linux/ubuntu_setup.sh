@@ -39,22 +39,22 @@ sudo apt install -y git tree htop ncdu \
                     links jq lftp highlight stow \
                     network-manager
 
-export INSTALL_RUBY='3.1.2'
-export INSTALL_GO='1.19'
+export INSTALL_RUBY='3.2.1'
+export INSTALL_GO='1.20.1'
 export INSTALL_CTOP='0.7.7'
-export INSTALL_BAT='0.21.0'
-export INSTALL_FD='8.4.0'
-export INSTALL_Q='3.1.6'
-export INSTALL_CURL='7.84.0'
-export INSTALL_DIRENV='2.32.1'
+export INSTALL_BAT='0.22.1'
+export INSTALL_FD='8.7.0'
+export INSTALL_Q='3.1.7'
+export INSTALL_CURL='7.88.1'
+export INSTALL_DIRENV='2.32.2'
 # wget https://github.com/direnv/direnv/releases/download/$INSTALL_DIRENV/direnv.linux-amd64
 export INSTALL_TMUX='3.3a'
 # wget https://github.com/tmux/tmux/releases/download/${INSTALL_TMUX}/tmux-${INSTALL_TMUX}.tar.gz
-export INSTALL_FZF='0.34.0'
+export INSTALL_FZF='0.38.0'
 # wget https://github.com/junegunn/fzf/archive/$INSTALL_FZF.tar.gz
 export INSTALL_JUMP='0.51.0'
-export INSTALL_DOCKER_COMPOSE='2.9.0'
-export INSTALL_NVM='0.39.2'
+export INSTALL_DOCKER_COMPOSE='2.16.0'
+export INSTALL_NVM='0.39.3'
 
 mkdir -p ~/src
 
