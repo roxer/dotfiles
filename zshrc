@@ -165,6 +165,7 @@ unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 eval "$(rbenv init --no-rehash - zsh)"
 eval "$(direnv hook zsh)"
 eval "$(jump shell)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 if (( $+commands[tag] )); then
   export TAG_SEARCH_PROG=rg  # replace with rg for ripgrep
