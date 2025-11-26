@@ -60,8 +60,8 @@ plugins=(git macos golang mix ruby brew bundler gem \
          alias-tips \
          docker docker-compose \
          github postgres pow rails \
-         zsh-autosuggestions httpie rake tmux vi-mode dircycle \
-         zsh-syntax-highlighting history-substring-search) # always last 2 items
+         httpie rake tmux vi-mode dircycle \
+         history-substring-search) # always last 2 items
 
 source $ZSH/oh-my-zsh.sh
 
@@ -206,3 +206,6 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
