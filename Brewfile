@@ -34,6 +34,7 @@ brew 'direnv'
 
 brew 'elixir'
 brew 'erlang'
+brew 'eza'          # ls replacement
 
 brew 'fd'
 brew 'ffmpeg',      args: %w[--with-libvpx --with-libvorbis]
@@ -136,6 +137,7 @@ brew 'wrk'              # HTTP benchmarks https://github.com/wg/wrk
 
 brew 'xz'               # similar to gzip http://tukaani.org/xz/
 
+brew 'zoxide'
 brew 'zsh'
 
 # brew 'youtube-dl'     # download from youtube
