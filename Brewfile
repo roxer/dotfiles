@@ -29,9 +29,9 @@ brew 'coreutils'
 brew 'ctags'
 brew 'ctop'         # top for docker containers
 
-brew 'diff-so-fancy'
-brew 'direnv'
 brew 'delta'        # git diff tool
+# prefer delta # brew 'diff-so-fancy' 
+brew 'direnv'
 
 brew 'elixir'
 brew 'erlang'
