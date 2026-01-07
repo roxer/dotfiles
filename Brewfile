@@ -31,6 +31,7 @@ brew 'ctop'         # top for docker containers
 
 brew 'diff-so-fancy'
 brew 'direnv'
+brew 'delta'        # git diff tool
 
 brew 'elixir'
 brew 'erlang'
