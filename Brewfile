@@ -29,11 +29,13 @@ brew 'coreutils'
 brew 'ctags'
 brew 'ctop'         # top for docker containers
 
-brew 'diff-so-fancy'
+brew 'delta'        # git diff tool
+# prefer delta # brew 'diff-so-fancy' 
 brew 'direnv'
 
 brew 'elixir'
 brew 'erlang'
+brew 'eza'          # ls replacement
 
 brew 'fd'
 brew 'ffmpeg',      args: %w[--with-libvpx --with-libvorbis]
@@ -136,6 +138,7 @@ brew 'wrk'              # HTTP benchmarks https://github.com/wg/wrk
 
 brew 'xz'               # similar to gzip http://tukaani.org/xz/
 
+brew 'zoxide'
 brew 'zsh'
 
 # brew 'youtube-dl'     # download from youtube
