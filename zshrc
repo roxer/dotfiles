@@ -149,11 +149,9 @@ export MANPATH="/usr/local/opt/gnu-sed/libexec/gnuman:/usr/local/man:$MANPATH"
 
 export PATH="/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$HOME/bin:$HOME/go/bin:$PATH"
 export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/curl/bin:$PATH"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="$(brew --prefix sqlite)/bin:$PATH"
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-# export PGDATA=~/Library/PostgreSQL/9.5/data/
-export PGDATA=/usr/local/var/postgres-9.6/
 export HOMEBREW_CASK_OPTS="--appdir=~/Applications --caskroom=/opt/homebrew-cask/Caskroom"
 export EDITOR=vim
 export GIT_EDITOR=vim
@@ -163,9 +161,11 @@ export CLICOLOR=1
 unalias rg # https://github.com/BurntSushi/ripgrep (insted rails generate)
 
 eval "$(rbenv init --no-rehash - zsh)"
+eval "$(pyenv init --path)"
 eval "$(direnv hook zsh)"
-eval "$(jump shell)"
+eval "$(zoxide init --cmd j zsh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(starship init zsh)"
 
 if (( $+commands[tag] )); then
   export TAG_SEARCH_PROG=rg  # replace with rg for ripgrep
